@@ -31,10 +31,10 @@
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label text-right" for="emailInput">
-                                    Email
+                                    Email <i class="fa-duotone fa-user-secret"></i>
                                 </label>
                                 <div class="col-sm-5">
-                                    <input class="form-control "  name="email" id="emailInput" placeholder="Email..." type="email" required="">
+                                    <input class="form-control "  name="email" id="emailInput" placeholder="Email..." type="email" required="" autocomplete="off">
                                     @error('email')<span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
                             </div>
@@ -77,13 +77,14 @@
                                 </label>
                                 <div class="col-sm-5">
                                     <select style="height: 93%;" name="department_id" class="form-control " id="designationInput" >
-                                        <option value="">Select a Department</option>
+                                        <option value="" selected disabled>Select a Department</option>
 
                                         @foreach($departments as $department)
                                             <option value="{{ $department->id }}" {{ old('category') == $department->id ? 'selected' : '' }}>{{ $department->name }}</option>
                                         @endforeach
 
                                     </select>
+                                    @error('department_id')<span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
                             </div>
 
