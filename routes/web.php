@@ -45,7 +45,7 @@ Route::get('/pass',function(){
     echo Hash::make(1);
 });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 

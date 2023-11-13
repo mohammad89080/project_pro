@@ -125,19 +125,21 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy( $id)
     {
-        $user = User::whereId($id)->first();
 
+        $user = User::whereId($id)->first();
 
         if ($user) {
 
             $user->delete();
             toastr()->error(trans('messages.Delete'));
             return redirect()->route('user.index');
-        }  // Handle the case when the user is not found
-        toastr()->error(trans('messages.UserNotFound'));
-        return redirect()->route('user.index');
+        }  else {
+            // Handle the case when the user is not found
+            toastr()->error(trans('messages.UserNotFound'));
+            return redirect()->route('user.index');
+        }
     }
 
 }

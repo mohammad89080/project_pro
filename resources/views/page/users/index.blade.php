@@ -61,7 +61,7 @@
                                             </button>
 
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <form>
+
                                                     <div i class="carousel menu-resolver">
                                                         <div class="carousel-inner" >
 
@@ -99,13 +99,17 @@
                                                                 </a>
 
 
-                                                                <a class="dropdown-item text-danger"  href="{{route('user.destroy',$user->id)}}">
+                                                                <a class="dropdown-item text-danger btn"  href="#" onclick="event.preventDefault(); document.getElementById('delete-form-{{$user->id}}').submit();" >
                                                                    Delete
                                                                 </a>
+                                                                <form id="delete-form-{{$user->id}}" action="{{ route('user.destroy', ['user' => $user->id]) }}" method="post" style="display: none;">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                </form>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </form>
+
                                             </div>
                                         </div></td>
                                 </tr>
