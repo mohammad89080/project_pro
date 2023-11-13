@@ -47,6 +47,7 @@
                                     @error('password')<span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
                             </div>
+                      
 {{--                            <div class="form-group row mb-1">--}}
 {{--                                <label class="col-sm-3 col-form-label text-right" for="passwordInput">--}}
 {{--                                    Re-type Password--}}
@@ -85,6 +86,22 @@
 
                                     </select>
                                     @error('department_id')<span class="text-danger">{{ $message }}</span>@enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label text-right" for="rrr">
+                                     role
+                                </label>
+                                <div class="col-sm-5">
+                                    <select style="height: 93%;" name="role" class="form-control " id="rrr" required>
+                                        <option value="" selected disabled>Select a role</option>
+
+                                            <option value="admin" >admin</option>
+                                            <option value="user" >user</option>
+
+                                    </select>
+                                    {{-- @error('department_id')<span class="text-danger">{{ $message }}</span>@enderror --}}
                                 </div>
                             </div>
 

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use function PHPUnit\Framework\returnArgument;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -34,8 +35,8 @@ class UserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
-            'department_id' => ['required']
-
+            'department_id' => ['required'],
+            'role' => ['required', 'string', Rule::in(['admin','user'])],
         ]);
     }
 
@@ -46,7 +47,8 @@ class UserController extends Controller
                 'name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'password' => ['required', 'string', 'min:8'],
-                'department_id' => ['required']
+                'department_id' => ['required'],
+                'role' => ['required', 'string', Rule::in(['admin','user'])],
             ]);
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator)->withInput();
@@ -57,7 +59,8 @@ class UserController extends Controller
             $data['status'] = $request->status;
             $data['department_id'] = $request->department_id;
 
-            User::create($data);
+            $user=User::create($data);
+            $user->assignRole($request->role);
             toastr()->success(trans('messages.success'));
             return redirect()->route('user.create');
         } catch (\Exception $e) {

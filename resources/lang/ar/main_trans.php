@@ -4,6 +4,7 @@ return [
     'Dashboard'=>'الرئيسية',
     'Dashboard_page'=>'لوحة التحكم',
     'Users'=>'المستخدمين',
+    'Holidays'=>'العطل',
     'Create_user' =>  'إنشاء مستخدم',
     'Edit_user' => 'تعديل بيانات مستخدم',
     'Main_title'=>'برنامج مورا سوفت لادارة المدارس',

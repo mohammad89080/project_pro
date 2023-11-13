@@ -2,7 +2,6 @@
 
 @extends('layouts.master')
 @section('css')
-
 @section('title')
     Holidays
 @stop
@@ -26,25 +25,36 @@
 @endsection
 @section('content')
 <!-- row -->
-<div class="row">
+<div class="row text-center" >
     <div class="col-md-12 mb-30">
-        <div class="card card-statistics h-100">
-            dsfdfdfsdsdfd         
-
+        <div class="card card-statistics  card-body">
+            <form action="{{route('holiday.store')}}" method="POST">
+                @csrf
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-3">
+                        <div class="input-group">
+                            <input required class="form-control" placeholder="Date" autocomplete="off"  id="datepicker-action" name="holiday_date" data-date-format="yyyy-mm-dd">
+                            <span class="input-group-text border-0" style="background-color: #F6F7F8;"><i class="fa fa-calendar"></i> </button></span>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <input type="submit" value="submit" class="btn btn-success btn-lg">
+                    </div>
+                </div>
+            </form>         
         </div>
     </div>
 </div>
 <!-- row closed -->
 <div class="card-body row text-center">
-    <?php
-        for ($i=0; $i <10 ; $i++) { 
-   ?>
-
     
+{{-- {{route('holiday.destroy',$post->id)}} --}}
+    @foreach ( $holidays as $holiday )
         <div class="col-lg-2 grid-margin mb-3" wire:loading>
             <div class="card loading-transition-background">
                 <div class="card-body p-2  flex holiday-info">
-                    <span  style="font-size: 1.2rem;">Dec 13, 2023
+                    <span  style="font-size: 1.2rem;">{{$holiday->holiday_date}}
                         <form action="" method="POST" style="display: inline;">
                             @csrf
                             @method('DELETE')
@@ -55,12 +65,9 @@
                 </div>
             </div>
         </div>
-
-@php
-}
-@endphp
+        @endforeach
 </div>
+        
 @endsection
 @section('js')
-
 @endsection

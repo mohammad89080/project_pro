@@ -7,6 +7,7 @@ return [
     'Users' => 'All Users',
     'Edit_user' => 'Update User',
     'Create_user' =>  'Create a user',
+    'Holidays'=>'Holidays',
     'Main_title' => 'MoraSoft School Management Program',
     'Programname' => 'MoraSoft School Management Program',
     'change_language'=>'language',

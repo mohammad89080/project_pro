@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Holiday;
 use Illuminate\Http\Request;
 
 class HolidayController extends Controller
@@ -11,7 +11,8 @@ class HolidayController extends Controller
      */
     public function index()
     {
-        return  view("page.holidays.index");
+        $holidays=Holiday::all()->sortBy('holiday_date');
+        return  view("page.holidays.index", compact('holidays'));
     }
 
     /**
@@ -27,9 +28,23 @@ class HolidayController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        try{
 
+            $this->validate($request,[
+                
+                'holiday_date' =>['required','unique:Holidays,holiday_date,except,id']
+            ]);
+           
+            Holiday::create(['holiday_date'=>$request->holiday_date]);
+            toastr()->success('record added successfully');
+            return redirect()->back();
+
+        }catch(\Exception $e){
+            toastr()->error($e->getMessage());
+            return redirect()->back();
+        }
+    
+    }
     /**
      * Display the specified resource.
      */
