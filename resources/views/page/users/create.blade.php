@@ -52,7 +52,7 @@
 {{--                                    Re-type Password--}}
 {{--                                </label>--}}
 {{--                                <div class="col-sm-5">--}}
-{{--                                    <input wire:model.lazy="password" class="form-control " id="passwordInput" placeholder="Re-type Password..." type="password" required="">--}}
+{{--                                    <input  class="form-control " id="passwordInput" placeholder="Re-type Password..." type="password" required="">--}}
 {{--                                </div>--}}
 {{--                            </div>--}}
 

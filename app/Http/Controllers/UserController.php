@@ -15,8 +15,9 @@ class UserController extends Controller
     public function index()
     {
 
+        $users = User::with(['department'])->orderBy('id', 'desc')->get();
 
-//      return  view("page.user");
+      return  view("page.users.index", compact('users'));
     }
 
 
