@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -25,17 +26,19 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
     {
         return view('dashboard');
     });
+//    Route::livewire('/livewire/posts', \App\Livewire\CreatePost::class);
 
+//    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 //    Route::get('test',function(){
 //        return View::make('test');
 //    });
+    Route::resource('/user', UserController::class);
 });
 
 Route::get('/pass',function(){
     echo Hash::make(1);
 });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 
