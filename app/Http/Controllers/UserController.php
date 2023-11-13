@@ -32,7 +32,8 @@ class UserController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:8'],
+            'department_id' => ['required']
 
         ]);
     }
@@ -43,6 +44,7 @@ class UserController extends Controller
                 'name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'password' => ['required', 'string', 'min:8'],
+                'department_id' => ['required']
             ]);
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator)->withInput();

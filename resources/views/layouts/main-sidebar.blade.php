@@ -26,6 +26,10 @@
                     <li class="mt-10 mb-10 text-muted pl-4 font-medium menu-title">Components </li>
                     <!-- menu item Elements-->
                     <li>
+                        <a href="{{route('dashboard')}}"><i class="ti-menu-alt"></i>
+                            <span class="right-nav-text"></span>{{trans('main_trans.Dashboard_page')}} </a>
+                    </li>
+                    <li>
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements">
                             <div class="pull-left"><i class="ti-palette"></i><span
                                     class="right-nav-text">Elements</span></div>
