@@ -2,7 +2,11 @@
 return [
     'Add_new_user' => 'Add new user +',
     'Dashboard'=>'Dashboard',
+
     'Dashboard_page'=>'Dashboard',
+    'Users' => 'All Users',
+    'Edit_user' => 'Update User',
+    'Create_user' =>  'Create a user',
     'Main_title' => 'MoraSoft School Management Program',
     'Programname' => 'MoraSoft School Management Program',
     'change_language'=>'language',
@@ -30,7 +34,7 @@ return [
     'library'=>'Library',
     'Onlineclasses'=>'Online classes',
     'Settings'=>'Settings',
-    'Users'=>'Users',
+
     'Copyright' => 'Copyright',
     'Name_Programer' => 'SamirGamal MoraSoft All Rights Reserved'
 

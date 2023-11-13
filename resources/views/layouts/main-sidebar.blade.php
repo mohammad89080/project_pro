@@ -30,6 +30,10 @@
                             <span class="right-nav-text"></span>{{trans('main_trans.Dashboard_page')}} </a>
                     </li>
                     <li>
+                        <a href="{{route('user.index')}}"><i class="fa fa-user" aria-hidden="true"></i>
+                            <span class="right-nav-text"></span>{{trans('main_trans.Users')}} </a>
+                    </li>
+                    <li>
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements">
                             <div class="pull-left"><i class="ti-palette"></i><span
                                     class="right-nav-text">Elements</span></div>

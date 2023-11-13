@@ -3,6 +3,9 @@ return [
     'Add_new_user' => 'إضافة مستخدم جديد + ',
     'Dashboard'=>'الرئيسية',
     'Dashboard_page'=>'لوحة التحكم',
+    'Users'=>'المستخدمين',
+    'Create_user' =>  'إنشاء مستخدم',
+    'Edit_user' => 'تعديل بيانات مستخدم',
     'Main_title'=>'برنامج مورا سوفت لادارة المدارس',
     'Programname' => 'برنامج مورا سوفت لادارة المدارس',
     'change_language'=>'تغير اللغة',
@@ -33,7 +36,7 @@ return [
     'library'=>'المكتبة',
     'Onlineclasses'=>'حصص اونلاين',
     'Settings'=>'الاعدادات',
-    'Users'=>'المستخدمين',
+
     'Copyright' => 'جميع الحقوق محفوظة ',
     'Name_Programer' => 'سمير جمال مورا سوفت'
     ];

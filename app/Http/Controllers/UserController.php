@@ -17,7 +17,7 @@ class UserController extends Controller
 
         $users = User::with(['department'])->orderBy('id', 'desc')->get();
 
-      return  view("page.users.index", compact('users'));
+        return view("page.users.index", compact('users'));
     }
 
 
@@ -25,7 +25,7 @@ class UserController extends Controller
     {
         $departments = Department::all();
 
-        return  view("page.users.create",compact('departments'));
+        return view("page.users.create", compact('departments'));
     }
 
     protected function validator(array $data)
@@ -38,6 +38,7 @@ class UserController extends Controller
 
         ]);
     }
+
     public function store(Request $request)
     {
         try {
@@ -59,8 +60,7 @@ class UserController extends Controller
             User::create($data);
             toastr()->success(trans('messages.success'));
             return redirect()->route('user.create');
-            }
-        catch (\Exception $e){
+        } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }
@@ -76,17 +76,50 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $user = User::whereId($id)->first();
+        if ($user) {
+            $departments = Department::all();
+            return view('page.users.edit', compact('user', 'departments'));
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+
+        try {
+            $validator = Validator::make($request->all(), [
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255'],
+//                'password' => ['required', 'string', 'min:8'],
+                'department_id' => ['required']
+            ]);
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+            $user = User::whereId($id)->first();
+            if ($user) {
+//                dd($request);
+                $data['name'] = $request->name;
+                $data['email'] = $request->email;
+                if ($request->password) {
+
+                    $data['password'] = Hash::make($request->password);
+                }
+                $data['status'] = $request->status;
+                $data['department_id'] = $request->department_id;
+
+                $user->update($data);
+                toastr()->success(trans('messages.Update'));
+                return redirect()->route('user.index');
+            }
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
     /**
@@ -94,6 +127,17 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::whereId($id)->first();
+
+
+        if ($user) {
+
+            $user->delete();
+            toastr()->error(trans('messages.Delete'));
+            return redirect()->route('user.index');
+        }  // Handle the case when the user is not found
+        toastr()->error(trans('messages.UserNotFound'));
+        return redirect()->route('user.index');
     }
+
 }

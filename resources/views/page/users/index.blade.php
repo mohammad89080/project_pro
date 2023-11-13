@@ -2,13 +2,13 @@
 @section('css')
 
     @section('title')
-        اضافة مستخدم جديد
+        {{ trans('main_trans.Users') }}
     @stop
 @endsection
 @section('page-header')
     <!-- breadcrumb -->
     @section('PageTitle')
-        {{--        اضافة مستخدم جديد--}}
+        {{ trans('main_trans.Users') }}
     @stop
     <!-- breadcrumb -->
 @endsection
@@ -99,7 +99,7 @@
                                                                 </a>
 
 
-                                                                <a class="dropdown-item text-danger"  href="#">
+                                                                <a class="dropdown-item text-danger"  href="{{route('user.destroy',$user->id)}}">
                                                                    Delete
                                                                 </a>
                                                             </div>

@@ -2,14 +2,14 @@
 @section('css')
 
     @section('title')
-        اضافة مستخدم جديد
+        {{ trans('main_trans.Edit_user') }}
     @stop
 @endsection
 
 @section('page-header')
     <!-- breadcrumb -->
     @section('PageTitle')
-        {{--        اضافة مستخدم جديد--}}
+        {{ trans('main_trans.Edit_user') }}
     @stop
     <!-- breadcrumb -->
 @endsection
@@ -19,32 +19,35 @@
             <div class="card card-statistics h-100">
                 <div class="card-body">
                     <div class="card-body">
-                        <form class="forms-sample" action="{{ route('user.store') }}" method="post">
+                        <form class="forms-sample" action="{{ route('user.update',$user->id) }}" method="post">
+
+
                             @csrf
+                            @method('PUT')
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label text-right" for="nameInput">
-                                    Name
+                                    {{ trans('forms.Name') }}
                                 </label>
                                 <div class="col-sm-5">
-                                    <input class="form-control" name="name" id="nameInput" placeholder="Name..." type="text" required="" autofocus="">
+                                    <input class="form-control" name="name" value="{{ old('name', $user->name) }}"  id="nameInput" placeholder="{{ trans('forms.Name') }}..." type="text" required="" autofocus="">
                                     @error('name')<span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label text-right" for="emailInput">
-                                    Email <i class="fa-duotone fa-user-secret"></i>
+                                 {{ trans('forms.Email') }}
                                 </label>
                                 <div class="col-sm-5">
-                                    <input class="form-control "  name="email" id="emailInput" placeholder="Email..." type="email" required="" autocomplete="off">
+                                    <input class="form-control " value="{{ old('email', $user->email) }}" name="email" id="emailInput" placeholder=" {{ trans('forms.Email') }}..." type="email" required="" autocomplete="off">
                                     @error('email')<span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label text-right" for="confirmPasswordInput">
-                                    Password
+                                  {{ trans('forms.Password') }}
                                 </label>
                                 <div class="col-sm-5">
-                                    <input   class="form-control " id="confirmPasswordInput" name="password" placeholder="Password..." type="password" required="">
+                                    <input   class="form-control"  id="confirmPasswordInput" name="password" placeholder=" {{ trans('forms.Password') }}..." type="password">
                                     @error('password')<span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
                             </div>
@@ -57,12 +60,9 @@
                             {{--                                </div>--}}
                             {{--                            </div>--}}
 
-
-
-
                             <div  class="form-group row">
                                 <label class="col-sm-3 col-form-label text-right" for="statusInput">
-                                    Status
+                                    {{ trans('forms.Status') }}
                                 </label>
                                 <div class="col-sm-5">
                                     <select style="height: 93%;" name="status" class="form-control " id="statusInput">
@@ -74,14 +74,14 @@
 
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label text-right" for="designationInput">
-                                    Designation
+                                    {{ trans('forms.Departemnt') }}
                                 </label>
                                 <div class="col-sm-5">
-                                    <select style="height: 93%;" name="department_id" class="form-control " id="designationInput" >
-                                        <option value="" selected disabled>Select a Department</option>
+                                    <select style="height: 93%;" name="department_id" class="form-control" id="designationInput" >
+                                        <option value="" selected disabled >Select a Department</option>
 
                                         @foreach($departments as $department)
-                                            <option value="{{ $department->id }}" {{ old('category') == $department->id ? 'selected' : '' }}>{{ $department->name }}</option>
+                                            <option  value="{{ $department->id }}" {{ old('department_id', $department->id) == $department->id ? 'selected' : '' }}>{{ $department->name }}</option>
                                         @endforeach
 
                                     </select>
