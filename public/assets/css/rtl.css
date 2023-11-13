@@ -125,7 +125,9 @@ h5,
 h6 {
   margin-top: 0;
   margin-bottom: .5rem; }
-
+#btn-optios {
+padding-left: 30px;
+}
 p {
   margin-top: 0;
   margin-bottom: 1rem; }

@@ -8,9 +8,9 @@
         </div>
         <div class="col-md-6">
           <ul class="text-center text-md-right">
-            <li class="list-inline-item"><a href="#">Terms & Conditions </a> </li>
-            <li class="list-inline-item"><a href="#">API Use Policy </a> </li>
-            <li class="list-inline-item"><a href="#">Privacy Policy </a> </li>
+{{--            <li class="list-inline-item"><a href="#">Terms & Conditions </a> </li>--}}
+{{--            <li class="list-inline-item"><a href="#">API Use Policy </a> </li>--}}
+{{--            <li class="list-inline-item"><a href="#">Privacy Policy </a> </li>--}}
           </ul>
         </div>
       </div>
