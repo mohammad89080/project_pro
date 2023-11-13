@@ -5,10 +5,11 @@
         اضافة مستخدم جديد
     @stop
 @endsection
+
 @section('page-header')
     <!-- breadcrumb -->
     @section('PageTitle')
-        اضافة مستخدم جديد
+        {{--        اضافة مستخدم جديد--}}
     @stop
     <!-- breadcrumb -->
 @endsection
@@ -47,14 +48,14 @@
                                     @error('password')<span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
                             </div>
-{{--                            <div class="form-group row mb-1">--}}
-{{--                                <label class="col-sm-3 col-form-label text-right" for="passwordInput">--}}
-{{--                                    Re-type Password--}}
-{{--                                </label>--}}
-{{--                                <div class="col-sm-5">--}}
-{{--                                    <input  class="form-control " id="passwordInput" placeholder="Re-type Password..." type="password" required="">--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
+                            {{--                            <div class="form-group row mb-1">--}}
+                            {{--                                <label class="col-sm-3 col-form-label text-right" for="passwordInput">--}}
+                            {{--                                    Re-type Password--}}
+                            {{--                                </label>--}}
+                            {{--                                <div class="col-sm-5">--}}
+                            {{--                                    <input  class="form-control " id="passwordInput" placeholder="Re-type Password..." type="password" required="">--}}
+                            {{--                                </div>--}}
+                            {{--                            </div>--}}
 
 
 
