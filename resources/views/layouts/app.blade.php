@@ -15,6 +15,7 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    @livewireStyles
 </head>
 <body>
     <div id="app">
@@ -73,8 +74,14 @@
         </nav>
 
         <main class="py-4">
+            <div class="contianer">
+
             @yield('content')
+            </div>
         </main>
     </div>
+    <script src="{{ asset('vendor/livewire/livewire.js') }}"></script>
+    @livewireScripts
+    @stack('scripts')
 </body>
 </html>
