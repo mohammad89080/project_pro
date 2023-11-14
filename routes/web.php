@@ -42,18 +42,12 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
     Route::get('/user/{user}/toggle-status', [UserController::class, 'toggleStatus'])->name('user.toggleStatus');
     Route::resource('/user', UserController::class)->middleware(['role:admin']);
 
-<<<<<<< HEAD
-    Route::resource('/user', UserController::class)->middleware(['role:admin']);
-    Route::resource('/holiday', HolidayController::class);
     Route::resource('/leave-types', LeaveTypeController::class)->middleware(['role:admin']);;
     Route::resource('/leave', LeaveController::class);
-=======
     Route::get('/holiday/holidays-this-month', [HolidayController::class,'holidaysThisMonthDisplay'])->name('holiday.holidaysThisMonthDisplay');
     Route::resource('/holiday', HolidayController::class);
-    Route::get('/holiday/holidays-this-month', [HolidayController::class,'holidaysThisMonthDisplay'])->name('holiday.holidaysThisMonthDisplay');
 
     Route::resource('/department', Department::class);
->>>>>>> 74e9b20a5ce4d114c51ad262ecad6b7811302748
 });
 
 Route::get('/pass',function(){
@@ -61,6 +55,3 @@ Route::get('/pass',function(){
 });
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
-
