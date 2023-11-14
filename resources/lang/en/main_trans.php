@@ -8,26 +8,16 @@ return [
     'Edit_user' => 'Update User',
     'Create_user' =>  'Create a user',
     'Holidays'=>'Holidays',
-<<<<<<< HEAD
-
     'Leave_application'=>'Leave Application',
-
-=======
     'Leave_application'=>'Leave Application',
->>>>>>> 62003e783733f4673c2a2700eda81b2dc86a124a
     'Department' => 'Departments',
     'Create_New_Designation' => 'Create New Department',
-
      'Make_Active' => 'Make Active',
      'Make_Inactive' => 'Make Inactive',
      'Create_Department' => 'Create',
     'Delete_Department' => 'Delete',
     'Holiday_This_Month' => 'Holiday This Month',
     'Holiday_This_Year' => 'Holiday This Year',
-
-<<<<<<< HEAD
-=======
-
     'Main_title' => 'MoraSoft School Management Program',
     'Programname' => 'MoraSoft School Management Program',
     'change_language'=>'language',
@@ -58,7 +48,7 @@ return [
 
     'Copyright' => 'Copyright',
     'Name_Programer' => 'SamirGamal MoraSoft All Rights Reserved'
->>>>>>> 62003e783733f4673c2a2700eda81b2dc86a124a
+
 
 
 ];

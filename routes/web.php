@@ -43,29 +43,31 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
     Route::get('/user/{user}/toggle-status', [UserController::class, 'toggleStatus'])->name('user.toggleStatus');
     Route::resource('/user', UserController::class)->middleware(['role:admin']);
 
-<<<<<<< HEAD
+
 
     Route::resource('/user', UserController::class)->middleware(['role:admin']);
+    Route::get('/holiday/holidays-this-month', [HolidayController::class,'holidaysThisMonthDisplay'])->name('holiday.holidaysThisMonthDisplay');
+
     Route::resource('/holiday', HolidayController::class);
     Route::resource('/leave-types', LeaveTypeController::class)->middleware(['role:admin']);;
     Route::resource('/leave', LeaveController::class);
-=======
+
     Route::resource('/leave-types', LeaveTypeController::class)->middleware(['role:admin']);
     Route::resource('/leave', LeaveController::class);
     Route::get('/leave/update_status/{id}/{status}', [LeaveController::class, 'update_status'])->middleware(['role:admin'])->name('update_leave_status');
     Route::get('/leave/my/{id}', [LeaveController::class, 'index_my'])->name('leave.myApply');
->>>>>>> 62003e783733f4673c2a2700eda81b2dc86a124a
+
 
     Route::get('/holiday/holidays-this-month', [HolidayController::class,'holidaysThisMonthDisplay'])->name('holiday.holidaysThisMonthDisplay');
-    Route::resource('/holiday', HolidayController::class);
+//    Route::resource('/holiday', HolidayController::class);
 
     Route::resource('/department', Department::class);
-<<<<<<< HEAD
+
     Route::post('/toggle-work/{user}', [AttendanceController::class, 'toggleWork'])->name('toggle-work');
     Route::resource('/attendance', HolidayController::class);
 
-=======
->>>>>>> 62003e783733f4673c2a2700eda81b2dc86a124a
+
+
 });
 
 Route::get('/pass',function(){
