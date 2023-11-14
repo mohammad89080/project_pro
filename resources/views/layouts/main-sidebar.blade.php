@@ -16,6 +16,16 @@
                             <a href="{{route('user.create')}}" class="btn">{{trans('main_trans.Add_new_user')}}</a>
                             @else
                             <a href="#" class="btn">Punch In</a>
+                            <form id="toggle-work-form" action="{{ route('toggle-work', ['user' => $user->id]) }}" method="post">
+                                @csrf
+                                <button type="submit">
+                                    @if ($user->isWorking())
+                                        End Work
+                                    @else
+                                        Start Work
+                                    @endif
+                                </button>
+                            </form>
                             @endrole
 {{--                        <ul id="dashboard" class="collapse" data-parent="#sidebarnav">--}}
 {{--                            <li> <a href="index.html">Dashboard 01</a> </li>--}}

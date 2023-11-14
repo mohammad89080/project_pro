@@ -49,4 +49,17 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Department::class);
     }
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class);
+    }
+    public function isWorking()
+    {
+
+        $attendance = $this->attendances()
+            ->where('attendance_date', now()->toDateString())
+            ->first();
+
+        return $attendance && $attendance->start_time && !$attendance->departure_time;
+    }
 }

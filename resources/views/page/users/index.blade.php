@@ -62,7 +62,7 @@
 
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-                                                    <div i class="carousel menu-resolver">
+                                                    <div  class="carousel menu-resolver">
                                                         <div class="carousel-inner" >
 
                                                             <div class="carousel-item active">

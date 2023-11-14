@@ -27,6 +27,7 @@ class HomeController extends Controller
     public function index()
     {
         $activeUserCount = User::where('status', '1')->count();
+        $user = User::whereId(auth()->id())->first();
         $UserCount = User::count();
         $holidays = Holiday::all();
 
@@ -43,6 +44,6 @@ class HomeController extends Controller
 
 
 
-        return view('dashboard',compact('activeUserCount','UserCount','numberOfHolidaysThisYear','numberOfHolidaysThisMonth'));
+        return view('dashboard',compact('activeUserCount','UserCount','numberOfHolidaysThisYear','numberOfHolidaysThisMonth','user'));
     }
 }
