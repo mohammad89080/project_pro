@@ -8,6 +8,8 @@ return [
     'Edit_user' => 'Update User',
     'Create_user' =>  'Create a user',
     'Holidays'=>'Holidays',
+    'Leave_application'=>'Leave Application',
+
     'Main_title' => 'MoraSoft School Management Program',
     'Programname' => 'MoraSoft School Management Program',
     'change_language'=>'language',

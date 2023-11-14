@@ -5,6 +5,8 @@ return [
     'Dashboard_page'=>'لوحة التحكم',
     'Users'=>'المستخدمين',
     'Holidays'=>'العطل',
+    'Leave_application'=>'طلب إجازة',
+
     'Create_user' =>  'إنشاء مستخدم',
     'Edit_user' => 'تعديل بيانات مستخدم',
     'Main_title'=>'برنامج مورا سوفت لادارة المدارس',

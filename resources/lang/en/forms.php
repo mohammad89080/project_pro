@@ -5,6 +5,7 @@ return [
     'Password' => 'Password',
     'Status' => 'Status',
     'Department' => 'Department',
+    'maximum_in_year' => 'Maximum In Year',
 
 
 ];

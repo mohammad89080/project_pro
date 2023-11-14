@@ -101,7 +101,7 @@
                                             <option value="user" >user</option>
 
                                     </select>
-                                    {{-- @error('department_id')<span class="text-danger">{{ $message }}</span>@enderror --}}
+                                    @error('role')<span class="text-danger">{{ $message }}</span>@enderror
                                 </div>
                             </div>
 

@@ -43,6 +43,25 @@
                         <a href="{{route('holiday.index')}}"><i class="fa fa-plane" aria-hidden="true"></i>
                             <span class="right-nav-text"></span>{{trans('main_trans.Holidays')}} </a>
                     </li>
+
+                    <li>
+                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#leave-menu">
+                            <div class="pull-left"><i class="fa fa-sign-out" aria-hidden="true"></i>
+                                <span class="right-nav-text">leave</span></div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+                            <div class="clearfix"></div>
+                        </a>
+                        <ul id="leave-menu" class="collapse" data-parent="#sidebarnav">
+                            @role('admin')
+                            <li> <a href="{{route('leave.index')}}">All</a> </li>
+                            <li> <a href="{{route('leave-types.index')}}">Types</a></li>
+                            @else
+                            <li> <a href="{{route('leave.create')}}">{{trans('main_trans.Leave_application')}}</a> </li>
+                            <li> <a href="#">Types</a></li>
+                            @endrole
+                        </ul>
+                    </li>
+
                     <li>
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements">
                             <div class="pull-left"><i class="ti-palette"></i><span
