@@ -102,9 +102,11 @@
                                                                 <a class="dropdown-item text-danger btn"  href="#" onclick="event.preventDefault(); document.getElementById('delete-form-{{$user->id}}').submit();" >
                                                                    Delete
                                                                 </a>
-                                                                <form id="delete-form-{{$user->id}}" action="{{ route('user.destroy', ['user' => $user->id]) }}" method="post" style="display: none;">
+                                                                <form id="delete-form-{{$user->id}}" action="{{ route('holiday.destroy', ['holiday' => $user->id]) }}" method="POST" style="display: inline;">
                                                                     @csrf
                                                                     @method('DELETE')
+                                                                    <button type="submit" title="delete" class="btn btn-lg text-danger" style="border:none; background-color: transparent" >
+                                                                        <i class="ti-trash"></i> </button>
                                                                 </form>
                                                             </div>
                                                         </div>

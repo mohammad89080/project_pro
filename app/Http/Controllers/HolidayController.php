@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Holiday;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HolidayController extends Controller
@@ -31,10 +32,10 @@ class HolidayController extends Controller
         try{
 
             $this->validate($request,[
-                
+
                 'holiday_date' =>['required','unique:Holidays,holiday_date,except,id']
             ]);
-           
+
             Holiday::create(['holiday_date'=>$request->holiday_date]);
             toastr()->success('record added successfully');
             return redirect()->back();
@@ -43,7 +44,7 @@ class HolidayController extends Controller
             toastr()->error($e->getMessage());
             return redirect()->back();
         }
-    
+
     }
     /**
      * Display the specified resource.
@@ -74,6 +75,17 @@ class HolidayController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $holiday = Holiday::whereId($id)->first();
+
+        if ($holiday) {
+
+            $holiday->delete();
+            toastr()->error(trans('messages.Delete'));
+            return redirect()->route('holiday.index');
+        }  else {
+            // Handle the case when the user is not found
+            toastr()->error(trans('messages.holidayNotFound'));
+            return redirect()->route('holiday.index');
+        }
     }
 }

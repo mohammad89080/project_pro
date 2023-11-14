@@ -42,32 +42,32 @@
                         <input type="submit" value="submit" class="btn btn-success btn-lg">
                     </div>
                 </div>
-            </form>         
+            </form>
         </div>
     </div>
 </div>
 <!-- row closed -->
 <div class="card-body row text-center">
-    
+
 {{-- {{route('holiday.destroy',$post->id)}} --}}
     @foreach ( $holidays as $holiday )
-        <div class="col-lg-2 grid-margin mb-3" wire:loading>
+        <div class="col-lg-2 grid-margin mb-3">
             <div class="card loading-transition-background">
                 <div class="card-body p-2  flex holiday-info">
                     <span  style="font-size: 1.2rem;">{{$holiday->holiday_date}}
-                        <form action="" method="POST" style="display: inline;">
+                        <form id="delete-form-{{$holiday->id}}" action="{{ route('holiday.destroy', ['holiday' => $holiday->id]) }}" method="POST" style="display: inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" title="delete" class="btn btn-lg text-danger" style="border:none; background-color: transparent" >
                                 <i class="ti-trash"></i> </button>
                         </form>
-                    
+
                 </div>
             </div>
         </div>
         @endforeach
 </div>
-        
+
 @endsection
 @section('js')
 @endsection
