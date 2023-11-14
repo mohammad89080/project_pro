@@ -7,7 +7,19 @@ return [
     'Holidays'=>'العطل',
     'Create_user' =>  'إنشاء مستخدم',
     'Edit_user' => 'تعديل بيانات مستخدم',
+    'Department' => 'الأقسام',
+    'Create_New_Designation' => 'إنشاء قسم جديد',
+    'Make_Active' => 'تفعيل',
+    'Make_Inactive' => 'تعطيل',
+    'Create_Department' => 'إنشاء قسم',
+    'Delete_Department' => ' حذف القسم',
+    'Holiday_This_Month' => 'العطل هذا الشهر',
+    'Holiday_This_Year' => 'العطل هذه السنة',
+
+
+
     'Main_title'=>'برنامج مورا سوفت لادارة المدارس',
+
     'Programname' => 'برنامج مورا سوفت لادارة المدارس',
     'change_language'=>'تغير اللغة',
     'Grades'=>'المراحل الدراسية',

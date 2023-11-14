@@ -75,7 +75,13 @@ class UserController extends Controller
     {
         //
     }
+    public function toggleStatus(User $user)
+    {
+        $user->update(['status' => !$user->status]);
 
+        // You might want to add a flash message or redirect somewhere
+        return redirect()->route('user.index');
+    }
     /**
      * Show the form for editing the specified resource.
      */
