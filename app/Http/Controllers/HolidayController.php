@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Holiday;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class HolidayController extends Controller
 {
@@ -12,7 +13,7 @@ class HolidayController extends Controller
         // $this->middleware('role:admin')->only(['method1', 'method2']); // Apply to method1 and method2
         $this->middleware('role:admin')->except(['index']); // Apply to other methods except method1 and method2
     }
-    
+
     /**
      * Display a listing of the resource.
      */
@@ -21,7 +22,16 @@ class HolidayController extends Controller
         $holidays=Holiday::all()->sortBy('holiday_date');
         return  view("page.holidays.index", compact('holidays'));
     }
-
+    public function holidaysThisMonthDisplay()
+    {
+        $currentYear = Carbon::now()->year;
+        $currentMonth = Carbon::now()->month;
+        $holidaysThisYear = Holiday::whereYear('holiday_date', $currentYear)->get();
+        $holidays = Holiday::whereYear('holiday_date', $currentYear)
+            ->whereMonth('holiday_date', $currentMonth)
+            ->get();
+        return view('page.holidays.index' ,compact('holidays'));
+    }
     /**
      * Show the form for creating a new resource.
      */

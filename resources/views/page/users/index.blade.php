@@ -66,20 +66,27 @@
                                                         <div class="carousel-inner" >
 
                                                             <div class="carousel-item active">
-                                                                <a class="dropdown-item"  href="#">
-                                                                IP Restriction
-                                                                </a>
+{{--                                                                <a class="dropdown-item"  href="#">--}}
+{{--                                                                IP Restriction--}}
+{{--                                                                </a>--}}
 
                                                                 <a class="dropdown-item" href="{{route('user.edit',$user->id)}}">
                                                                    Update user
                                                                 </a>
 
-                                                                <a class="dropdown-item"  href="#">
-                                                                    Update Designation
-                                                                </a>
+{{--                                                                <a class="dropdown-item"  href="#">--}}
+{{--                                                                    Update Designation--}}
+{{--                                                                </a>--}}
 
-                                                                <a class="dropdown-item text-danger" href="#">
-                                                                    Make Inactive
+                                                                <a class="dropdown-item text-danger" href="{{ route('user.toggleStatus', ['user' => $user->id]) }}">
+                                                                    @if ($user->status)
+
+                                                                        {{ trans('main_trans.Make_Inactive') }}
+                                                                    @else
+
+                                                                        {{ trans('main_trans.Make_Active') }}
+                                                                    @endif
+
                                                                 </a>
 
                                                                 <a class="dropdown-item"  href="#">
@@ -94,19 +101,18 @@
                                                                     Force Punch In / Out
                                                                 </a>
 
-                                                                <a class="dropdown-item" href="https://www.kingpabel.com/attendance-management-system/user/6437539d-6c03-4eb0-bab7-c1d28ebfb162/force/login">
+                                                                <a class="dropdown-item" href="{{ route('force-login', ['user' => $user->id]) }}">
                                                                   Force Login
                                                                 </a>
 
 
                                                                 <a class="dropdown-item text-danger btn"  href="#" onclick="event.preventDefault(); document.getElementById('delete-form-{{$user->id}}').submit();" >
-                                                                   Delete
+                                                                    <i class="ti-trash"></i> Delete
                                                                 </a>
-                                                                <form id="delete-form-{{$user->id}}" action="{{ route('holiday.destroy', ['holiday' => $user->id]) }}" method="POST" style="display: inline;">
+                                                                <form id="delete-form-{{$user->id}}" action="{{ route('user.destroy', ['user' => $user->id]) }}" method="POST" style="display: inline;">
                                                                     @csrf
                                                                     @method('DELETE')
-                                                                    <button type="submit" title="delete" class="btn btn-lg text-danger" style="border:none; background-color: transparent" >
-                                                                        <i class="ti-trash"></i> </button>
+
                                                                 </form>
                                                             </div>
                                                         </div>

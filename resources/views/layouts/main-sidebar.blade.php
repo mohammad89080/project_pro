@@ -63,6 +63,10 @@
                     </li>
 
                     <li>
+                        <a href="{{route('department.index')}}"><i class="fa fa-plane" aria-hidden="true"></i>
+                            <span class="right-nav-text"></span>{{trans('main_trans.Department')}} </a>
+                    </li>
+                    <li>
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements">
                             <div class="pull-left"><i class="ti-palette"></i><span
                                     class="right-nav-text">Elements</span></div>
