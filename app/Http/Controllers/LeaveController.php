@@ -13,7 +13,7 @@ class LeaveController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('role:admin')->only(['index', 'destroy']); // Apply to method1 and method2
+        $this->middleware('role:admin')->only(['index', 'destroy','update_status']); // Apply to method1 and method2
         // $this->middleware('role:admin')->except(['store']); // Apply to other methods except method1 and method2
     }
 
@@ -22,9 +22,13 @@ class LeaveController extends Controller
      */
     public function index()
     {
-        $leaves = Leave::all();
+        $leaves = Leave::all(); 
         return view("page.leaves.index", compact('leaves'));
-
+    }
+    public function index_my()
+    {
+        $leaves = Leave::where('user_id', Auth::user()->id)->get();
+        return view("page.leaves.index", compact('leaves'));
     }
 
     /**
@@ -76,9 +80,29 @@ class LeaveController extends Controller
      */
     public function edit(Leave $leave)
     {
-        //
-    }
 
+    }
+    public function update_status( $id, $status)
+    {
+        try {
+            $validator = Validator::make(
+                compact('id', 'status'),
+                [
+                    'id' => ['required','numeric',Rule::exists('leaves', 'id')],
+                    'status' => ['required','string', Rule::in(['Granted','Pending','Rejected'])],
+                ]
+            );
+            $leave = Leave::find($id);
+
+            $data['status'] = $status;
+            $leave->update($data);
+            
+            toastr()->success('status updated successfully');
+            return redirect()->route('leave');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
+    }
     /**
      * Update the specified resource in storage.
      */
@@ -90,8 +114,19 @@ class LeaveController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Leave $leave)
+    public function destroy($id)
     {
-        //
+        $leave = Leave::whereId($id)->first();
+
+        if ($leave) {
+
+            $leave->delete();
+            toastr()->error(trans('messages.Delete'));
+            return redirect()->route('leave.index');
+        }  else {
+            // Handle the case when the user is not found
+            toastr()->error(trans('messages.leaveTypeNotFound'));
+            return redirect()->route('leave.index');
+        }
     }
 }

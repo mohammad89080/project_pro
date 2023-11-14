@@ -42,5 +42,12 @@ class UsersTableSeeder extends Seeder
             'department_id' => 1, // replace with the actual department_id
             'password' =>Hash::make('1')
         ])->assignRole('user');
+
+        User::create([
+            'name' =>'User2',
+            'email' =>'u2@u.u',
+            'department_id' => 1, // replace with the actual department_id
+            'password' =>Hash::make('1')
+        ])->assignRole('user');
     }
 }

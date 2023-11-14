@@ -42,8 +42,11 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
     Route::get('/user/{user}/toggle-status', [UserController::class, 'toggleStatus'])->name('user.toggleStatus');
     Route::resource('/user', UserController::class)->middleware(['role:admin']);
 
-    Route::resource('/leave-types', LeaveTypeController::class)->middleware(['role:admin']);;
+    Route::resource('/leave-types', LeaveTypeController::class)->middleware(['role:admin']);
     Route::resource('/leave', LeaveController::class);
+    Route::get('/leave/update_status/{id}/{status}', [LeaveController::class, 'update_status'])->middleware(['role:admin'])->name('update_leave_status');
+    Route::get('/leave/my/{id}', [LeaveController::class, 'index_my'])->name('leave.myApply');
+
     Route::get('/holiday/holidays-this-month', [HolidayController::class,'holidaysThisMonthDisplay'])->name('holiday.holidaysThisMonthDisplay');
     Route::resource('/holiday', HolidayController::class);
 

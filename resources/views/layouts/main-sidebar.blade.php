@@ -57,7 +57,7 @@
                             <li> <a href="{{route('leave-types.index')}}">Types</a></li>
                             @else
                             <li> <a href="{{route('leave.create')}}">{{trans('main_trans.Leave_application')}}</a> </li>
-                            <li> <a href="#">Types</a></li>
+                            <li> <a href="{{route('leave.myApply', ['id' => auth()->user()->id])}}">All</a></li>
                             @endrole
                         </ul>
                     </li>
