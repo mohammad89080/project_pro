@@ -28,6 +28,7 @@
 <div class="row text-center" >
     <div class="col-md-12 mb-30">
         <div class="card card-statistics  card-body">
+            @role('admin')
             <form action="{{route('holiday.store')}}" method="POST">
                 @csrf
                 <div class="row">
@@ -43,6 +44,7 @@
                     </div>
                 </div>
             </form>
+            @endrole
         </div>
     </div>
 </div>
@@ -55,13 +57,14 @@
             <div class="card loading-transition-background">
                 <div class="card-body p-2  flex holiday-info">
                     <span  style="font-size: 1.2rem;">{{$holiday->holiday_date}}
+                        @role('admin')
                         <form id="delete-form-{{$holiday->id}}" action="{{ route('holiday.destroy', ['holiday' => $holiday->id]) }}" method="POST" style="display: inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" title="delete" class="btn btn-lg text-danger" style="border:none; background-color: transparent" >
                                 <i class="ti-trash"></i> </button>
                         </form>
-
+                        @endrole
                 </div>
             </div>
         </div>

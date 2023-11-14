@@ -24,10 +24,7 @@ Auth::routes();
 Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath', 'auth' ]], function()
 {
     /** ADD ALL LOCALIZED ROUTES INSIDE THIS GROUP **/
-//    Route::get('/', function()
-//    {
-//        return view('dashboard');
-//    });
+    Route::get('/', [HomeController::class, 'index'])->name('dashboard');
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 
 //    Route::livewire('/livewire/posts', \App\Livewire\CreatePost::class);
@@ -37,7 +34,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
 //        return View::make('test');
 //    });
 
-    Route::resource('/user', UserController::class);
+    Route::resource('/user', UserController::class)->middleware(['role:admin']);;
     Route::resource('/holiday', HolidayController::class);
 });
 

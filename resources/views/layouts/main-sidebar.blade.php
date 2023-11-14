@@ -12,7 +12,11 @@
 {{--                            <div class="pull-right"><i class="ti-plus"></i></div>--}}
 {{--                            <div class="clearfix"></div>--}}
 {{--                        </a>--}}
-                        <a href="{{route('user.create')}}" class="btn">{{trans('main_trans.Add_new_user')}}</a>
+                            @role('admin')
+                            <a href="{{route('user.create')}}" class="btn">{{trans('main_trans.Add_new_user')}}</a>
+                            @else
+                            <a href="#" class="btn">Punch In</a>
+                            @endrole
 {{--                        <ul id="dashboard" class="collapse" data-parent="#sidebarnav">--}}
 {{--                            <li> <a href="index.html">Dashboard 01</a> </li>--}}
 {{--                            <li> <a href="index-02.html">Dashboard 02</a> </li>--}}
@@ -29,10 +33,12 @@
                         <a href="{{route('dashboard')}}"><i class="ti-menu-alt"></i>
                             <span class="right-nav-text"></span>{{trans('main_trans.Dashboard_page')}} </a>
                     </li>
+                    @role('admin')
                     <li>
                         <a href="{{route('user.index')}}"><i class="fa fa-user" aria-hidden="true"></i>
                             <span class="right-nav-text"></span>{{trans('main_trans.Users')}} </a>
                     </li>
+                    @endrole
                     <li>
                         <a href="{{route('holiday.index')}}"><i class="fa fa-plane" aria-hidden="true"></i>
                             <span class="right-nav-text"></span>{{trans('main_trans.Holidays')}} </a>
