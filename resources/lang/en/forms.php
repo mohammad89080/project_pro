@@ -7,7 +7,4 @@ return [
     'Department' => 'Department',
     'maximum_in_year' => 'Maximum In Year',
     'Date' => 'Date',
-
-
-
 ];

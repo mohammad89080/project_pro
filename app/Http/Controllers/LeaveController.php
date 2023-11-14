@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Leave;
+use App\Models\LeaveUser;
 use Illuminate\Http\Request;
 
 class LeaveController extends Controller
@@ -36,8 +37,13 @@ class LeaveController extends Controller
      */
     public function create()
     {
+        $user_id=Auth::user()->id;
         $leave_types = LeaveType::all();
-        return view("page.leaves.create", compact('leave_types'));
+        foreach ($leave_types as $key => $type) {
+            $count=LeaveUser::where('user_id', $user_id)->where('leave_id',$type->id)->first()->count;
+            $count_leave[$type->id] = $type->maximum - $count;
+        }
+        return view("page.leaves.create", compact('leave_types','count_leave'));
     }
 
     /**
@@ -48,18 +54,33 @@ class LeaveController extends Controller
 
         try {
             $validator = Validator::make($request->all(), [
-                'date' => ['required',],
+                'date' => ['required','email' => 'unique:App\Models\Leave,date'],
                 'leave_type' => ['required', 'integer', Rule::exists('leave_types', 'id'),],
             ]);
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator)->withInput();
             }
+            $user_id=Auth::user()->id;
+            $leave_types = LeaveType::all();
+            foreach ($leave_types as $key => $type) {
+                $count=LeaveUser::where('user_id', $user_id)->where('leave_id',$type->id)->first()->count;
+                $count_leave[$type->id] = $type->maximum - $count;
+            }
+            if($count_leave[$request->leave_type]<=0)
+            {
+                toastr()->error('no remaining leaves');
+                return redirect()->back()->withErrors(['error' => 'no remaining leaves']);
+            }
             $data['date'] = $request->date;
             $data['leave_id'] = $request->leave_type;
-            $data['user_id'] = Auth::user()->id;
+            $data['user_id'] = $user_id;
             $data['description'] = $request->description;
 
             Leave::create($data);
+            LeaveUser::updateOrCreate(
+                ['user_id' => $data['user_id'], 'leave_id' => $data['leave_id']],
+                [ 'count' => \DB::raw('count + 1')]
+            );
             toastr()->success(trans('messages.success'));
             return redirect()->route('leave');
         } catch (\Exception $e) {

@@ -36,12 +36,16 @@
                             <label class="col-sm-3 col-form-label text-right" for="nameInput">
                                 {{ trans('forms.Date') }}
                             </label>
-                            <div class="input-group col-sm-5">
-                                <input required class="form-control" placeholder="Date" autocomplete="off"  id="datepicker-action" name="date" data-date-format="yyyy-mm-dd">
-                                <span class="input-group-text border-0" style="background-color: #F6F7F8;"><i class="fa fa-calendar"></i> </button></span>
+                            <div class="col-sm-5">
+                                <div class="input-group">
+                                    <input required class="form-control" placeholder="Date" autocomplete="off"  id="datepicker-action" name="date" data-date-format="yyyy-mm-dd">
+                                    <span class="input-group-text border-0" style="background-color: #F6F7F8;"><i class="fa fa-calendar"></i> </button></span>
+                                </div>
+                                @error('date')<span class="text-danger">{{ $message }}</span>@enderror
+
                             </div>
                         </div>
-
+                        
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label text-right" for="rrr">
                                 Leaves type
@@ -50,7 +54,7 @@
                                 <select style="height: 93%;" name="leave_type" class="form-control" id="rrr" required>
                                     <option value="" selected disabled>Select a type</option>
                                         @foreach ($leave_types as $leave_type)
-                                            <option value="{{$leave_type->id}}">{{$leave_type->name}}</option>
+                                            <option @if($count_leave[$leave_type->id]<=0) disabled class="text-danger" @endif value="{{$leave_type->id}}">{{$leave_type->name}}&nbsp;({{$count_leave[$leave_type->id]}}&nbsp;remaining)</option>
                                         @endforeach
 
                                 </select>
