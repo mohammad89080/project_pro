@@ -6,6 +6,7 @@ return [
     'Status' => 'الحالة',
     'Department' => 'القسم',
     'maximum_in_year' => 'العدد الأعظمي خلال سنة',
+    'Date' => 'التاريخ',
 
 
 

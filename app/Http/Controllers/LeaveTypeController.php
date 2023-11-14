@@ -74,7 +74,7 @@ class LeaveTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy( $id)
     {
         $leave_type = LeaveType::whereId($id)->first();
 
