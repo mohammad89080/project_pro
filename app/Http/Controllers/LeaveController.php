@@ -62,8 +62,13 @@ class LeaveController extends Controller
             }
             $user_id=Auth::user()->id;
             $leave_types = LeaveType::all();
+
             foreach ($leave_types as $key => $type) {
-                $count=LeaveUser::where('user_id', $user_id)->where('leave_id',$type->id)->first()->count;
+                $count=0;
+                $lu=LeaveUser::where('user_id', $user_id)->where('leave_id',$type->id)->first();
+                if(!empty($lu)) {
+                    $count=$l->count;
+                }
                 $count_leave[$type->id] = $type->maximum - $count;
             }
             if($count_leave[$request->leave_type]<=0)
