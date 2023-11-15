@@ -14,7 +14,7 @@ class LeaveController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('role:admin')->only(['index', 'destroy','update_status']); // Apply to method1 and method2
+        $this->middleware('role:admin')->only(['index', 'destroy','update_status','indexGranted']); // Apply to method1 and method2
         // $this->middleware('role:admin')->except(['store']); // Apply to other methods except method1 and method2
     }
 
@@ -29,6 +29,11 @@ class LeaveController extends Controller
     public function index_my()
     {
         $leaves = Leave::where('user_id', Auth::user()->id)->get();
+        return view("page.leaves.index", compact('leaves'));
+    }
+    public function indexGranted()
+    {
+        $leaves = Leave::where('status','Granted')->get(); 
         return view("page.leaves.index", compact('leaves'));
     }
 

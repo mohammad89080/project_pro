@@ -35,7 +35,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
 
 //    Route::livewire('/livewire/posts', \App\Livewire\CreatePost::class);
 
-//    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+   Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 //    Route::get('test',function(){
 //        return View::make('test');
 //    });
@@ -50,12 +50,15 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
 
     Route::resource('/holiday', HolidayController::class);
     Route::resource('/leave-types', LeaveTypeController::class)->middleware(['role:admin']);;
-    Route::resource('/leave', LeaveController::class);
 
     Route::resource('/leave-types', LeaveTypeController::class)->middleware(['role:admin']);
+
+    Route::get('/leave/my', [LeaveController::class, 'index_my'])->name('leave.myApply');
+    Route::get('/leave/leave-granted', [LeaveController::class, 'indexGranted'])->name('leave.leavesGranted');
     Route::resource('/leave', LeaveController::class);
+
+
     Route::get('/leave/update_status/{id}/{status}', [LeaveController::class, 'update_status'])->middleware(['role:admin'])->name('update_leave_status');
-    Route::get('/leave/my/{id}', [LeaveController::class, 'index_my'])->name('leave.myApply');
 
 
     Route::get('/holiday/holidays-this-month', [HolidayController::class,'holidaysThisMonthDisplay'])->name('holiday.holidaysThisMonthDisplay');

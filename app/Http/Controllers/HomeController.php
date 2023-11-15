@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Holiday;
+use App\Models\Leave;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -38,12 +39,17 @@ class HomeController extends Controller
         $holidaysThisMonth = Holiday::whereYear('holiday_date', $currentYear)
             ->whereMonth('holiday_date', $currentMonth)
             ->get();
+
+        $leavesThisYear = Leave::whereYear('date', $currentYear)->get();
+        $leavesGranted = Leave::where('status','Granted')->get();
 //        dd($holidaysThisMonth);
         $numberOfHolidaysThisYear = $holidaysThisYear->count();
         $numberOfHolidaysThisMonth = $holidaysThisMonth->count();
 
+        $numberOfLeavesThisYear = $leavesThisYear->count();
+        $numberOfLeavesGranted  = $leavesGranted->count();
 
 
-        return view('dashboard',compact('activeUserCount','UserCount','numberOfHolidaysThisYear','numberOfHolidaysThisMonth','user'));
+        return view('dashboard',compact('activeUserCount','UserCount','numberOfHolidaysThisYear','numberOfHolidaysThisMonth','numberOfLeavesThisYear','numberOfLeavesGranted','user'));
     }
 }
