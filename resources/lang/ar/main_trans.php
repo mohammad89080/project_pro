@@ -19,6 +19,7 @@ return [
     'Leaves_This_Month' => 'الإجازات هذا الشهر',
     'Leaves_This_Year' => 'الإجازات هذه السنة',
     'Leaves_Granted' => 'الإجازات المقبولة',
+    'UpdateSettings' => 'تعديل معلومات النظام',
     'Main_title'=>'برنامج مورا سوفت لادارة المدارس',
 
 

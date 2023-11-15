@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\HolidayController;
 use App\Http\Controllers\LeaveTypeController;
 use App\Http\Controllers\LeaveController;
+use App\Http\Controllers\SettingsController;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -68,6 +69,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
 
     Route::post('/toggle-work/{user}', [AttendanceController::class, 'toggleWork'])->name('toggle-work');
     Route::resource('/attendance', HolidayController::class);
+
+    Route::resource('/settings', SettingsController::class)->middleware(['role:admin']);
 
 
 

@@ -120,7 +120,9 @@
                         <a class="dropdown-item" href="#"><i class="text-dark ti-layers-alt"></i>Projects <span
                                 class="badge badge-info">6</span> </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#"><i class="text-info ti-settings"></i>Settings</a>
+                        @role('admin')
+                        <a class="dropdown-item" href="{{route('settings.index')}}"><i class="text-info ti-settings"></i>Settings</a>
+                        @endrole
                         <a class="dropdown-item" href="#">
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
