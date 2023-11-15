@@ -67,7 +67,7 @@ class LeaveController extends Controller
                 $count=0;
                 $lu=LeaveUser::where('user_id', $user_id)->where('leave_id',$type->id)->first();
                 if(!empty($lu)) {
-                    $count=$l->count;
+                    $count=$lu->count;
                 }
                 $count_leave[$type->id] = $type->maximum - $count;
             }
