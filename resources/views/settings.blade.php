@@ -37,7 +37,7 @@
                                 {{ trans('forms.Title') }}
                             </label>
                             <div class="col-sm-5">
-                                <input class="form-control" name="title" value="{{$settings->title}}" id="nameInput" placeholder="{{ trans('forms.Title') }}..." type="text" required="" autofocus="">
+                                <input class="form-control" name="title" value="{{ $settings ? $settings->title : '' }}" id="nameInput" placeholder="{{ trans('forms.Title') }}..." type="text" required="" autofocus="">
                                 @error('title')<span class="text-danger">{{ $message }}</span>@enderror
                             </div>
                         </div>
@@ -47,7 +47,7 @@
                                 {{ trans('forms.Footer') }}
                             </label>
                             <div class="col-sm-5">
-                                <input class="form-control" name="footer" value="{{$settings->footer}}" id="nameInput" placeholder="{{ trans('forms.Footer') }}..." type="text" required="" autofocus="">
+                                <input class="form-control" name="footer" value="{{ $settings ? $settings->footer : '' }}" id="nameInput" placeholder="{{ trans('forms.Footer') }}..." type="text" required="" autofocus="">
                                 @error('footer')<span class="text-danger">{{ $message }}</span>@enderror
                             </div>
                         </div>
@@ -57,7 +57,7 @@
                                 {{ trans('forms.StartTimeWork') }}
                             </label>
                             <div class="col-sm-5">
-                                <input class="form-control" type="time" value="{{$settings->start_work}}" name="start_work" id="nameInput" placeholder="{{ trans('forms.StartTimeWork') }}..." type="text" required="" autofocus="">
+                                <input class="form-control" type="time" vvalue="{{ $settings ? $settings->start_work : '' }}" name="start_work" id="nameInput" placeholder="{{ trans('forms.StartTimeWork') }}..." type="text" required="" autofocus="">
                                 @error('start_work')<span class="text-danger">{{ $message }}</span>@enderror
                             </div>
                         </div>
@@ -67,7 +67,7 @@
                                 {{ trans('forms.WorkHours') }}
                             </label>
                             <div class="col-sm-5">
-                                <input class="form-control" type="number" value="{{$settings->work_hours}}" min="1" max="16" name="work_hours" id="nameInput" placeholder="{{ trans('forms.WorkHours') }}..." type="text" required="" autofocus="">
+                                <input class="form-control" type="number" value="{{ $settings ? $settings->work_hours : '' }}" min="1" max="16" name="work_hours" id="nameInput" placeholder="{{ trans('forms.WorkHours') }}..." type="text" required="" autofocus="">
                                 @error('work_hours')<span class="text-danger">{{ $message }}</span>@enderror
                             </div>
                         </div>
