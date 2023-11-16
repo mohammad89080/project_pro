@@ -17,7 +17,7 @@ class AttendanceController extends Controller
         // Create a new attendance record with the start time
         $attendance = new Attendance([
             'attendance_date' => now()->toDateString(),
-            'start_time' => now()->toTimeString(),
+            'start_time' => now(),
             'user_id' => $user->id,
         ]);
         $workStartTime = config('app.work_start_time');
@@ -31,8 +31,12 @@ class AttendanceController extends Controller
 
         return redirect()->back()->with('success', 'Work started successfully.');
     }
+
     private function calculateLateTime($attendanceDate, $actualStartTime, $expectedStartTime)
     {
+        // If $actualStartTime contains date, extract only the time part
+        $actualStartTime = Carbon::parse($actualStartTime)->format('H:i:s');
+
         $actualStart = Carbon::parse("$attendanceDate $actualStartTime");
         $expectedStart = Carbon::parse("$attendanceDate $expectedStartTime");
 
@@ -41,7 +45,6 @@ class AttendanceController extends Controller
 
         return max(0, $lateTime); // Ensure late time is not negative
     }
-
 
     public function finishWork(Request $request)
     {
@@ -56,7 +59,7 @@ class AttendanceController extends Controller
 
         if ($attendance) {
             // Update the attendance record with the end time and calculate working hours
-            $attendance->departure_time = now()->toTimeString();
+            $attendance->departure_time = now();
 
             $start = Carbon::parse($attendance->start_time);
             $end = Carbon::parse($attendance->departure_time);

@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained(); // Assuming 'users' table already exists
             $table->date('attendance_date');
-            $table->time('start_time');
-            $table->time('departure_time')->nullable();
+            $table->dateTime('start_time');
+            $table->dateTime('departure_time')->nullable();
             $table->float('working_time')->nullable();
             $table->integer('late_time')->default(0)->nullable();
             $table->string('status')->nullable();
