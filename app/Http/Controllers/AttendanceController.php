@@ -155,12 +155,12 @@ class AttendanceController extends Controller
         $startDate = Carbon::now()->startOfMonth()->toDateString();
         $endDate = Carbon::now()->endOfMonth()->toDateString();
 
-
         $workedMinutesByUser = $this->getWorkedMinutesByUsers($startDate, $endDate);
 
         return view('page.attendances.summary_report', compact('workedMinutesByUser', 'startDate', 'endDate'));
     }
-    public function reportByUser(Request $request)
+
+    public function report_my(Request $request)
     {
         $startDate = Carbon::now()->startOfMonth()->toDateString();
         $endDate = Carbon::now()->endOfMonth()->toDateString();
@@ -169,23 +169,26 @@ class AttendanceController extends Controller
             $startDate = $request->input('startDate');
             $endDate = $request->input('endDate');
         }
-        $workedMinutesByUser = $this->getWorkedMinutesByUser($userId, $startDate, $endDate);
+        $user_id = Auth::user()->id;
+        $workedMinutesByUser = $this->getWorkedMinutesByUser($user_id, $startDate, $endDate);
 
         return view('page.attendances.summary_report', compact('workedMinutesByUser', 'startDate', 'endDate'));return view('page.attendances.summary_report', compact('workedMinutesByUser', 'startDate', 'endDate'));
     }
-    private function getWorkedMinutesByUser($userId, $startDate, $endDate)
+
+    private function getWorkedMinutesByUser($user_id, $startDate, $endDate)
     {
 
         return DB::table('attendances')
             ->select(DB::raw('SUM(working_time) as totalWorkedMinutes'))
-            ->where('user_id', $userId)
+            ->where('user_id', $user_id)
             ->whereBetween('attendance_date', [$startDate, $endDate])
             ->get();
     }
+
     public function report2($startDate,$endDate)
     {
 
-        $workedMinutesByUser = $this->getWorkedMinutesByUser($startDate, $endDate);
+        $workedMinutesByUser = $this->getWorkedMinutesByUsers($startDate, $endDate);
 
         return $workedMinutesByUser;
 

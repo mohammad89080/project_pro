@@ -108,10 +108,13 @@
                         <ul id="elements" class="collapse" data-parent="#sidebarnav">
                             @role('admin')
                             <li><a style="font-size: 14px;" href="{{route('attendance.index')}}">{{ trans('main_trans.ReportAll') }}</a></li>
+                            <li><a style="font-size: 14px;" href="{{route('attendance.report')}}">{{ trans('main_trans.SummaryReport') }}</a></li>
+
                             @else
                             <li><a style="font-size: 14px;" href="{{route('attendance.myreport')}}">{{ trans('main_trans.ReportAll') }}</a></li>
+                            <li><a style="font-size: 14px;" href="{{route('attendance.mysumary')}}">{{ trans('main_trans.SummaryReport') }}</a></li>
+
                             @endrole
-                            <li><a style="font-size: 14px;" href="{{route('attendance.report')}}">{{ trans('main_trans.SummaryReport') }}</a></li>
 
                         </ul>
 {{--                    </li>--}}
