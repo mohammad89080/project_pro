@@ -18,7 +18,7 @@ return new class extends Migration
             $table->time('start_work');
             $table->time('end_work')->nullable();
             $table->integer('work_hours');
-            $table->string('logo');
+            $table->string('logo')->nullable();
             $table->timestamps();
         });
     }

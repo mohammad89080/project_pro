@@ -6,7 +6,15 @@
 
             <div class="text-left navbar-brand-wrapper">
 
-                <img class="rounded-circle" width="60" src="{{ URL::asset('assets/images/unnamed.png') }}" alt="">
+                @php
+                  $settings=\App\Models\Settings::latest()->first();
+                @endphp
+
+                @if (empty($settings->logo))
+                    <img class="rounded-circle" width="60" src="{{ URL::asset('assets/images/unnamed.png') }}" alt="logo">
+                @else
+                <img class="rounded-circle" width="60" src="{{ asset('assets/images/' . $settings->logo) }}" alt="logo">
+                @endif
 
                 <a class="navbar-brand brand-logo-mini" href="index.html">
             </div>

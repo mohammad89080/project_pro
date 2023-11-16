@@ -29,6 +29,7 @@ class SettingsController extends Controller
                 'footer' => ['required','string'],
                 'start_work' => ['required',],
                 'work_hours' => ['required','integer'],
+                'logo' => ['image','mimes:jpeg,png,jpg,gif,svg','max:2048'],
             ]);
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator)->withInput();
@@ -37,8 +38,15 @@ class SettingsController extends Controller
             $data['footer'] = $request->footer;
             $data['start_work'] = $request->start_work;
             $data['work_hours'] = $request->work_hours;
-            $data['logo'] = 'sss';
-
+            
+            if ($request->hasFile('logo')) {
+                $imageName = time().'.'.$request->logo->extension();
+                $request->logo->move(public_path('assets/images'), $imageName);
+                $data['logo'] = $imageName;
+            }
+            elseif(Settings::latest()->first()){
+                $data['logo'] = Settings::latest()->value('logo');
+            }
             Settings::truncate();
             Settings::Create($data);
 

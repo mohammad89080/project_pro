@@ -7,9 +7,16 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class AttendanceController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:admin')->only(['index', 'getAttendance', 'report']); // Apply to method1 and method2
+        // $this->middleware('role:admin')->except(['index_my']); // Apply to other methods except method1 and method2
+    }
+
     public function startWork(Request $request)
     {
         // Assuming you have user authentication and get the user from the request
@@ -87,6 +94,14 @@ class AttendanceController extends Controller
 
         return view("page.attendances.index", compact('users','attendances'));
 
+    }
+
+    public function index_my ()
+    {
+
+        $attendances = Attendance::where('user_id', Auth::user()->id)->with(['user'])->get();
+      
+        return view("page.attendances.index", compact('attendances'));
     }
 
 

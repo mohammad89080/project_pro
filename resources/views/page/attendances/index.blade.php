@@ -21,6 +21,7 @@
 
 
                     <div class="form-row align-items-center content-center">
+                        @role('admin')
                         <div class="col-sm-3 my-1 form-group">
 
                             <select name="userSelect" id="userSelect"  style="padding-bottom: 11px;"  class="form-control" required="">
@@ -31,13 +32,14 @@
                             </select>
 
                         </div>
-
+                        
                         <div class="col-sm-3 my-1 flex">
                             <button id="reportButton"  class="btn btn-success ml-2 btn-fw" onclick="filter_users()">
 
                                 Report
                             </button>
                         </div>
+                        @endrole
                     </div>
 
                 </div>
@@ -77,7 +79,7 @@
                                     $i++;
 
                                 @endphp
-                                <tr class="filter-data" style="display:none">
+                                <tr class="filter-data" !@role('admin') style="display:none" @endrole>
                                     <td>{{$i}}</td>
                                     <td>{{$attendance->user->name}}</td>
                                     @if ($attendance->attendance_date != $lastDate)

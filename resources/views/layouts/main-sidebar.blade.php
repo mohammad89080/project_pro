@@ -18,16 +18,31 @@
                             <a style="font-size: 16px" href="{{route('user.create')}}" class="btn">{{trans('main_trans.Add_new_user')}}</a>
                             @else
 {{--                            <a href="#" class="btn">Punch In</a>--}}
+                            @php
+                                $att=\App\Models\Attendance::where('user_id', Auth::user()->id)->latest()->first();
+                                
+                                $end=null;
+                                if($att){
+                                    $end=$att->departure_time;
+            
+                                }
+    
+                            @endphp
 
-                            <form action="{{ route('start.work') }}" method="post">
-                                @csrf
-                                <button class="btn btn-primary w-100" type="submit">{{trans('main_trans.StartWork')}}</button>
-                            </form>
+                            @if (!$att || ($att && $end))
+                                <form action="{{ route('start.work') }}" method="post">
+                                    @csrf
+                                    <button class="btn btn-primary w-100" type="submit">{{trans('main_trans.StartWork')}}</button>
+                                </form>
+                            @else
+                                <form action="{{ route('finish.work') }}" method="post">
+                                    @csrf
+                                    <button class="btn btn-danger mt-2 w-100" type="submit">{{trans('main_trans.EndWork')}}</button>
+                                </form>
+                            @endif
+                            
 
-                            <form action="{{ route('finish.work') }}" method="post">
-                                @csrf
-                                <button class="btn btn-danger mt-2 w-100" type="submit">{{trans('main_trans.EndWork')}}</button>
-                            </form>
+                            
 {{--                            <form action="{{ route('toggle-work') }}" method="post">--}}
 {{--                                @csrf--}}
 {{--                                <button type="submit">Toggle Work</button>--}}
@@ -91,7 +106,11 @@
                             <div class="clearfix"></div>
                         </a>
                         <ul id="elements" class="collapse" data-parent="#sidebarnav">
+                            @role('admin')
                             <li><a style="font-size: 14px;" href="{{route('attendance.index')}}">{{ trans('main_trans.ReportAll') }}</a></li>
+                            @else
+                            <li><a style="font-size: 14px;" href="{{route('attendance.myreport')}}">{{ trans('main_trans.ReportAll') }}</a></li>
+                            @endrole
                             <li><a style="font-size: 14px;" href="{{route('attendance.report')}}">{{ trans('main_trans.SummaryReport') }}</a></li>
 
                         </ul>
