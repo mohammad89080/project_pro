@@ -70,8 +70,10 @@
                             </thead>
                             <tbody>
                             @php
-                                $i=0;
+                                $i = 0;
+                                $lastDate = null;
                             @endphp
+
                             @foreach($attendances as $attendance)
                                 @php
                                     $i++;
@@ -79,18 +81,27 @@
                                 <tr>
                                     <td>{{$i}}</td>
                                     <td>{{$attendance->user->name}}</td>
-                                    <td>{{$attendance->attendance_date}}</td>
+                                    @if ($attendance->attendance_date != $lastDate)
+
+                                        <td>{{ $attendance->attendance_date }}</td>
+                                    @else
+
+                                        <td></td>
+                                    @endif
+{{--                                    <td>{{$attendance->attendance_date}}</td>--}}
 
                                     <td>{{$attendance->start_time}}</td>
                                     <td>{{$attendance->departure_time}}</td>
                                     <td>{{$attendance->working_time}}</td>
                                     <td>{{$attendance->late_time}}</td>
 
-
+                                @php
+                                    $lastDate = $attendance->attendance_date;
+                                @endphp
 {{--                                    <td style="color: {{ $user->status ? 'green' : 'red' }}">--}}
 {{--                                        {{ $user->status ? 'Active' : 'Inactive' }}--}}
 {{--                                    </td>--}}
-
+                                </tr>
                             @endforeach
 
 
