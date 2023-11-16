@@ -24,10 +24,10 @@
                     <div class="form-row align-items-center content-center">
                         <div class="col-sm-3 my-1 form-group">
 
-                            <select name="userSelect"  style="padding-bottom: 11px;"  class="form-control" required="">
+                            <select name="userSelect"  style="padding-bottom: 8px;"  class="form-control" required="">
                                 <option value="">--- Please Select User ---</option>
                                 @foreach($users as $user )
-                                <option value="{{$user->id}}">  {{$user->name}}   </option>
+                                <option value="{{$user->id}}" {{ request('userSelect') == $user->id ? 'selected' : '' }}>  {{$user->name}}   </option>
                                 @endforeach
                             </select>
 
@@ -57,13 +57,13 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Name</th>
 
-                                <th>Date</th>
-                                <th>In Time	</th>
-                                <th>Out Time</th>
-                                <th>Worked</th>
-                                <th>Time Late</th>
+
+                                <th> {{ trans('main_trans.Date') }}</th>
+                                <th>{{ trans('main_trans.InTime') }}</th>
+                                <th>{{ trans('main_trans.OutTime') }}</th>
+                                <th>{{ trans('main_trans.Worked') }}</th>
+                                <th>{{ trans('main_trans.TimeLate') }}</th>
 
 
                             </tr>
@@ -80,7 +80,7 @@
                                 @endphp
                                 <tr>
                                     <td>{{$i}}</td>
-                                    <td>{{$attendance->user->name}}</td>
+
                                     @if ($attendance->attendance_date != $lastDate)
 
                                         <td>{{ $attendance->attendance_date }}</td>
@@ -109,13 +109,12 @@
                             <tfoot>
                             <tr>
                                 <th>#</th>
-                                <th>Name</th>
 
-                                <th>Date</th>
-                                <th>In Time	</th>
-                                <th>Out Time</th>
-                                <th>Worked</th>
-                                <th>Time Late</th>
+                                <th> {{ trans('main_trans.Date') }}</th>
+                                <th>{{ trans('main_trans.InTime') }}</th>
+                                <th>{{ trans('main_trans.OutTime') }}</th>
+                                <th>{{ trans('main_trans.Worked') }}</th>
+                                <th>{{ trans('main_trans.TimeLate') }}</th>
 
                             </tr>
                             </tfoot>

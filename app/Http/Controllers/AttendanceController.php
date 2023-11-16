@@ -6,6 +6,7 @@ use App\Models\Attendance;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class AttendanceController extends Controller
 {
@@ -88,17 +89,29 @@ class AttendanceController extends Controller
 
     }
 
+
     public function getAttendance(Request $request)
     {
-        $users = User::all();
-        $userId = $request->input('userSelect');
+        // Set default values for $startDate and $endDate to cover the current month
+        $startDate = Carbon::now()->startOfMonth()->toDateString();
+        $endDate = Carbon::now()->endOfMonth()->toDateString();
 
+        // Update values based on user input
+        if ($request->filled('startDate') && $request->filled('endDate')) {
+            $startDate = $request->input('startDate');
+            $endDate = $request->input('endDate');
+        }
 
-        $attendances = Attendance::where('user_id', $userId)->get();
+        // Fetch grouped worked minutes by user for the selected date range
+        $workedMinutesByUser = DB::table('attendances')
+            ->select('users.name as userName', DB::raw('SUM(working_time) as totalWorkedMinutes'))
+            ->join('users', 'users.id', '=', 'attendances.user_id')
+            ->whereBetween('attendance_date', [$startDate, $endDate])
+            ->groupBy('users.id', 'users.name')
+            ->get();
 
-        return view('page.attendances.index', compact('users','attendances'));
+        return view('page.attendances.summary_report', compact('workedMinutesByUser', 'startDate', 'endDate'));
     }
-
     /**
      * Show the form for creating a new resource.
      */
@@ -122,7 +135,28 @@ class AttendanceController extends Controller
     {
         //
     }
+    public function report()
+    {
+        // Set default values for $startDate and $endDate to cover the current month
+        $startDate = Carbon::now()->startOfMonth()->toDateString();
+        $endDate = Carbon::now()->endOfMonth()->toDateString();
 
+        // Fetch grouped worked minutes by user for the selected date range
+        $workedMinutesByUser = $this->getWorkedMinutesByUser($startDate, $endDate);
+
+        return view('page.attendances.summary_report', compact('workedMinutesByUser', 'startDate', 'endDate'));
+    }
+
+    private function getWorkedMinutesByUser($startDate, $endDate)
+    {
+        // Fetch grouped worked minutes by user for the selected date range
+        return DB::table('attendances')
+            ->select('users.name as userName', DB::raw('SUM(working_time) as totalWorkedMinutes'))
+            ->join('users', 'users.id', '=', 'attendances.user_id')
+            ->whereBetween('attendance_date', [$startDate, $endDate])
+            ->groupBy('users.id', 'users.name')
+            ->get();
+    }
     /**
      * Show the form for editing the specified resource.
      */

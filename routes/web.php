@@ -75,6 +75,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
     Route::post('/start-work', [AttendanceController::class, 'startWork'])->name('start.work');
     Route::post('/attendance/get-attendance', [AttendanceController::class, 'getAttendance'])->name('get-attendance');
 
+    Route::get('/attendance/report', [AttendanceController::class, 'report'])->name('attendance.report');
     Route::resource('/attendance', AttendanceController::class);
 
 

@@ -19,12 +19,12 @@
 
                             <form action="{{ route('start.work') }}" method="post">
                                 @csrf
-                                <button class="btn btn-primary w-100" type="submit">Start Work</button>
+                                <button class="btn btn-primary w-100" type="submit">{{trans('main_trans.StartWork')}}</button>
                             </form>
 
                             <form action="{{ route('finish.work') }}" method="post">
                                 @csrf
-                                <button class="btn btn-danger mt-2 w-100" type="submit">Finish Work</button>
+                                <button class="btn btn-danger mt-2 w-100" type="submit">{{trans('main_trans.EndWork')}}</button>
                             </form>
 {{--                            <form action="{{ route('toggle-work') }}" method="post">--}}
 {{--                                @csrf--}}
@@ -90,7 +90,7 @@
                         </a>
                         <ul id="elements" class="collapse" data-parent="#sidebarnav">
                             <li><a href="{{route('attendance.index')}}">{{ trans('main_trans.ReportAll') }}</a></li>
-                            <li><a href="alerts.html">Alerts</a></li>
+                            <li><a href="{{route('attendance.report')}}">تقارير مختصرة</a></li>
 
                         </ul>
 {{--                    </li>--}}

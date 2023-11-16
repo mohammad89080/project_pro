@@ -9,7 +9,7 @@ return [
     'Create_user' =>  'Create a user',
     'Holidays'=>'Holidays',
     'Leave_application'=>'Leave Application',
-    'Leave_application'=>'Leave Application',
+
     'Department' => 'Departments',
     'Create_New_Designation' => 'Create New Department',
      'Make_Active' => 'Make Active',
@@ -22,7 +22,16 @@ return [
     'Report' => 'Report',
     'ReportAll' => 'User report',
 
+    "Date" => 'Date',
+    'InTime' => 'In Time',
+    'OutTime' => 'Out Time',
+    'Worked' => 'Worked',
+    'TimeLate' => 'Late Time',
+    'StartWork' => 'Start Work',
+    'EndWork' => 'End Work',
 
+  'WordHour' => 'Worked Hours',
+    'periodFilter' => 'Displaying data for the period:',
 
     'Leaves_This_Month' => 'Leave This Month',
     'Leaves_This_Year' => 'Leave This Year',
