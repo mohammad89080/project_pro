@@ -54,7 +54,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
 
     Route::resource('/leave-types', LeaveTypeController::class)->middleware(['role:admin']);;
 
-    Route::resource('/leave-types', LeaveTypeController::class)->middleware(['role:admin']);
 
     Route::get('/leave/my', [LeaveController::class, 'index_my'])->name('leave.myApply');
     Route::get('/leave/leave-granted', [LeaveController::class, 'indexGranted'])->name('leave.leavesGranted');
@@ -66,7 +65,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
 
 //    Route::resource('/holiday', HolidayController::class);
 
-    Route::resource('/department', Department::class);
+    Route::resource('/department', Department::class)->middleware(['role:admin']);
 //    Route::post('/toggle-time/{user}', [AttendanceController::class, 'toggleTime'])->name('toggle-time');
 
 //        ---------------------------AttendanceController --------------------------
@@ -75,6 +74,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
 
     Route::post('/start-work', [AttendanceController::class, 'startWork'])->name('start.work');
     Route::post('/attendance/get-attendance', [AttendanceController::class, 'getAttendance'])->name('get-attendance');
+    Route::get('/attendance/my', [AttendanceController::class, 'index_my'])->name('attendance.myreport');
 
     Route::get('/attendance/report', [AttendanceController::class, 'report'])->name('attendance.report');
     Route::resource('/attendance', AttendanceController::class);

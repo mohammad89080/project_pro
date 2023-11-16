@@ -30,7 +30,7 @@
             <div class="card-body">
                     <h5>{{trans('main_trans.UpdateSettings')}}</h5> <br>
 
-                    <form class="forms-sample" action="{{ route('settings.store') }}" method="post">
+                    <form class="forms-sample" action="{{ route('settings.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label text-right" for="nameInput">
@@ -57,7 +57,7 @@
                                 {{ trans('forms.StartTimeWork') }}
                             </label>
                             <div class="col-sm-5">
-                                <input class="form-control" type="time" vvalue="{{ $settings ? $settings->start_work : '' }}" name="start_work" id="nameInput" placeholder="{{ trans('forms.StartTimeWork') }}..." type="text" required="" autofocus="">
+                                <input class="form-control" type="time" value="{{ $settings ? $settings->start_work : '' }}" name="start_work" id="nameInput" placeholder="{{ trans('forms.StartTimeWork') }}..." type="text" required="" autofocus="">
                                 @error('start_work')<span class="text-danger">{{ $message }}</span>@enderror
                             </div>
                         </div>
@@ -78,7 +78,7 @@
                                 {{ trans('forms.Logo') }}
                             </label>
                             <div class="col-sm-5">
-                                <input class="form-control" type="file" min="1" max="16" name="logo" id="nameInput" placeholder="{{ trans('forms.Logo') }}..." type="text" required="" autofocus="">
+                                <input class="form-control" type="file" min="1" max="16" name="logo" id="nameInput" placeholder="{{ trans('forms.Logo') }}..." type="text" autofocus="" accept="image/*">
                                 @error('logo')<span class="text-danger">{{ $message }}</span>@enderror
                             </div>
                         </div>
