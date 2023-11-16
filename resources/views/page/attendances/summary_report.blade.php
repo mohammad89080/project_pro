@@ -2,13 +2,13 @@
 @section('css')
 
     @section('title')
-        {{ trans('main_trans.Users') }}
+        {{ trans('main_trans.SummaryReport') }}
     @stop
 @endsection
 @section('page-header')
     <!-- breadcrumb -->
     @section('PageTitle')
-        {{ trans('main_trans.Users') }}
+        {{ trans('main_trans.SummaryReport') }}
     @stop
     <!-- breadcrumb -->
 @endsection

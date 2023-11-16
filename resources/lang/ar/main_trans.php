@@ -19,11 +19,12 @@ return [
 
     'Report' => 'التقارير',
     'ReportAll' => 'تقرير عن مستخدم',
-
+    'SummaryReport' => 'تقرير مختصر',
     'Leaves_This_Month' => 'الإجازات هذا الشهر',
     'Leaves_This_Year' => 'الإجازات هذه السنة',
     'Leaves_Granted' => 'الإجازات المقبولة',
     'UpdateSettings' => 'تعديل معلومات النظام',
+
 
     "Date" => 'التاريخ',
     'InTime' => 'بدء العمل',
@@ -34,4 +35,9 @@ return [
     'WordHour' => 'ساعات العمل',
     'EndWork' => 'إنتهاء العمل',
     'periodFilter' => 'عرض بيانات الفترة:',
+
+
+
+
+
     ];

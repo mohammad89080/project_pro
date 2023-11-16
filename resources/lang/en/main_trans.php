@@ -32,12 +32,13 @@ return [
 
   'WordHour' => 'Worked Hours',
     'periodFilter' => 'Displaying data for the period:',
+    'SummaryReport' => 'Summary Report',
+    'Report' => 'Summary Report',
 
     'Leaves_This_Month' => 'Leave This Month',
     'Leaves_This_Year' => 'Leave This Year',
     'Leaves_Granted' => 'Leave Granted',
     'UpdateSettings'=> 'Update System Settings',
-
     'Main_title' => 'MoraSoft School Management Program',
     'Programname' => 'MoraSoft School Management Program',
     'change_language'=>'language',

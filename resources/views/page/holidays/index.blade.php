@@ -8,7 +8,6 @@
 @endsection
 @section('page-header')
 <!-- breadcrumb -->
-
 <!-- breadcrumb -->
 @endsection
 @section('content')

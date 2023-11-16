@@ -1,3 +1,4 @@
+
 <div class="container-fluid">
     <div class="row">
         <!-- Left Sidebar start-->
@@ -6,6 +7,7 @@
                 <ul class="nav navbar-nav side-menu" id="sidebarnav">
                     <!-- menu item Dashboard-->
                     <li>
+
 {{--                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#dashboard">--}}
 {{--                            <div class="pull-left"><i class="ti-home"></i><span class="right-nav-text">Dashboard</span>--}}
 {{--                            </div>--}}
@@ -13,7 +15,7 @@
 {{--                            <div class="clearfix"></div>--}}
 {{--                        </a>--}}
                             @role('admin')
-                            <a href="{{route('user.create')}}" class="btn">{{trans('main_trans.Add_new_user')}}</a>
+                            <a style="font-size: 16px" href="{{route('user.create')}}" class="btn">{{trans('main_trans.Add_new_user')}}</a>
                             @else
 {{--                            <a href="#" class="btn">Punch In</a>--}}
 
@@ -45,22 +47,22 @@
                     <li class="mt-10 mb-10 text-muted pl-4 font-medium menu-title">Components </li>
                     <!-- menu item Elements-->
                     <li>
-                        <a href="{{route('dashboard')}}"><i class="ti-menu-alt"></i>
+                        <a style="font-size: 15px;" href="{{route('dashboard')}}"><i class="ti-menu-alt"></i>
                             <span class="right-nav-text"></span>{{trans('main_trans.Dashboard_page')}} </a>
                     </li>
                     @role('admin')
                     <li>
-                        <a href="{{route('user.index')}}"><i class="fa fa-user" aria-hidden="true"></i>
+                        <a style="font-size: 16px;" href="{{route('user.index')}}"><i class="fa fa-user" aria-hidden="true"></i>
                             <span class="right-nav-text"></span>{{trans('main_trans.Users')}} </a>
                     </li>
                     @endrole
                     <li>
-                        <a href="{{route('holiday.index')}}"><i class="fa fa-plane" aria-hidden="true"></i>
+                        <a  style="font-size: 16px;" href="{{route('holiday.index')}}"><i class="fa fa-plane" aria-hidden="true"></i>
                             <span class="right-nav-text"></span>{{trans('main_trans.Holidays')}} </a>
                     </li>
 
                     <li>
-                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#leave-menu">
+                        <a style="font-size: 16px;" href="javascript:void(0);" data-toggle="collapse" data-target="#leave-menu">
                             <div class="pull-left"><i class="fa fa-sign-out" aria-hidden="true"></i>
                                 <span class="right-nav-text">leave</span></div>
                             <div class="pull-right"><i class="ti-plus"></i></div>
@@ -78,19 +80,19 @@
                     </li>
 
                     <li>
-                        <a href="{{route('department.index')}}"><i class="fa fa-plane" aria-hidden="true"></i>
+                        <a style="font-size: 16px;" href="{{route('department.index')}}"><i class="fa fa-plane" aria-hidden="true"></i>
                             <span class="right-nav-text"></span>{{trans('main_trans.Department')}} </a>
                     </li>
                     <li>
-                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements">
+                        <a  style="font-size: 16px;" href="javascript:void(0);" data-toggle="collapse" data-target="#elements">
                             <div class="pull-left"><i class="ti-palette"></i><span
                                     class="right-nav-text"> {{ trans('main_trans.Report') }}</span></div>
                             <div class="pull-right"><i class="ti-plus"></i></div>
                             <div class="clearfix"></div>
                         </a>
                         <ul id="elements" class="collapse" data-parent="#sidebarnav">
-                            <li><a href="{{route('attendance.index')}}">{{ trans('main_trans.ReportAll') }}</a></li>
-                            <li><a href="{{route('attendance.report')}}">تقارير مختصرة</a></li>
+                            <li><a style="font-size: 14px;" href="{{route('attendance.index')}}">{{ trans('main_trans.ReportAll') }}</a></li>
+                            <li><a style="font-size: 14px;" href="{{route('attendance.report')}}">{{ trans('main_trans.SummaryReport') }}</a></li>
 
                         </ul>
 {{--                    </li>--}}

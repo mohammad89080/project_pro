@@ -83,7 +83,7 @@ class AttendanceController extends Controller
     {
 
         $users = User::all();
-        $attendances = Attendance::with(['user']);
+        $attendances = Attendance::with(['user'])->get();
 
         return view("page.attendances.index", compact('users','attendances'));
 
