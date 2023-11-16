@@ -10,7 +10,7 @@
 @yield('css')
 <!--- Style css -->
 <link href="{{ URL::asset('assets/css/style.css') }}" rel="stylesheet">
-
+<script src="{{ URL::asset('js/attendance.js') }}"></script>
 <!--- Style css -->
 @if (App::getLocale() == 'en')
     <link href="{{ URL::asset('assets/css/ltr.css') }}" rel="stylesheet">

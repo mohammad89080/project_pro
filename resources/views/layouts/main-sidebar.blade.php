@@ -15,9 +15,23 @@
                             @role('admin')
                             <a href="{{route('user.create')}}" class="btn">{{trans('main_trans.Add_new_user')}}</a>
                             @else
-                            <a href="#" class="btn">Punch In</a>
+{{--                            <a href="#" class="btn">Punch In</a>--}}
 
+                            <form action="{{ route('start.work') }}" method="post">
+                                @csrf
+                                <button class="btn btn-primary w-100" type="submit">Start Work</button>
+                            </form>
+
+                            <form action="{{ route('finish.work') }}" method="post">
+                                @csrf
+                                <button class="btn btn-danger mt-2 w-100" type="submit">Finish Work</button>
+                            </form>
+{{--                            <form action="{{ route('toggle-work') }}" method="post">--}}
+{{--                                @csrf--}}
+{{--                                <button type="submit">Toggle Work</button>--}}
+{{--                            </form>--}}
                             @endrole
+
 {{--                        <ul id="dashboard" class="collapse" data-parent="#sidebarnav">--}}
 {{--                            <li> <a href="index.html">Dashboard 01</a> </li>--}}
 {{--                            <li> <a href="index-02.html">Dashboard 02</a> </li>--}}
@@ -67,34 +81,18 @@
                         <a href="{{route('department.index')}}"><i class="fa fa-plane" aria-hidden="true"></i>
                             <span class="right-nav-text"></span>{{trans('main_trans.Department')}} </a>
                     </li>
-{{--                    <li>--}}
-{{--                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements">--}}
-{{--                            <div class="pull-left"><i class="ti-palette"></i><span--}}
-{{--                                    class="right-nav-text">Elements</span></div>--}}
-{{--                            <div class="pull-right"><i class="ti-plus"></i></div>--}}
-{{--                            <div class="clearfix"></div>--}}
-{{--                        </a>--}}
-{{--                        <ul id="elements" class="collapse" data-parent="#sidebarnav">--}}
-{{--                            <li><a href="accordions.html">Accordions</a></li>--}}
-{{--                            <li><a href="alerts.html">Alerts</a></li>--}}
-{{--                            <li><a href="button.html">Button</a></li>--}}
-{{--                            <li><a href="colorpicker.html">Colorpicker</a></li>--}}
-{{--                            <li><a href="dropdown.html">Dropdown</a></li>--}}
-{{--                            <li><a href="lists.html">lists</a></li>--}}
-{{--                            <li><a href="modal.html">modal</a></li>--}}
-{{--                            <li><a href="nav.html">nav</a></li>--}}
-{{--                            <li><a href="nicescroll.html">nicescroll</a></li>--}}
-{{--                            <li><a href="pricing-table.html">pricing table</a></li>--}}
-{{--                            <li><a href="ratings.html">ratings</a></li>--}}
-{{--                            <li><a href="date-picker.html">date picker</a></li>--}}
-{{--                            <li><a href="tabs.html">tabs</a></li>--}}
-{{--                            <li><a href="typography.html">typography</a></li>--}}
-{{--                            <li><a href="popover-tooltips.html">Popover tooltips</a></li>--}}
-{{--                            <li><a href="progress.html">progress</a></li>--}}
-{{--                            <li><a href="switch.html">switch</a></li>--}}
-{{--                            <li><a href="sweetalert2.html">sweetalert2</a></li>--}}
-{{--                            <li><a href="touchspin.html">touchspin</a></li>--}}
-{{--                        </ul>--}}
+                    <li>
+                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#elements">
+                            <div class="pull-left"><i class="ti-palette"></i><span
+                                    class="right-nav-text"> {{ trans('main_trans.Report') }}</span></div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+                            <div class="clearfix"></div>
+                        </a>
+                        <ul id="elements" class="collapse" data-parent="#sidebarnav">
+                            <li><a href="{{route('attendance.index')}}">{{ trans('main_trans.ReportAll') }}</a></li>
+                            <li><a href="alerts.html">Alerts</a></li>
+
+                        </ul>
 {{--                    </li>--}}
 {{--                    <!-- menu item calendar-->--}}
 {{--                    <li>--}}

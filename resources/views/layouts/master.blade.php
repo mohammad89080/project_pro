@@ -66,7 +66,6 @@
  footer -->
 
     @include('layouts.footer-scripts')
-
 </body>
 
 </html>

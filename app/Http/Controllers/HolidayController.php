@@ -22,17 +22,17 @@ class HolidayController extends Controller
         $holidays=Holiday::all()->sortBy('holiday_date');
         return  view("page.holidays.index", compact('holidays'));
     }
-//    public function holidaysThisMonthDisplay()
-//    {
-//
-//        $currentYear = Carbon::now()->year;
-//        $currentMonth = Carbon::now()->month;
-//        $holidaysThisYear = Holiday::whereYear('holiday_date', $currentYear)->get();
-//        $holidays = Holiday::whereYear('holiday_date', $currentYear)
-//            ->whereMonth('holiday_date', $currentMonth)
-//            ->get();
-//        return view('page.holidays.index' ,compact('holidays'));
-//    }
+    public function holidaysThisMonthDisplay()
+    {
+
+        $currentYear = Carbon::now()->year;
+        $currentMonth = Carbon::now()->month;
+        $holidaysThisYear = Holiday::whereYear('holiday_date', $currentYear)->get();
+        $holidays = Holiday::whereYear('holiday_date', $currentYear)
+            ->whereMonth('holiday_date', $currentMonth)
+            ->get();
+        return view('page.holidays.index' ,compact('holidays'));
+    }
     /**
      * Show the form for creating a new resource.
      */

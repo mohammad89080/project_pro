@@ -16,6 +16,15 @@ return [
     |
     */
 
+<<<<<<< HEAD
+=======
+    // ...
+
+    'work_start_time' => env('WORK_START_TIME', '09:00:00'),
+
+    // ...
+
+>>>>>>> ef9c4b6b1d813c88549c3ac2dd393e725830d656
     'name' => env('APP_NAME', 'Laravel'),
 
     /*
@@ -70,7 +79,13 @@ return [
     |
     */
 
+<<<<<<< HEAD
     'timezone' => 'UTC',
+=======
+//    'timezone' => 'UTC',
+    'timezone' => 'Asia/Damascus',
+
+>>>>>>> ef9c4b6b1d813c88549c3ac2dd393e725830d656
 
     /*
     |--------------------------------------------------------------------------
@@ -157,11 +172,11 @@ return [
 
     'providers' => ServiceProvider::defaultProviders()->merge([
         /*
-         * Package Service Providers... 
+         * Package Service Providers...
          */
         Spatie\Permission\PermissionServiceProvider::class,
 
-        /* 
+        /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
@@ -185,6 +200,10 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
+<<<<<<< HEAD
+=======
+        'Carbon' => 'Carbon\Carbon',
+>>>>>>> ef9c4b6b1d813c88549c3ac2dd393e725830d656
     ])->toArray(),
 
 ];

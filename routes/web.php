@@ -47,9 +47,10 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
 
 
     Route::resource('/user', UserController::class)->middleware(['role:admin']);
-    Route::get('/holiday/holidays-this-month', [HolidayController::class,'holidaysThisMonthDisplay'])->name('holiday.holidaysThisMonthDisplay');
 
+    Route::get('/holiday/holidays-this-month', [HolidayController::class,'holidaysThisMonthDisplay'])->name('holiday.holidaysThisMonthDisplay');
     Route::resource('/holiday', HolidayController::class);
+
     Route::resource('/leave-types', LeaveTypeController::class)->middleware(['role:admin']);;
 
     Route::resource('/leave-types', LeaveTypeController::class)->middleware(['role:admin']);
@@ -62,13 +63,25 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
     Route::get('/leave/update_status/{id}/{status}', [LeaveController::class, 'update_status'])->middleware(['role:admin'])->name('update_leave_status');
 
 
-    Route::get('/holiday/holidays-this-month', [HolidayController::class,'holidaysThisMonthDisplay'])->name('holiday.holidaysThisMonthDisplay');
 //    Route::resource('/holiday', HolidayController::class);
 
     Route::resource('/department', Department::class);
+//    Route::post('/toggle-time/{user}', [AttendanceController::class, 'toggleTime'])->name('toggle-time');
 
-    Route::post('/toggle-work/{user}', [AttendanceController::class, 'toggleWork'])->name('toggle-work');
-    Route::resource('/attendance', HolidayController::class);
+//        ---------------------------AttendanceController --------------------------
+
+    Route::post('/finish-work', [AttendanceController::class, 'finishWork'])->name('finish.work');
+
+    Route::post('/start-work', [AttendanceController::class, 'startWork'])->name('start.work');
+    Route::post('/attendance/get-attendance', [AttendanceController::class, 'getAttendance'])->name('get-attendance');
+
+    Route::resource('/attendance', AttendanceController::class);
+
+
+
+    Route::get('/holiday/holidays-this-month', [HolidayController::class,'holidaysThisMonthDisplay'])->name('holiday.holidaysThisMonthDisplay');
+
+    Route::resource('/Holiday', HolidayController::class);
 
     Route::resource('/settings', SettingsController::class)->middleware(['role:admin']);
 

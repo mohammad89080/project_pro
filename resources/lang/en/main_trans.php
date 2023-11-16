@@ -18,6 +18,12 @@ return [
     'Delete_Department' => 'Delete',
     'Holiday_This_Month' => 'Holiday This Month',
     'Holiday_This_Year' => 'Holiday This Year',
+
+    'Report' => 'Report',
+    'ReportAll' => 'User report',
+
+
+
     'Leaves_This_Month' => 'Leave This Month',
     'Leaves_This_Year' => 'Leave This Year',
     'Leaves_Granted' => 'Leave Granted',

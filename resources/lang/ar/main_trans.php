@@ -16,6 +16,10 @@ return [
     'Delete_Department' => ' حذف القسم',
     'Holiday_This_Month' => 'العطل هذا الشهر',
     'Holiday_This_Year' => 'العطل هذه السنة',
+
+    'Report' => 'التقارير',
+    'ReportAll' => 'تقرير عن مستخدم',
+
     'Leaves_This_Month' => 'الإجازات هذا الشهر',
     'Leaves_This_Year' => 'الإجازات هذه السنة',
     'Leaves_Granted' => 'الإجازات المقبولة',
