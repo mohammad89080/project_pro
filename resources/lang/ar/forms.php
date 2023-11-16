@@ -12,7 +12,8 @@ return [
     'StartTimeWork' => 'وقت بداية العمل',
     'WorkHours' => 'عددد ساعات العمل',
     'Logo' => 'الأيقونة',
-
+    'StartDate' => 'من تاريخ',
+    'EndDate' => 'إلى تاريخ',
 
 
 ];

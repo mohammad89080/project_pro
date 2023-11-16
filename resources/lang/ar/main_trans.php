@@ -35,7 +35,8 @@ return [
     'WordHour' => 'ساعات العمل',
     'EndWork' => 'إنتهاء العمل',
     'periodFilter' => 'عرض بيانات الفترة:',
-
+    'StartDate' => 'من تاريخ',
+    'EndDate' => 'إلى تاريخ',
 
 
 

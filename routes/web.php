@@ -37,6 +37,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
 //    Route::livewire('/livewire/posts', \App\Livewire\CreatePost::class);
 
    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::post('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 //    Route::get('test',function(){
 //        return View::make('test');
 //    });

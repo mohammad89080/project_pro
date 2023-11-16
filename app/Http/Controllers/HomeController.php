@@ -7,7 +7,7 @@ use App\Models\Leave;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-
+use App\Http\Controllers\AttendanceController;
 class HomeController extends Controller
 {
     /**
@@ -25,8 +25,17 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
+        // Set default values for $startDate and $endDate to cover the current month
+        $startDate = Carbon::now()->startOfMonth()->toDateString();
+        $endDate = Carbon::now()->endOfMonth()->toDateString();
+
+        // Update values based on user input
+        if ($request->filled('startDate') && $request->filled('endDate')) {
+            $startDate = $request->input('startDate');
+            $endDate = $request->input('endDate');
+        }
         $activeUserCount = User::where('status', '1')->count();
         $user = User::whereId(auth()->id())->first();
         $UserCount = User::count();
@@ -48,8 +57,16 @@ class HomeController extends Controller
 
         $numberOfLeavesThisYear = $leavesThisYear->count();
         $numberOfLeavesGranted  = $leavesGranted->count();
+        $report= new AttendanceController();
+        $workedMinutesByUser  = $report->report2($startDate,$endDate);
+
+//dd($workedMinutesByUser);
+//die;
 
 
-        return view('dashboard',compact('activeUserCount','UserCount','numberOfHolidaysThisYear','numberOfHolidaysThisMonth','numberOfLeavesThisYear','numberOfLeavesGranted','user'));
+        return view('dashboard',compact('activeUserCount',
+            'UserCount','numberOfHolidaysThisYear',
+            'numberOfHolidaysThisMonth','numberOfLeavesThisYear',
+            'numberOfLeavesGranted','user','workedMinutesByUser'));
     }
 }

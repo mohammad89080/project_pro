@@ -13,4 +13,6 @@ return [
     'StartTimeWork' => 'Start Time Work',
     'WorkHours' => 'working Hours',
     'Logo' => 'Logo',
+    'StartDate' => 'Start Date',
+    'EndDate' => 'End Date',
 ];

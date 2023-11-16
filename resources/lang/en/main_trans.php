@@ -35,6 +35,7 @@ return [
     'SummaryReport' => 'Summary Report',
     'Report' => 'Summary Report',
 
+
     'Leaves_This_Month' => 'Leave This Month',
     'Leaves_This_Year' => 'Leave This Year',
     'Leaves_Granted' => 'Leave Granted',

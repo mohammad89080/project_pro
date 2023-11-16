@@ -150,6 +150,62 @@
 {{--                    </div>--}}
 {{--                </div>--}}
             </div>
+{{--            -----------------start summray ---------------------}}
+            <div class="col-xl-8 mb-30">
+                <div class="card h-100">
+
+                        <div class="card-body" style="padding: 1rem 1.81rem;">
+                            <form action="{{ route('home') }}" method="post">
+                                @csrf
+                                <div class="form-row align-items-center mb-3">
+                                    <div class="col-md-4">
+                                        <label for="startDate">Start Date:
+                                            {{ trans('forms.StartDate') }}:</label>
+                                        <input type="date" name="startDate" class="form-control" required>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="endDate">   {{ trans('forms.EndDate') }}:</label>
+                                        <input type="date" name="endDate" class="form-control" required>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button style="width: 44%;" type="submit" class="btn btn-primary mt-4">Filter</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                    </div>
+                    <div class="col-xl-12 mb-30">
+                        <div class="card ">
+                            <div class="card-body">
+
+
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>{{ trans('forms.Name') }}</th>
+                                            <th>{{ trans('main_trans.WordHour') }}</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($workedMinutesByUser as $index => $result)
+                                            <tr>
+                                                <td>{{ $index + 1 }}</td>
+                                                <td>{{ $result->userName }}</td>
+                                                <td>{{ $result->totalWorkedMinutes }}</td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            {{--            -----------------End summray ---------------------}}
 {{--            <!-- Orders Status widgets-->--}}
 {{--            <div class="row">--}}
 {{--                <div class="col-xl-4 mb-30">--}}
