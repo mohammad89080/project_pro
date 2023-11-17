@@ -47,12 +47,15 @@
                 </li>
             </ul>
 
+            @role('admin')
+            @else
             <ul class="nav navbar-nav mr-auto">
                 
                 <li class="nav-item" id="tt">
                     <button class="btn btn-outline-primary" id="work-timer">00:00:00</button>
                 </li>
             </ul>
+            @endrole
             <!-- top bar right -->
             <ul class="nav navbar-nav ml-auto">
             <div class="btn-group mb-1">
