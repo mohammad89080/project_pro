@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\AttendanceController;
 use App\Models\Holiday;
 use App\Models\Leave;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
-use App\Http\Controllers\AttendanceController;
+
 class HomeController extends Controller
 {
     /**
@@ -27,6 +28,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        $currentDate = Carbon::now()->toDateString();
         // Set default values for $startDate and $endDate to cover the current month
         $startDate = Carbon::now()->startOfMonth()->toDateString();
         $endDate = Carbon::now()->endOfMonth()->toDateString();
@@ -57,8 +59,11 @@ class HomeController extends Controller
 
         $numberOfLeavesThisYear = $leavesThisYear->count();
         $numberOfLeavesGranted  = $leavesGranted->count();
-        $report= new AttendanceController();
-        $workedMinutesByUser  = $report->report2($startDate,$endDate);
+        $AttendancObject= new AttendanceController();
+        $workedMinutesByUser  = $AttendancObject->report2($startDate,$endDate);
+
+        $attendanceSummary = $AttendancObject->getAttendanceSummary($currentDate);
+//        dd($AttendanceSummary);
 
 //dd($workedMinutesByUser);
 //die;
@@ -67,6 +72,6 @@ class HomeController extends Controller
         return view('dashboard',compact('activeUserCount',
             'UserCount','numberOfHolidaysThisYear',
             'numberOfHolidaysThisMonth','numberOfLeavesThisYear',
-            'numberOfLeavesGranted','user','workedMinutesByUser'));
+            'numberOfLeavesGranted','user','workedMinutesByUser','attendanceSummary'));
     }
 }

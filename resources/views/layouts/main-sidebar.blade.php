@@ -20,29 +20,29 @@
 {{--                            <a href="#" class="btn">Punch In</a>--}}
                             @php
                                 $att=\App\Models\Attendance::where('user_id', Auth::user()->id)->latest()->first();
-                                
+
                                 $end=null;
                                 if($att){
                                     $end=$att->departure_time;
-            
+
                                 }
-    
+
                             @endphp
 
                             @if (!$att || ($att && $end))
                                 <form action="{{ route('start.work') }}" method="post">
                                     @csrf
-                                    <button class="btn btn-primary w-100" type="submit">{{trans('main_trans.StartWork')}}</button>
+                                    <button style="font-size: 20px" class="btn btn-primary w-100" type="submit">{{trans('main_trans.StartWork')}}</button>
                                 </form>
                             @else
                                 <form action="{{ route('finish.work') }}" method="post">
                                     @csrf
-                                    <button class="btn btn-danger mt-2 w-100" type="submit">{{trans('main_trans.EndWork')}}</button>
+                                    <button style="font-size: 20px" class="btn btn-danger mt-2 w-100" type="submit">{{trans('main_trans.EndWork')}}</button>
                                 </form>
                             @endif
-                            
 
-                            
+
+
 {{--                            <form action="{{ route('toggle-work') }}" method="post">--}}
 {{--                                @csrf--}}
 {{--                                <button type="submit">Toggle Work</button>--}}

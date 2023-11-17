@@ -34,10 +34,11 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
     Route::get('/', [HomeController::class, 'index'])->name('dashboard');
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 
-//    Route::livewire('/livewire/posts', \App\Livewire\CreatePost::class);
+
 
    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::post('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+   Route::post('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 //    Route::get('test',function(){
 //        return View::make('test');
 //    });
@@ -71,15 +72,14 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
 //        ---------------------------AttendanceController --------------------------
 
     Route::post('/finish-work', [AttendanceController::class, 'finishWork'])->name('finish.work');
-
     Route::post('/start-work', [AttendanceController::class, 'startWork'])->name('start.work');
     Route::post('/attendance/get-attendance', [AttendanceController::class, 'getAttendance'])->name('get-attendance');
     Route::get('/attendance/my', [AttendanceController::class, 'index_my'])->name('attendance.myreport');
 
     Route::get('/attendance/report', [AttendanceController::class, 'report'])->name('attendance.report');
+
     Route::resource('/attendance', AttendanceController::class);
-
-
+    Route::post('/attendance/ajax_search', [AttendanceController::class, 'ajax_search'])->name('attendance.ajax_search');
 
     Route::get('/holiday/holidays-this-month', [HolidayController::class,'holidaysThisMonthDisplay'])->name('holiday.holidaysThisMonthDisplay');
 

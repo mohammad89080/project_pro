@@ -33,12 +33,12 @@ return [
     'TimeLate' => 'فترة التأخر',
     'StartWork' => 'بدء العمل',
     'WordHour' => 'ساعات العمل',
-    'EndWork' => 'إنتهاء العمل',
+    'EndWork' => 'إنهاء العمل',
     'periodFilter' => 'عرض بيانات الفترة:',
     'StartDate' => 'من تاريخ',
     'EndDate' => 'إلى تاريخ',
-
-
+    'UserAbsent' => 'المستخدمين الغائبين',
+    'UserActive' => 'المستخدمين الفاعلين',
 
 
     ];

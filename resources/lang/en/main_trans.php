@@ -34,8 +34,9 @@ return [
     'periodFilter' => 'Displaying data for the period:',
     'SummaryReport' => 'Summary Report',
     'Report' => 'Summary Report',
+    'UserAbsent' => 'User Absent',
 
-
+        'UserActive' => 'User Active',
     'Leaves_This_Month' => 'Leave This Month',
     'Leaves_This_Year' => 'Leave This Year',
     'Leaves_Granted' => 'Leave Granted',
