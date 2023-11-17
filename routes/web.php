@@ -57,6 +57,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
 
     Route::get('/leave/my', [LeaveController::class, 'index_my'])->name('leave.myApply');
     Route::get('/leave/leave-granted', [LeaveController::class, 'indexGranted'])->name('leave.leavesGranted');
+    Route::get('/leave/leave-granted-my', [LeaveController::class, 'indexGranted_my'])->name('leave.leavesGrantedMy');
     Route::resource('/leave', LeaveController::class);
 
 

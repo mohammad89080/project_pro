@@ -32,12 +32,32 @@
                             @if (!$att || ($att && $end))
                                 <form action="{{ route('start.work') }}" method="post">
                                     @csrf
+                                    
                                     <button class="btn btn-primary w-100" type="submit">{{trans('main_trans.StartWork')}}</button>
+                                    <script>
+                                    setTimeout(function() {
+                                        var timerButton = document.getElementById('work-timer');
+                                        timerButton.style.display='none';
+
+                                    }, 500);
+                                    </script>
                                 </form>
                             @else
                                 <form action="{{ route('finish.work') }}" method="post">
                                     @csrf
-                                    <button class="btn btn-danger mt-2 w-100" type="submit">{{trans('main_trans.EndWork')}}</button>
+
+                                    <button class="btn btn-danger mt-2 w-100" type="submit" onclick="">{{trans('main_trans.EndWork')}}</button>
+                                    <script>
+                                        setTimeout(function() {
+                                            var timerButton = document.getElementById('work-timer');
+                                            timerButton.style.display='inline';
+                                            // Your code to be executed after the delay
+                                            console.log('{{($att->start_time)}}');
+                                            startTimer('{{$att->start_time}}')
+
+                                        }, 1000);
+                                    
+                                    </script>
                                 </form>
                             @endif
                             

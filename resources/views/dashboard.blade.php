@@ -46,6 +46,7 @@
             </div>
             <!-- widgets -->
             <div class="row">
+                @role('admin')
                 <div class="col-xl-3 col-lg-6 col-md-6 mb-30">
                     <div class="card card-statistics h-100">
                         <div class="card-body">
@@ -66,13 +67,14 @@
                         </div>
                     </div>
                 </div>
+                @endrole
                 <div class="col-xl-3 col-lg-6 col-md-6 mb-30">
                     <div class="card card-statistics h-100">
                         <div class="card-body">
                             <div class="clearfix">
                                 <div class="float-left">
                                     <span class="text-warning">
-                                        <i class="fa fa-shopping-cart highlight-icon" aria-hidden="true"></i>
+                                        <i class="fa fa-plane highlight-icon" aria-hidden="true"></i>
                                     </span>
                                 </div>
                                 <div class="float-right text-right">
@@ -99,11 +101,19 @@
                                 </div>
                                 <div class="float-right text-right">
                                     <p class="card-text text-dark">{{ trans('main_trans.Leaves_This_Year') }}</p>
+                                    @role('admin')
                                     <h4>{{$numberOfLeavesThisYear}}</h4>
+                                    @else
+                                    <h4>{{$numberOfLeavesThisYearUser}}</h4>
+                                    @endrole
                                 </div>
                             </div>
                             <p class="text-muted pt-3 mb-0 mt-2 border-top">
+                               @role('admin')
                                <a class="text-decoration-none" href="{{route('leave.leavesGranted')}}"> <i class="fa fa-bookmark-o mr-1" aria-hidden="true"></i> {{ trans('main_trans.Leaves_Granted') }} {{$numberOfLeavesGranted}}</a>
+                               @else
+                               <a class="text-decoration-none" href="{{route('leave.leavesGrantedMy')}}"> <i class="fa fa-bookmark-o mr-1" aria-hidden="true"></i> {{ trans('main_trans.Leaves_Granted') }} {{$numberOfLeavesGranted}}</a>
+                                @endrole
                             </p>
                         </div>
                     </div>
@@ -151,9 +161,10 @@
 {{--                </div>--}}
             </div>
 {{--            -----------------start summray ---------------------}}
+@role('admin')
             <div class="col-xl-8 mb-30">
                 <div class="card h-100">
-
+                        
                         <div class="card-body" style="padding: 1rem 1.81rem;">
                             <form action="{{ route('home') }}" method="post">
                                 @csrf
@@ -209,6 +220,7 @@
                 </div>
                 </div>
             </div>
+            @endrole
             {{--            -----------------End summray ---------------------}}
 {{--            <!-- Orders Status widgets-->--}}
 {{--            <div class="row">--}}
@@ -746,6 +758,30 @@
 {{--                    </div>--}}
 {{--                </div>--}}
 {{--            </div>--}}
+
+
+<div wire:id="Be1avhGwCrjXjgKZ4U5g" class="col-md-8 grid-margin ">
+    <div class="card">
+        <div class="card-body">
+            <div class="d-sm-flex justify-content-between align-items-center mb-4">
+                <h2 class="card-title mb-0">Working Hour Analysis</h2>
+                <div class="wrapper d-flex">
+                    <div class="d-flex align-items-center mr-3">
+                        <span class="dot-indicator bg-success"></span>
+                        <p class="mb-0 ml-2 text-muted">Hour Worked</p>
+                    </div>
+                </div>
+            </div>
+            <div class="chart-container"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                <canvas id="dashboard-hour-worked-chart" height="146" width="552" style="display: block; height: 117px; width: 442px;" class="chartjs-render-monitor"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
             <!--=================================
  wrapper -->
 
