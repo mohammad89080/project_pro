@@ -165,27 +165,35 @@
     function filter_table(idd,idx)
         {
 
-            select_filter=document.getElementById(idd);
-            select_index=select_filter.selectedIndex;
-            data=select_filter[select_index].value;
+            cat_filter=document.getElementById('catSelect');
+            stat_filter=document.getElementById('statSelect');
 
-            filter = data.trim();
+            select_index_cat=cat_filter.selectedIndex;
+            data_cat=cat_filter[select_index_cat].value;
+
+            select_index_stat=stat_filter.selectedIndex;
+            data_stat=stat_filter[select_index_stat].value;
+
+            filter_cat = data_cat.trim();
+            filter_stat = data_stat.trim();
             
             // var tr = document.querySelectorAll('.filter-data:not(.nshow)');
             tr=document.getElementsByClassName("filter-data");
 
-
-
             // Loop through all table rows, and hide those who don't match the search query
             count=0;
             for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[idx];
-                if (td) {
+                td_cat = tr[i].getElementsByTagName("td")[2];
+                td_stat = tr[i].getElementsByTagName("td")[3];
+                if (td_cat || td_stat) {
                     
-                    txtValue = td.textContent || td.innerText;
-                    txtValue=txtValue.trim();
+                    txtValue_cat = td_cat.textContent || td_cat.innerText;
+                    txtValue_cat=txtValue_cat.trim();
 
-                    if (txtValue==filter || filter=="") {
+                    txtValue_stat = td_stat.textContent || td_stat.innerText;
+                    txtValue_stat=txtValue_stat.trim();
+
+                    if ((txtValue_cat==filter_cat || filter_cat=="") && (txtValue_stat==filter_stat || filter_stat=="")) {
 
                             tr[i].classList.remove("nshow");
                             count++;
