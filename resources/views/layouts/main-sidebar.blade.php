@@ -32,11 +32,8 @@
                             @if (!$att || ($att && $end))
                                 <form action="{{ route('start.work') }}" method="post">
                                     @csrf
-<<<<<<< HEAD
                                     <button style="font-size: 20px" class="btn btn-primary w-100" type="submit">{{trans('main_trans.StartWork')}}</button>
-=======
                                     
-                                    <button class="btn btn-primary w-100" type="submit">{{trans('main_trans.StartWork')}}</button>
                                     <script>
                                     setTimeout(function() {
                                         var timerButton = document.getElementById('work-timer');
@@ -44,16 +41,12 @@
 
                                     }, 500);
                                     </script>
->>>>>>> af8d16e0eea1499c6f802d01a55e72e262a92921
                                 </form>
                             @else
                                 <form action="{{ route('finish.work') }}" method="post">
                                     @csrf
-<<<<<<< HEAD
                                     <button style="font-size: 20px" class="btn btn-danger mt-2 w-100" type="submit">{{trans('main_trans.EndWork')}}</button>
-=======
 
-                                    <button class="btn btn-danger mt-2 w-100" type="submit" onclick="">{{trans('main_trans.EndWork')}}</button>
                                     <script>
                                         setTimeout(function() {
                                             var timerButton = document.getElementById('work-timer');
@@ -65,7 +58,6 @@
                                         }, 1000);
                                     
                                     </script>
->>>>>>> af8d16e0eea1499c6f802d01a55e72e262a92921
                                 </form>
                             @endif
 
