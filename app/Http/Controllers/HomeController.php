@@ -9,6 +9,10 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
+
+use Illuminate\Support\Facades\Auth;
+
+
 class HomeController extends Controller
 {
     /**
@@ -53,17 +57,30 @@ class HomeController extends Controller
 
         $leavesThisYear = Leave::whereYear('date', $currentYear)->get();
         $leavesGranted = Leave::where('status','Granted')->get();
+
+
+        $leavesThisYearUser = Leave::where('user_id',Auth::user()->id)->whereYear('date', $currentYear)->get();
+        $leavesGrantedUser = Leave::where('user_id',Auth::user()->id)->where('status','Granted')->get();
 //        dd($holidaysThisMonth);
         $numberOfHolidaysThisYear = $holidaysThisYear->count();
         $numberOfHolidaysThisMonth = $holidaysThisMonth->count();
 
         $numberOfLeavesThisYear = $leavesThisYear->count();
         $numberOfLeavesGranted  = $leavesGranted->count();
+
         $AttendancObject= new AttendanceController();
         $workedMinutesByUser  = $AttendancObject->report2($startDate,$endDate);
 
         $attendanceSummary = $AttendancObject->getAttendanceSummary($currentDate);
 //        dd($AttendanceSummary);
+
+        $numberOfLeavesThisYearUser = $leavesThisYearUser->count();
+        $numberOfLeavesGrantedUser  = $leavesGrantedUser->count();
+
+
+        $report= new AttendanceController();
+        $workedMinutesByUser  = $report->report2($startDate,$endDate);
+
 
 //dd($workedMinutesByUser);
 //die;
@@ -72,6 +89,11 @@ class HomeController extends Controller
         return view('dashboard',compact('activeUserCount',
             'UserCount','numberOfHolidaysThisYear',
             'numberOfHolidaysThisMonth','numberOfLeavesThisYear',
+
             'numberOfLeavesGranted','user','workedMinutesByUser','attendanceSummary'));
+
+
+
+
     }
 }

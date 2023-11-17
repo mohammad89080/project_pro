@@ -1,7 +1,7 @@
 <?php
 return [
     'Add_new_user' => 'إضافة مستخدم جديد + ',
-    'Dashboard'=>'الرئيسية',
+    'Dashboard'=>'لوحة التحكم',
     'Dashboard_page'=>'لوحة التحكم',
     'Users'=>'المستخدمين',
     'Holidays'=>'العطل',
@@ -25,7 +25,7 @@ return [
     'Leaves_Granted' => 'الإجازات المقبولة',
     'UpdateSettings' => 'تعديل معلومات النظام',
 
-
+    'ActiveUser' => 'المستخدمين المفعلين',
     "Date" => 'التاريخ',
     'InTime' => 'بدء العمل',
     'OutTime' => 'المغادرة',
@@ -38,7 +38,10 @@ return [
     'StartDate' => 'من تاريخ',
     'EndDate' => 'إلى تاريخ',
     'UserAbsent' => 'المستخدمين الغائبين',
-    'UserActive' => 'المستخدمين الفاعلين',
+    'UserActive' => 'المستخدمين النشيطين',
+//    'EndDate' => 'إلى تاريخ',
+//    'StartDate' => 'من تاريخ',
+    'Filter' => 'فلترة',
 
 
-    ];
+];

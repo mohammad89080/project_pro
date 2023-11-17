@@ -13,10 +13,10 @@
                 @if (empty($settings->logo))
                     <img class="rounded-circle" width="60" src="{{ URL::asset('assets/images/unnamed.png') }}" alt="logo">
                 @else
-                <img class="rounded-circle" width="60" src="{{ asset('assets/images/' . $settings->logo) }}" alt="logo">
+                <img class="" width="60" src="{{ asset('assets/images/' . $settings->logo) }}" alt="logo">
                 @endif
 
-                <a class="navbar-brand brand-logo-mini" href="index.html">
+{{--                <a class="navbar-brand brand-logo-mini" href="index.html">--}}
             </div>
             <style>
                 .navbar-brand-wrapper {
@@ -25,9 +25,9 @@
                     justify-content: center;
                 }
 
-                .rounded-circle {
-                    border-radius: 50%;
-                }
+                /*.rounded-circle {*/
+                /*    border-radius: 50%;*/
+                /*}*/
             </style>
             <!-- Top bar left -->
             <ul class="nav navbar-nav mr-auto">
@@ -44,6 +44,13 @@
                             <button class="search-button" type="submit"> <i class="fa fa-search not-click"></i></button>
                         </div>
                     </div>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav mr-auto">
+
+                <li class="nav-item" id="tt">
+                    <button class="btn btn-outline-primary" id="work-timer">00:00:00</button>
                 </li>
             </ul>
             <!-- top bar right -->

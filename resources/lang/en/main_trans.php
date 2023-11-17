@@ -35,8 +35,12 @@ return [
     'SummaryReport' => 'Summary Report',
     'Report' => 'Summary Report',
     'UserAbsent' => 'User Absent',
+    'EndDate' => 'End Date',
+    'StartDate' => 'Start Date',
+    'Filter' => 'Filter',
 
-        'UserActive' => 'User Active',
+
+        'ActiveUser' => 'User Active',
     'Leaves_This_Month' => 'Leave This Month',
     'Leaves_This_Year' => 'Leave This Year',
     'Leaves_Granted' => 'Leave Granted',

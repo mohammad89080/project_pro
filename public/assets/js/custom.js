@@ -927,3 +927,46 @@ var _arr  = {};
 
 
 
+
+function startTimer(initialTime) {
+  var timerButton = document.getElementById('work-timer');
+  var dateObject = new Date(initialTime);
+
+// Get the Unix timestamp (in milliseconds) from the Date object
+var timestamp = (dateObject.getTime() / 1000);
+
+var currentDate = new Date();
+
+// Get the current Unix timestamp (in milliseconds)
+var currentTimestamp = currentDate.getTime();
+
+// Convert the timestamp to seconds (if needed)
+var currentTimestampInSeconds = Math.floor(currentTimestamp / 1000);
+var timer=currentTimestampInSeconds-timestamp-(3600);
+  updateTimer(timer, timerButton);
+}
+
+// Function to update the timer value
+function updateTimer(initialTime, timerButton) {
+  // Calculate hours, minutes, and seconds
+  var hours = Math.floor(initialTime / 3600);
+  var minutes = Math.floor((initialTime % 3600) / 60);
+  var seconds = initialTime % 60;
+
+  // Format the time values with leading zeros
+  var formattedTime =
+    ('0' + hours).slice(-2) + ':' +
+    ('0' + minutes).slice(-2) + ':' +
+    ('0' + seconds).slice(-2);
+
+  // Update the button text with the formatted time
+  timerButton.textContent = formattedTime;
+
+  // Increment the time value
+  initialTime++;
+
+  // You can adjust the interval (in milliseconds) based on your requirements
+  setTimeout(function () {
+    updateTimer(initialTime, timerButton);
+  }, 1000);
+}

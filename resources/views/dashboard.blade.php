@@ -36,7 +36,7 @@
             <div class="page-title">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h4 class="mb-0"> Dashboard</h4>
+                        <h4 class="mb-0">{{ trans('main_trans.Dashboard') }} </h4>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right">
@@ -46,6 +46,7 @@
             </div>
             <!-- widgets -->
             <div class="row">
+                @role('admin')
                 <div class="col-xl-3 col-lg-6 col-md-6 mb-30">
                     <div class="card card-statistics h-100">
                         <div class="card-body">
@@ -56,23 +57,24 @@
                                     </span>
                                 </div>
                                 <div class="float-right text-right">
-                                    <p class="card-text text-dark">Users</p>
+                                    <p class="card-text text-dark"> {{ trans('main_trans.Users') }}</p>
                                     <h4>{{$UserCount}}</h4>
                                 </div>
                             </div>
                             <p class="text-muted pt-3 mb-0 mt-2 border-top">
-                                <i class="fa fa-exclamation-circle mr-1" aria-hidden="true"></i> {{$activeUserCount}} Active User
+                                <i class="fa fa-exclamation-circle mr-1" aria-hidden="true"></i> {{ trans('main_trans.ActiveUser') }} {{$activeUserCount}}
                             </p>
                         </div>
                     </div>
                 </div>
+                @endrole
                 <div class="col-xl-3 col-lg-6 col-md-6 mb-30">
                     <div class="card card-statistics h-100">
                         <div class="card-body">
                             <div class="clearfix">
                                 <div class="float-left">
                                     <span class="text-warning">
-                                        <i class="fa fa-shopping-cart highlight-icon" aria-hidden="true"></i>
+                                        <i class="fa fa-plane highlight-icon" aria-hidden="true"></i>
                                     </span>
                                 </div>
                                 <div class="float-right text-right">
@@ -99,11 +101,19 @@
                                 </div>
                                 <div class="float-right text-right">
                                     <p class="card-text text-dark">{{ trans('main_trans.Leaves_This_Year') }}</p>
+                                    @role('admin')
                                     <h4>{{$numberOfLeavesThisYear}}</h4>
+                                    @else
+                                    <h4>{{$numberOfLeavesThisYearUser}}</h4>
+                                    @endrole
                                 </div>
                             </div>
                             <p class="text-muted pt-3 mb-0 mt-2 border-top">
+                               @role('admin')
                                <a class="text-decoration-none" href="{{route('leave.leavesGranted')}}"> <i class="fa fa-bookmark-o mr-1" aria-hidden="true"></i> {{ trans('main_trans.Leaves_Granted') }} {{$numberOfLeavesGranted}}</a>
+                               @else
+                               <a class="text-decoration-none" href="{{route('leave.leavesGrantedMy')}}"> <i class="fa fa-bookmark-o mr-1" aria-hidden="true"></i> {{ trans('main_trans.Leaves_Granted') }} {{$numberOfLeavesGranted}}</a>
+                                @endrole
                             </p>
                         </div>
                     </div>
@@ -153,63 +163,129 @@
 {{--                </div>--}}
             </div>
 {{--            -----------------start summray ---------------------}}
-            <div class="col-xl-8 mb-30">
-                <div class="card h-100">
+{{--@role('admin')--}}
+{{--            <div class="col-xl-8 mb-30">--}}
+{{--                <div class="card h-100">--}}
 
-                        <div class="card-body" style="padding: 1rem 1.81rem;">
-                            <form action="{{ route('home') }}" method="post">
-                                @csrf
-                                <div class="form-row align-items-center mb-3">
-                                    <div class="col-md-4">
-                                        <label for="startDate">Start Date:
-                                            {{ trans('forms.StartDate') }}:</label>
-                                        <input type="date" name="startDate" class="form-control" required>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="endDate">   {{ trans('forms.EndDate') }}:</label>
-                                        <input type="date" name="endDate" class="form-control" required>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <button style="width: 44%;" type="submit" class="btn btn-primary mt-4">Filter</button>
-                                    </div>
-                                </div>
-                            </form>
+{{--                        <div class="card-body" style="padding: 1rem 1.81rem;">--}}
+{{--                            <form action="{{ route('home') }}" method="post">--}}
+{{--                                @csrf--}}
+{{--                                <div class="form-row align-items-center mb-3">--}}
+{{--                                    <div class="col-md-4">--}}
+{{--                                        <div class="input-group">--}}
+{{--                                            <input required name="startDate" class="form-control" placeholder="Start Date" autocomplete="off"  id="datepicker-action"  data-date-format="yyyy-mm-dd">--}}
+{{--                                            <span class="input-group-text border-0" style="background-color: #F6F7F8;"><i class="fa fa-calendar"></i> </button></span>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="col-md-4">--}}
+{{--                                        <div class="input-group">--}}
+{{--                                            <input required name="endDate" class="form-control" placeholder="End Date" autocomplete="off"  id="datepicker-action2"  data-date-format="yyyy-mm-dd">--}}
+{{--                                            <span class="input-group-text border-0" style="background-color: #F6F7F8;"><i class="fa fa-calendar"></i> </button></span>--}}
+{{--                                        </div>--}}
 
-                    </div>
-                    <div class="col-xl-12 mb-30">
-                        <div class="card ">
-                            <div class="card-body">
+{{--                                    </div>--}}
+{{--                                    <div class="col-md-4">--}}
+{{--                                        <button style="width: 44%;" type="submit" class="btn btn-primary">Filter</button>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </form>--}}
+
+{{--                    </div>--}}
+{{--                    <div class="col-xl-12 mb-30">--}}
+{{--                        <div class="card ">--}}
+{{--                            <div class="card-body">--}}
 
 
-                                <div class="table-responsive">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>{{ trans('forms.Name') }}</th>
-                                            <th>{{ trans('main_trans.WordHour') }}</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($workedMinutesByUser as $index => $result)
-                                            <tr>
-                                                <td>{{ $index + 1 }}</td>
-                                                <td>{{ $result->userName }}</td>
-                                                <td>{{ $result->totalWorkedMinutes }}</td>
-                                            </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </div>
-            </div>
+{{--                                <div class="table-responsive">--}}
+{{--                                    <table class="table table-bordered">--}}
+{{--                                        <thead>--}}
+{{--                                        <tr>--}}
+{{--                                            <th>#</th>--}}
+{{--                                            <th>{{ trans('forms.Name') }}</th>--}}
+{{--                                            <th>{{ trans('main_trans.WordHour') }}</th>--}}
+{{--                                        </tr>--}}
+{{--                                        </thead>--}}
+{{--                                        <tbody>--}}
+{{--                                        @foreach($workedMinutesByUser as $index => $result)--}}
+{{--                                            <tr>--}}
+{{--                                                <td>{{ $index + 1 }}</td>--}}
+{{--                                                <td>{{ $result->userName }}</td>--}}
+{{--                                                <td>{{ $result->totalWorkedMinutes }}</td>--}}
+{{--                                            </tr>--}}
+{{--                                        @endforeach--}}
+{{--                                        </tbody>--}}
+{{--                                    </table>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            @endrole--}}
             {{--            -----------------End summray ---------------------}}
 {{--            <!-- Orders Status widgets-->--}}
-{{--            <div class="row">--}}
+            <div class="row">
+                @role('admin')
+                            <div class="col-xl-8 mb-30">
+                                <div class="card h-100">
+
+                                        <div class="card-body" style="padding: 1rem 1.81rem;">
+                                            <form action="{{ route('home') }}" method="post">
+                                                @csrf
+                                                <div class="form-row align-items-center mb-3">
+                                                    <div class="col-md-4">
+                                                        <div class="input-group">
+                                                            <input required value="{{ old('startDate') }}" name="startDate" class="form-control" placeholder="{{ trans('main_trans.StartDate') }}" autocomplete="off"  id="datepicker-action"  data-date-format="yyyy-mm-dd">
+                                                            <span class="input-group-text border-0" style="background-color: #F6F7F8;"><i class="fa fa-calendar"></i></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="input-group">
+                                                            <input value="{{ old('endDate') }}" required name="endDate" class="form-control" placeholder="{{ trans('main_trans.EndDate') }}" autocomplete="off"  id="datepicker-action2"  data-date-format="yyyy-mm-dd">
+                                                            <span class="input-group-text border-0" style="background-color: #F6F7F8;"><i class="fa fa-calendar"></i> </span>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <button style="width: 44%;" type="submit" class="btn btn-primary">{{ trans('main_trans.Filter') }}</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+
+                                    </div>
+                                    <div class="col-xl-12 mb-30">
+                                        <div class="card ">
+                                            <div class="card-body">
+
+
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>{{ trans('forms.Name') }}</th>
+                                                            <th>{{ trans('main_trans.WordHour') }}</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        @foreach($workedMinutesByUser as $index => $result)
+                                                            <tr>
+                                                                <td>{{ $index + 1 }}</td>
+                                                                <td>{{ $result->userName }}</td>
+                                                                <td>{{ $result->totalWorkedMinutes }}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            @endrole
 {{--                <div class="col-xl-4 mb-30">--}}
 {{--                    <div class="card card-statistics h-100">--}}
 {{--                        <!-- action group -->--}}
@@ -311,7 +387,7 @@
 {{--                            </div>--}}
 {{--                        </div>--}}
 {{--                    </div>--}}
-{{--                </div>--}}
+                </div>
 {{--                <div class="col-xl-8 mb-30">--}}
 {{--                    <div class="card card-statistics h-100">--}}
 {{--                        <div class="card-body">--}}
@@ -744,6 +820,10 @@
 {{--                    </div>--}}
 {{--                </div>--}}
 {{--            </div>--}}
+
+
+
+
             <!--=================================
  wrapper -->
 

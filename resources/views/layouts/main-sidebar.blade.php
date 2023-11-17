@@ -32,12 +32,40 @@
                             @if (!$att || ($att && $end))
                                 <form action="{{ route('start.work') }}" method="post">
                                     @csrf
+<<<<<<< HEAD
                                     <button style="font-size: 20px" class="btn btn-primary w-100" type="submit">{{trans('main_trans.StartWork')}}</button>
+=======
+                                    
+                                    <button class="btn btn-primary w-100" type="submit">{{trans('main_trans.StartWork')}}</button>
+                                    <script>
+                                    setTimeout(function() {
+                                        var timerButton = document.getElementById('work-timer');
+                                        timerButton.style.display='none';
+
+                                    }, 500);
+                                    </script>
+>>>>>>> af8d16e0eea1499c6f802d01a55e72e262a92921
                                 </form>
                             @else
                                 <form action="{{ route('finish.work') }}" method="post">
                                     @csrf
+<<<<<<< HEAD
                                     <button style="font-size: 20px" class="btn btn-danger mt-2 w-100" type="submit">{{trans('main_trans.EndWork')}}</button>
+=======
+
+                                    <button class="btn btn-danger mt-2 w-100" type="submit" onclick="">{{trans('main_trans.EndWork')}}</button>
+                                    <script>
+                                        setTimeout(function() {
+                                            var timerButton = document.getElementById('work-timer');
+                                            timerButton.style.display='inline';
+                                            // Your code to be executed after the delay
+                                            console.log('{{($att->start_time)}}');
+                                            startTimer('{{$att->start_time}}')
+
+                                        }, 1000);
+                                    
+                                    </script>
+>>>>>>> af8d16e0eea1499c6f802d01a55e72e262a92921
                                 </form>
                             @endif
 
@@ -108,10 +136,13 @@
                         <ul id="elements" class="collapse" data-parent="#sidebarnav">
                             @role('admin')
                             <li><a style="font-size: 14px;" href="{{route('attendance.index')}}">{{ trans('main_trans.ReportAll') }}</a></li>
+                            <li><a style="font-size: 14px;" href="{{route('attendance.report')}}">{{ trans('main_trans.SummaryReport') }}</a></li>
+
                             @else
                             <li><a style="font-size: 14px;" href="{{route('attendance.myreport')}}">{{ trans('main_trans.ReportAll') }}</a></li>
+                            <li><a style="font-size: 14px;" href="{{route('attendance.mysumary')}}">{{ trans('main_trans.SummaryReport') }}</a></li>
+
                             @endrole
-                            <li><a style="font-size: 14px;" href="{{route('attendance.report')}}">{{ trans('main_trans.SummaryReport') }}</a></li>
 
                         </ul>
 {{--                    </li>--}}

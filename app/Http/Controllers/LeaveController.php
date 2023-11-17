@@ -37,6 +37,12 @@ class LeaveController extends Controller
         return view("page.leaves.index", compact('leaves'));
     }
 
+    public function indexGranted_my()
+    {
+        $leaves = Leave::where('user_id',Auth::user()->id)->where('status','Granted')->get(); 
+        return view("page.leaves.index", compact('leaves'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
