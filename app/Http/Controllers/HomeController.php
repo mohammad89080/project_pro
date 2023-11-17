@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\AttendanceController;
+
 use App\Models\Holiday;
 use App\Models\Leave;
 use App\Models\User;
@@ -67,18 +68,18 @@ class HomeController extends Controller
         $numberOfLeavesThisYear = $leavesThisYear->count();
         $numberOfLeavesGranted  = $leavesGranted->count();
 
-        $AttendancObject= new AttendanceController();
-        $workedMinutesByUser  = $AttendancObject->report2($startDate,$endDate);
-
-        $attendanceSummary = $AttendancObject->getAttendanceSummary($currentDate);
-
 
         $numberOfLeavesThisYearUser = $leavesThisYearUser->count();
         $numberOfLeavesGrantedUser  = $leavesGrantedUser->count();
+
+        $AttendancObject= new AttendanceController();
+        $workedMinutesByUser  = $AttendancObject->report2($startDate,$endDate);
+        $attendanceSummary = $AttendancObject->getAttendanceSummary($currentDate);
         $workedMinutesByUserForHome = $AttendancObject->getWorkedMinutesByUserForLast30Days();
         $getWorkedMinutesByUserForWorkingTodays = $AttendancObject->getWorkedMinutesByUserForWorkingTodays();
-
-
+//        print_r($getWorkedMinutesByUserForWorkingTodays);
+//die;
+//
 
 
         return view('dashboard',compact('activeUserCount',

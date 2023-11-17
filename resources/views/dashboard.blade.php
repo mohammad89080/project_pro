@@ -1,3 +1,17 @@
+@php
+    function time1($time)
+    {
+             $totalWorkedSeconds = $time ?? 0;
+
+     $hours = floor($totalWorkedSeconds / 3600);
+     $minutes = floor(($totalWorkedSeconds % 3600) / 60);
+     $seconds = $totalWorkedSeconds % 60;
+
+
+             return sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);
+    }
+
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 
@@ -90,7 +104,7 @@
                     </div>
                 </div>
                 @else
-                    <div class="col-xl-3 col-lg-6 col-md-6 mb-30">
+                    <div class="col-xl-4 col-lg-6 col-md-6 mb-30">
                         <div class="card card-statistics h-100">
                             <div class="card-body">
                                 <div class="clearfix">
@@ -140,7 +154,7 @@
                     </div>
                 </div>
                     @else
-                        <div class="col-xl-3 col-lg-6 col-md-6 mb-30">
+                        <div class="col-xl-4 col-lg-6 col-md-6 mb-30">
                             <div class="card card-statistics h-100">
                                 <div class="card-body">
                                     <div class="clearfix">
@@ -190,7 +204,7 @@
                     </div>
                 </div>
                         @else
-                            <div class="col-xl-3 col-lg-6 col-md-6 mb-30">
+                            <div class="col-xl-4 col-lg-6 col-md-6 mb-30">
                                 <div class="card card-statistics h-100">
                                     <div class="card-body">
                                         <div class="clearfix">
@@ -285,7 +299,8 @@
                                                             <tr>
                                                                 <td>{{ $index + 1 }}</td>
                                                                 <td>{{ $result->userName }}</td>
-                                                                <td>{{ $result->totalWorkedMinutes }}</td>
+
+                                                                <td>{{time1($result->totalWorkedMinutes)  }}</td>
                                                             </tr>
                                                         @endforeach
                                                         </tbody>

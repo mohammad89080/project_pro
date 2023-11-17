@@ -17,8 +17,8 @@ return new class extends Migration
             $table->date('attendance_date');
             $table->dateTime('start_time');
             $table->dateTime('departure_time')->nullable();
-            $table->float('working_time')->nullable();
-            $table->integer('late_time')->default(0)->nullable();
+            $table->bigInteger('working_time')->nullable();
+            $table->bigInteger('late_time')->default(0)->nullable();
             $table->string('status')->nullable();
             $table->timestamps();
         });

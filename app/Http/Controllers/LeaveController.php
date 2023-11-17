@@ -23,13 +23,15 @@ class LeaveController extends Controller
      */
     public function index()
     {
+        $leave_types = LeaveType::all();
         $leaves = Leave::all(); 
-        return view("page.leaves.index", compact('leaves'));
+        return view("page.leaves.index", compact('leaves','leave_types'));
     }
     public function index_my()
     {
+        $leave_type = LeaveType::all();
         $leaves = Leave::where('user_id', Auth::user()->id)->get();
-        return view("page.leaves.index", compact('leaves'));
+        return view("page.leaves.index", compact('leaves','leave_type'));
     }
     public function indexGranted()
     {

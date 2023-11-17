@@ -18,12 +18,11 @@
         <div class="col-xl-12 mb-30">
             <div class="card">
                 <div class="card-body" style="padding: 1rem 1.81rem;">
-<<<<<<< HEAD
-                    <input id="urlAjax" type="hidden" value="{{route('attendance.ajax_search')}}">
-                    <input type="hidden" id="token_search" value="{{csrf_token()}}">
-=======
+
+
+
         @role('admin')
->>>>>>> af8d16e0eea1499c6f802d01a55e72e262a92921
+
         <form action="{{ route('get-attendance') }}" method="post">
 
         @else
@@ -33,31 +32,19 @@
             @csrf
 
             <div class="form-row align-items-center mb-3">
-
-                
-
-
                 <div class="col-md-4">
-<<<<<<< HEAD
-                    <label for="startDate">Start Date:</label>
-                    <input id="startDate" type="date" name="startDate" class="form-control" required>
-                </div>
-                <div class="col-md-4">
-                    <label for="endDate">End Date:</label>
-                    <input type="date" id="endDate" name="endDate" class="form-control" required>
-=======
                     <div class="input-group">
                         <input required name="startDate" class="form-control" placeholder="Start Date" autocomplete="off"  id="datepicker-action"  data-date-format="yyyy-mm-dd">
-                        <span class="input-group-text border-0" style="background-color: #F6F7F8;"><i class="fa fa-calendar"></i> </button></span>
+                        <span class="input-group-text border-0" style="background-color: #F6F7F8;"><i class="fa fa-calendar"></i> </span>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="input-group">
                         <input required name="endDate" class="form-control" placeholder="End Date" autocomplete="off"  id="datepicker-action2"  data-date-format="yyyy-mm-dd">
-                        <span class="input-group-text border-0" style="background-color: #F6F7F8;"><i class="fa fa-calendar"></i> </button></span>
+                        <span class="input-group-text border-0" style="background-color: #F6F7F8;"><i class="fa fa-calendar"></i></span>
                     </div>
 
->>>>>>> af8d16e0eea1499c6f802d01a55e72e262a92921
+
                 </div>
                 <div class="col-md-4">
                     <button style="width: 44%;" type="submit" class="btn btn-primary btn-lg ">Filter</button>
@@ -95,7 +82,16 @@
                                 {{ auth()->user()->name }}
                                 @endrole
                             </td>
-                            <td>{{ $result->totalWorkedMinutes }}</td>
+                            @php
+                                $totalWorkedSeconds = $result->totalWorkedMinutes ?? 0;
+
+                            $hours = floor($totalWorkedSeconds / 3600);
+                            $minutes = floor(($totalWorkedSeconds % 3600) / 60);
+                            $seconds = $totalWorkedSeconds % 60;
+
+                                    $time_work = sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);
+                            @endphp
+                            <td>{{ $time_work }}</td>
                         </tr>
                     @endforeach
                 </tbody>

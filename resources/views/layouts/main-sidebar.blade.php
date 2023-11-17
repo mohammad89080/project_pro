@@ -37,6 +37,10 @@
 
 
 {{--                                    <button class="btn btn-primary w-100" type="submit">{{trans('main_trans.StartWork')}}</button>--}}
+
+{{--                                    <button style="font-size: 20px" class="btn btn-primary w-100" type="submit">{{trans('main_trans.StartWork')}}</button>--}}
+
+
                                     <script>
                                     setTimeout(function() {
                                         var timerButton = document.getElementById('work-timer');
@@ -44,14 +48,16 @@
 
                                     }, 500);
                                     </script>
-
                                 </form>
                             @else
                                 <form action="{{ route('finish.work') }}" method="post">
                                     @csrf
                                     <button style="font-size: 20px" class="btn btn-danger mt-2 w-100" type="submit">{{trans('main_trans.EndWork')}}</button>
 
+
 {{--                                    <button class="btn btn-danger mt-2 w-100" type="submit" onclick="">{{trans('main_trans.EndWork')}}</button>--}}
+
+
                                     <script>
                                         setTimeout(function() {
                                             var timerButton = document.getElementById('work-timer');

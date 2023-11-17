@@ -13,7 +13,20 @@
     <!-- breadcrumb -->
 @endsection
 @section('content')
+    @php
+   function time1($time)
+   {
+            $totalWorkedSeconds = $time ?? 0;
 
+    $hours = floor($totalWorkedSeconds / 3600);
+    $minutes = floor(($totalWorkedSeconds % 3600) / 60);
+    $seconds = $totalWorkedSeconds % 60;
+
+
+            return sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);
+   }
+
+    @endphp
     <div class="row">
         <div class="col-xl-12 mb-30">
             <div class="card">
@@ -32,7 +45,7 @@
                             </select>
 
                         </div>
-                        
+
                         <div class="col-sm-3 my-1 flex">
                             <button id="reportButton"  class="btn btn-success ml-2 btn-fw" onclick="filter_users()">
 
@@ -93,9 +106,22 @@
 
                                     <td>{{$attendance->start_time}}</td>
                                     <td>{{$attendance->departure_time}}</td>
-                                    <td>{{$attendance->working_time}}</td>
-                                    <td>{{$attendance->late_time}}</td>
 
+                                <td>{{time1($attendance->working_time)}}</td>
+
+{{--                                @php--}}
+{{--                                    $totalWorkedSeconds = $attendance->working_time ?? 0;--}}
+{{--    --}}
+{{--                                $hours = floor($totalWorkedSeconds / 3600);--}}
+{{--                                $minutes = floor(($totalWorkedSeconds % 3600) / 60);--}}
+{{--                                $seconds = $totalWorkedSeconds % 60;--}}
+{{--    --}}
+{{--                                        $time_work = sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);--}}
+{{--                                @endphp--}}
+{{--                                <td>{{ $time_work }}</td>--}}
+
+{{--                                <td>{{$attendance->late_time}}</td>--}}
+                                <td>{{time1($attendance->late_time)}}</td>
                                     @php
                                         $lastDate = $attendance->attendance_date;
                                     @endphp

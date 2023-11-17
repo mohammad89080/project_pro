@@ -81,7 +81,6 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
     Route::get('/attendance/report', [AttendanceController::class, 'report'])->name('attendance.report');
 
     Route::resource('/attendance', AttendanceController::class);
-    Route::post('/attendance/ajax_search', [AttendanceController::class, 'ajax_search'])->name('attendance.ajax_search');
 
     Route::get('/holiday/holidays-this-month', [HolidayController::class,'holidaysThisMonthDisplay'])->name('holiday.holidaysThisMonthDisplay');
 
