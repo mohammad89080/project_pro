@@ -36,11 +36,11 @@
                     <div class="form-row align-items-center content-center">
                         @role('admin')
                         <div class="col-sm-3 my-1 form-group">
-
+                            
                             <select name="userSelect" id="userSelect"  style="padding-bottom: 11px;"  class="form-control" required="">
                                 <option value="">--- Please Select User ---</option>
                                 @foreach($users as $user )
-                                    <option value="{{$user->id}}">  {{$user->name}}   </option>
+                                    <option value="{{$user->id}}">{{$user->name}}</option>
                                 @endforeach
                             </select>
 
@@ -51,6 +51,11 @@
 
                                 Report
                             </button>
+                            
+                        </div>
+
+                        <div class="col-sm-3 my-1 flex">
+                            <a id="export" class="btn btn-info" href="#">Export to Excel</a>
                         </div>
                         @endrole
                     </div>
@@ -169,6 +174,13 @@
             select_users=document.getElementById('userSelect');
             select_index=select_users.selectedIndex;
             user=select_users[select_index].innerText;
+            user_id=select_users[select_index].value;
+
+            var exportUrl = "{{ route('attendance.export', ['user_id' => ':user_id']) }}";
+            exportUrl = exportUrl.replace(':user_id', user_id);
+
+            // Set the href attribute of the export link
+            aa=document.getElementById("export").href = exportUrl;
 
             filter = user.trim();
 
@@ -203,4 +215,36 @@
             // }
         }
     </script>
+
+    <!-- Include the necessary scripts -->
+{{-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> --}}
+{{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // Add a click event listener to the export button
+        $("#exportButton").click(function () {
+            // Use Ajax to send a request to your Laravel route for exporting
+            axios.get('/export-data')
+                .then(function (response) {
+                    // Handle the success, you can show a success message or trigger the download directly
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Exported Successfully!',
+                        text: 'Your Excel file is ready for download.'
+                    });
+                })
+                .catch(function (error) {
+                    // Handle the error
+                    console.error(error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!',
+                    });
+                });
+        });
+    }); --}}
+{{-- </script> --}}
 @endsection
