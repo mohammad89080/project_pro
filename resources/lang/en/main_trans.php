@@ -38,9 +38,9 @@ return [
     'EndDate' => 'End Date',
     'StartDate' => 'Start Date',
     'Filter' => 'Filter',
-
-
-        'ActiveUser' => 'User Active',
+    'Last30Days' => 'Last 30 Days',
+    'WorkingToday' => 'Working Today',
+    'ActiveUser' => 'User Active',
     'Leaves_This_Month' => 'Leave This Month',
     'Leaves_This_Year' => 'Leave This Year',
     'Leaves_Granted' => 'Leave Granted',

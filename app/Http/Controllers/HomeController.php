@@ -33,7 +33,6 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $currentDate = Carbon::now()->toDateString();
-        // Set default values for $startDate and $endDate to cover the current month
         $startDate = Carbon::now()->startOfMonth()->toDateString();
         $endDate = Carbon::now()->endOfMonth()->toDateString();
 
@@ -61,7 +60,7 @@ class HomeController extends Controller
 
         $leavesThisYearUser = Leave::where('user_id',Auth::user()->id)->whereYear('date', $currentYear)->get();
         $leavesGrantedUser = Leave::where('user_id',Auth::user()->id)->where('status','Granted')->get();
-//        dd($holidaysThisMonth);
+
         $numberOfHolidaysThisYear = $holidaysThisYear->count();
         $numberOfHolidaysThisMonth = $holidaysThisMonth->count();
 
@@ -72,25 +71,23 @@ class HomeController extends Controller
         $workedMinutesByUser  = $AttendancObject->report2($startDate,$endDate);
 
         $attendanceSummary = $AttendancObject->getAttendanceSummary($currentDate);
-//        dd($AttendanceSummary);
+
 
         $numberOfLeavesThisYearUser = $leavesThisYearUser->count();
         $numberOfLeavesGrantedUser  = $leavesGrantedUser->count();
+        $workedMinutesByUserForHome = $AttendancObject->getWorkedMinutesByUserForLast30Days();
+        $getWorkedMinutesByUserForWorkingTodays = $AttendancObject->getWorkedMinutesByUserForWorkingTodays();
 
 
-        $report= new AttendanceController();
-        $workedMinutesByUser  = $report->report2($startDate,$endDate);
-
-
-//dd($workedMinutesByUser);
-//die;
 
 
         return view('dashboard',compact('activeUserCount',
             'UserCount','numberOfHolidaysThisYear',
             'numberOfHolidaysThisMonth','numberOfLeavesThisYear',
 
-            'numberOfLeavesGranted','user','workedMinutesByUser','attendanceSummary'));
+            'numberOfLeavesGranted','user','workedMinutesByUser','attendanceSummary'
+            ,'numberOfLeavesThisYearUser','numberOfLeavesGrantedUser'
+            ,'workedMinutesByUserForHome','getWorkedMinutesByUserForWorkingTodays'));
 
 
 

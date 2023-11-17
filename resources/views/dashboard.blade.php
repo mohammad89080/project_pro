@@ -68,6 +68,7 @@
                     </div>
                 </div>
                 @endrole
+                @role('admin')
                 <div class="col-xl-3 col-lg-6 col-md-6 mb-30">
                     <div class="card card-statistics h-100">
                         <div class="card-body">
@@ -88,7 +89,31 @@
                         </div>
                     </div>
                 </div>
+                @else
+                    <div class="col-xl-3 col-lg-6 col-md-6 mb-30">
+                        <div class="card card-statistics h-100">
+                            <div class="card-body">
+                                <div class="clearfix">
+                                    <div class="float-left">
+                                    <span class="text-warning">
+                                        <i class="fa fa-plane highlight-icon" aria-hidden="true"></i>
+                                    </span>
+                                    </div>
+                                    <div class="float-right text-right">
+                                        <p class="card-text text-dark">{{ trans('main_trans.Holiday_This_Year') }}</p>
+                                        <h4>{{$numberOfHolidaysThisYear}}</h4>
+                                    </div>
+                                </div>
+                                <p class="text-muted pt-3 mb-0 mt-2 border-top">
+                                    <a class="text-decoration-none" href="{{route('holiday.holidaysThisMonthDisplay')}}"> <i class="fa fa-bookmark-o mr-1" aria-hidden="true"></i> {{ trans('main_trans.Holiday_This_Month') }} {{$numberOfHolidaysThisMonth}}</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    @endrole
                 {{-- fffffffffffffffffff --}}
+
+                    @role('admin')
                 <div class="col-xl-3 col-lg-6 col-md-6 mb-30">
                     <div class="card card-statistics h-100">
                         <div class="card-body">
@@ -101,24 +126,47 @@
                                 </div>
                                 <div class="float-right text-right">
                                     <p class="card-text text-dark">{{ trans('main_trans.Leaves_This_Year') }}</p>
-                                    @role('admin')
+
                                     <h4>{{$numberOfLeavesThisYear}}</h4>
-                                    @else
-                                    <h4>{{$numberOfLeavesThisYearUser}}</h4>
-                                    @endrole
+
                                 </div>
                             </div>
                             <p class="text-muted pt-3 mb-0 mt-2 border-top">
-                               @role('admin')
+
                                <a class="text-decoration-none" href="{{route('leave.leavesGranted')}}"> <i class="fa fa-bookmark-o mr-1" aria-hidden="true"></i> {{ trans('main_trans.Leaves_Granted') }} {{$numberOfLeavesGranted}}</a>
-                               @else
-                               <a class="text-decoration-none" href="{{route('leave.leavesGrantedMy')}}"> <i class="fa fa-bookmark-o mr-1" aria-hidden="true"></i> {{ trans('main_trans.Leaves_Granted') }} {{$numberOfLeavesGranted}}</a>
-                                @endrole
+
                             </p>
                         </div>
                     </div>
                 </div>
+                    @else
+                        <div class="col-xl-3 col-lg-6 col-md-6 mb-30">
+                            <div class="card card-statistics h-100">
+                                <div class="card-body">
+                                    <div class="clearfix">
+                                        <div class="float-left">
+                                    <span class="text-primary">
+                                        <i class="fa fa-sign-out highlight-icon" aria-hidden="true"></i>
 
+                                    </span>
+                                        </div>
+                                        <div class="float-right text-right">
+                                            <p class="card-text text-dark">{{ trans('main_trans.Leaves_This_Year') }}</p>
+
+                                                <h4>{{$numberOfLeavesThisYearUser}}</h4>
+
+                                        </div>
+                                    </div>
+                                    <p class="text-muted pt-3 mb-0 mt-2 border-top">
+
+                                            <a class="text-decoration-none" href="{{route('leave.leavesGrantedMy')}}"> <i class="fa fa-bookmark-o mr-1" aria-hidden="true"></i> {{ trans('main_trans.Leaves_Granted') }} {{$numberOfLeavesGranted}}</a>
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        @endrole
+                        @role('admin')
                 <div class="col-xl-3 col-lg-6 col-md-6 mb-30">
                     <div class="card card-statistics h-100">
                         <div class="card-body">
@@ -141,6 +189,30 @@
                         </div>
                     </div>
                 </div>
+                        @else
+                            <div class="col-xl-3 col-lg-6 col-md-6 mb-30">
+                                <div class="card card-statistics h-100">
+                                    <div class="card-body">
+                                        <div class="clearfix">
+                                            <div class="float-left">
+                                    <span class="text-success">
+                                      <i class="fa fa-3x fa-users" aria-hidden="true"></i>
+                                    </span>
+                                            </div>
+                                            <div class="float-right text-right">
+                                                <p class="card-text text-dark"> {{ trans('main_trans.Last30Days') }}</p>
+                                                <h4> {{$workedMinutesByUserForHome}}</h4>
+                                            </div>
+                                        </div>
+                                        <p class="text-muted pt-3 mb-0 mt-2 border-top">
+                                            <i class="fa fa-bookmark-o mr-1" aria-hidden="true"></i>
+                                            {{ trans('main_trans.WorkingToday') }}  {{$getWorkedMinutesByUserForWorkingTodays}}
+
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            @endrole
 {{--                <div class="col-xl-3 col-lg-6 col-md-6 mb-30">--}}
 {{--                    <div class="card card-statistics h-100">--}}
 {{--                        <div class="card-body">--}}
@@ -162,71 +234,11 @@
 {{--                    </div>--}}
 {{--                </div>--}}
             </div>
-{{--            -----------------start summray ---------------------}}
-{{--@role('admin')--}}
-{{--            <div class="col-xl-8 mb-30">--}}
-{{--                <div class="card h-100">--}}
 
-{{--                        <div class="card-body" style="padding: 1rem 1.81rem;">--}}
-{{--                            <form action="{{ route('home') }}" method="post">--}}
-{{--                                @csrf--}}
-{{--                                <div class="form-row align-items-center mb-3">--}}
-{{--                                    <div class="col-md-4">--}}
-{{--                                        <div class="input-group">--}}
-{{--                                            <input required name="startDate" class="form-control" placeholder="Start Date" autocomplete="off"  id="datepicker-action"  data-date-format="yyyy-mm-dd">--}}
-{{--                                            <span class="input-group-text border-0" style="background-color: #F6F7F8;"><i class="fa fa-calendar"></i> </button></span>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="col-md-4">--}}
-{{--                                        <div class="input-group">--}}
-{{--                                            <input required name="endDate" class="form-control" placeholder="End Date" autocomplete="off"  id="datepicker-action2"  data-date-format="yyyy-mm-dd">--}}
-{{--                                            <span class="input-group-text border-0" style="background-color: #F6F7F8;"><i class="fa fa-calendar"></i> </button></span>--}}
-{{--                                        </div>--}}
-
-{{--                                    </div>--}}
-{{--                                    <div class="col-md-4">--}}
-{{--                                        <button style="width: 44%;" type="submit" class="btn btn-primary">Filter</button>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </form>--}}
-
-{{--                    </div>--}}
-{{--                    <div class="col-xl-12 mb-30">--}}
-{{--                        <div class="card ">--}}
-{{--                            <div class="card-body">--}}
-
-
-{{--                                <div class="table-responsive">--}}
-{{--                                    <table class="table table-bordered">--}}
-{{--                                        <thead>--}}
-{{--                                        <tr>--}}
-{{--                                            <th>#</th>--}}
-{{--                                            <th>{{ trans('forms.Name') }}</th>--}}
-{{--                                            <th>{{ trans('main_trans.WordHour') }}</th>--}}
-{{--                                        </tr>--}}
-{{--                                        </thead>--}}
-{{--                                        <tbody>--}}
-{{--                                        @foreach($workedMinutesByUser as $index => $result)--}}
-{{--                                            <tr>--}}
-{{--                                                <td>{{ $index + 1 }}</td>--}}
-{{--                                                <td>{{ $result->userName }}</td>--}}
-{{--                                                <td>{{ $result->totalWorkedMinutes }}</td>--}}
-{{--                                            </tr>--}}
-{{--                                        @endforeach--}}
-{{--                                        </tbody>--}}
-{{--                                    </table>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--            @endrole--}}
-            {{--            -----------------End summray ---------------------}}
 {{--            <!-- Orders Status widgets-->--}}
+                            @role('admin')
+
             <div class="row">
-                @role('admin')
                             <div class="col-xl-8 mb-30">
                                 <div class="card h-100">
 
@@ -387,7 +399,7 @@
 {{--                            </div>--}}
 {{--                        </div>--}}
 {{--                    </div>--}}
-                </div>
+{{--                </div>--}}
 {{--                <div class="col-xl-8 mb-30">--}}
 {{--                    <div class="card card-statistics h-100">--}}
 {{--                        <div class="card-body">--}}
@@ -834,7 +846,7 @@
         </div><!-- main content wrapper end-->
     </div>
     </div>
-    </div>
+{{--    </div>--}}
 
     <!--=================================
  footer -->

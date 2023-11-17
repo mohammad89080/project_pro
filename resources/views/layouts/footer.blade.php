@@ -11,8 +11,8 @@
                     echo $settings->footer;
                   }
                 @endphp
-                  
-                 &copy; Copyright <span id="copyright"> <script>document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))</script></span>. <a href="#"> Webmin </a> All Rights Reserved. </p>
+
+                   </p>
           </div>
         </div>
         <div class="col-md-6">

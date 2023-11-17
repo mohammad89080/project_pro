@@ -182,8 +182,46 @@ class AttendanceController extends Controller
         $user_id = Auth::user()->id;
         $workedMinutesByUser = $this->getWorkedMinutesByUser($user_id, $startDate, $endDate);
 
-        return view('page.attendances.summary_report', compact('workedMinutesByUser', 'startDate', 'endDate'));return view('page.attendances.summary_report', compact('workedMinutesByUser', 'startDate', 'endDate'));
+        return view('page.attendances.summary_report', compact('workedMinutesByUser', 'startDate', 'endDate'));
     }
+    public function getWorkedMinutesByUserForLast30Days()
+    {
+        $startDate = Carbon::now()->startOfMonth()->toDateString();
+        $endDate = Carbon::now()->endOfMonth()->toDateString();
+
+
+        $user_id = Auth::user()->id;
+        $workedMinutesByUser = $this->getWorkedMinutesByUser($user_id, $startDate, $endDate);
+        $totalWorkMinutes = $workedMinutesByUser->first()->totalWorkedMinutes;
+
+        $hours = floor($totalWorkMinutes / 60);
+        $minutes = $totalWorkMinutes % 60;
+
+        // Format the result
+        $formattedWorkTime = sprintf('%02d:%02d', $hours, $minutes);
+
+        return $formattedWorkTime;
+    }
+    public function getWorkedMinutesByUserForWorkingTodays()
+    {
+        $user_id = Auth::user()->id;
+
+        // Use the 'value' method to get a single value
+        $totalWorkMinutes = DB::table('attendances')
+            ->where('user_id', $user_id)
+            ->whereDate('attendance_date', Carbon::today())
+            ->value(DB::raw('SUM(working_time)'));
+
+        $hours = floor($totalWorkMinutes / 60);
+        $minutes = $totalWorkMinutes % 60;
+
+        // Format the result
+        $formattedWorkTime = sprintf('%02d:%02d', $hours, $minutes);
+
+        return $formattedWorkTime;
+    }
+
+
 
     private function getWorkedMinutesByUser($user_id, $startDate, $endDate)
     {
