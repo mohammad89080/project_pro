@@ -36,7 +36,7 @@
             <div class="page-title">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h4 class="mb-0"> Dashboard</h4>
+                        <h4 class="mb-0">{{ trans('main_trans.Dashboard') }} </h4>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right">
@@ -57,12 +57,12 @@
                                     </span>
                                 </div>
                                 <div class="float-right text-right">
-                                    <p class="card-text text-dark">Users</p>
+                                    <p class="card-text text-dark"> {{ trans('main_trans.Users') }}</p>
                                     <h4>{{$UserCount}}</h4>
                                 </div>
                             </div>
                             <p class="text-muted pt-3 mb-0 mt-2 border-top">
-                                <i class="fa fa-exclamation-circle mr-1" aria-hidden="true"></i> {{$activeUserCount}} Active User
+                                <i class="fa fa-exclamation-circle mr-1" aria-hidden="true"></i> {{ trans('main_trans.ActiveUser') }} {{$activeUserCount}}
                             </p>
                         </div>
                     </div>
@@ -119,26 +119,28 @@
                     </div>
                 </div>
 
-{{--                <div class="col-xl-3 col-lg-6 col-md-6 mb-30">--}}
-{{--                    <div class="card card-statistics h-100">--}}
-{{--                        <div class="card-body">--}}
-{{--                            <div class="clearfix">--}}
-{{--                                <div class="float-left">--}}
-{{--                                    <span class="text-success">--}}
-{{--                                        <i class="fa fa-dollar highlight-icon" aria-hidden="true"></i>--}}
-{{--                                    </span>--}}
-{{--                                </div>--}}
-{{--                                <div class="float-right text-right">--}}
-{{--                                    <p class="card-text text-dark">Revenue</p>--}}
-{{--                                    <h4>$65656</h4>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <p class="text-muted pt-3 mb-0 mt-2 border-top">--}}
-{{--                                <i class="fa fa-calendar mr-1" aria-hidden="true"></i> Sales Per Week--}}
-{{--                            </p>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
+                <div class="col-xl-3 col-lg-6 col-md-6 mb-30">
+                    <div class="card card-statistics h-100">
+                        <div class="card-body">
+                            <div class="clearfix">
+                                <div class="float-left">
+                                    <span class="text-success">
+                                      <i class="fa fa-3x fa-users" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <div class="float-right text-right">
+                                    <p class="card-text text-dark"> {{ trans('main_trans.UserActive') }}</p>
+                                    <h4> {{$attendanceSummary['activeUsersCount']}}</h4>
+                                </div>
+                            </div>
+                            <p class="text-muted pt-3 mb-0 mt-2 border-top">
+                                <i class="fa fa-bookmark-o mr-1" aria-hidden="true"></i>
+                                {{ trans('main_trans.UserAbsent') }}  {{$attendanceSummary['absentUsersCount']}}
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
 {{--                <div class="col-xl-3 col-lg-6 col-md-6 mb-30">--}}
 {{--                    <div class="card card-statistics h-100">--}}
 {{--                        <div class="card-body">--}}
@@ -161,69 +163,129 @@
 {{--                </div>--}}
             </div>
 {{--            -----------------start summray ---------------------}}
-@role('admin')
-            <div class="col-xl-8 mb-30">
-                <div class="card h-100">
-                        
-                        <div class="card-body" style="padding: 1rem 1.81rem;">
-                            <form action="{{ route('home') }}" method="post">
-                                @csrf
-                                <div class="form-row align-items-center mb-3">
-                                    <div class="col-md-4">
-                                        <div class="input-group">
-                                            <input required name="startDate" class="form-control" placeholder="Start Date" autocomplete="off"  id="datepicker-action"  data-date-format="yyyy-mm-dd">
-                                            <span class="input-group-text border-0" style="background-color: #F6F7F8;"><i class="fa fa-calendar"></i> </button></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="input-group">
-                                            <input required name="endDate" class="form-control" placeholder="End Date" autocomplete="off"  id="datepicker-action2"  data-date-format="yyyy-mm-dd">
-                                            <span class="input-group-text border-0" style="background-color: #F6F7F8;"><i class="fa fa-calendar"></i> </button></span>
-                                        </div>
-                    
-                                    </div>
-                                    <div class="col-md-4">
-                                        <button style="width: 44%;" type="submit" class="btn btn-primary">Filter</button>
-                                    </div>
-                                </div>
-                            </form>
+{{--@role('admin')--}}
+{{--            <div class="col-xl-8 mb-30">--}}
+{{--                <div class="card h-100">--}}
 
-                    </div>
-                    <div class="col-xl-12 mb-30">
-                        <div class="card ">
-                            <div class="card-body">
+{{--                        <div class="card-body" style="padding: 1rem 1.81rem;">--}}
+{{--                            <form action="{{ route('home') }}" method="post">--}}
+{{--                                @csrf--}}
+{{--                                <div class="form-row align-items-center mb-3">--}}
+{{--                                    <div class="col-md-4">--}}
+{{--                                        <div class="input-group">--}}
+{{--                                            <input required name="startDate" class="form-control" placeholder="Start Date" autocomplete="off"  id="datepicker-action"  data-date-format="yyyy-mm-dd">--}}
+{{--                                            <span class="input-group-text border-0" style="background-color: #F6F7F8;"><i class="fa fa-calendar"></i> </button></span>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="col-md-4">--}}
+{{--                                        <div class="input-group">--}}
+{{--                                            <input required name="endDate" class="form-control" placeholder="End Date" autocomplete="off"  id="datepicker-action2"  data-date-format="yyyy-mm-dd">--}}
+{{--                                            <span class="input-group-text border-0" style="background-color: #F6F7F8;"><i class="fa fa-calendar"></i> </button></span>--}}
+{{--                                        </div>--}}
+
+{{--                                    </div>--}}
+{{--                                    <div class="col-md-4">--}}
+{{--                                        <button style="width: 44%;" type="submit" class="btn btn-primary">Filter</button>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </form>--}}
+
+{{--                    </div>--}}
+{{--                    <div class="col-xl-12 mb-30">--}}
+{{--                        <div class="card ">--}}
+{{--                            <div class="card-body">--}}
 
 
-                                <div class="table-responsive">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>{{ trans('forms.Name') }}</th>
-                                            <th>{{ trans('main_trans.WordHour') }}</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($workedMinutesByUser as $index => $result)
-                                            <tr>
-                                                <td>{{ $index + 1 }}</td>
-                                                <td>{{ $result->userName }}</td>
-                                                <td>{{ $result->totalWorkedMinutes }}</td>
-                                            </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </div>
-            </div>
-            @endrole
+{{--                                <div class="table-responsive">--}}
+{{--                                    <table class="table table-bordered">--}}
+{{--                                        <thead>--}}
+{{--                                        <tr>--}}
+{{--                                            <th>#</th>--}}
+{{--                                            <th>{{ trans('forms.Name') }}</th>--}}
+{{--                                            <th>{{ trans('main_trans.WordHour') }}</th>--}}
+{{--                                        </tr>--}}
+{{--                                        </thead>--}}
+{{--                                        <tbody>--}}
+{{--                                        @foreach($workedMinutesByUser as $index => $result)--}}
+{{--                                            <tr>--}}
+{{--                                                <td>{{ $index + 1 }}</td>--}}
+{{--                                                <td>{{ $result->userName }}</td>--}}
+{{--                                                <td>{{ $result->totalWorkedMinutes }}</td>--}}
+{{--                                            </tr>--}}
+{{--                                        @endforeach--}}
+{{--                                        </tbody>--}}
+{{--                                    </table>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            @endrole--}}
             {{--            -----------------End summray ---------------------}}
 {{--            <!-- Orders Status widgets-->--}}
-{{--            <div class="row">--}}
+            <div class="row">
+                @role('admin')
+                            <div class="col-xl-8 mb-30">
+                                <div class="card h-100">
+
+                                        <div class="card-body" style="padding: 1rem 1.81rem;">
+                                            <form action="{{ route('home') }}" method="post">
+                                                @csrf
+                                                <div class="form-row align-items-center mb-3">
+                                                    <div class="col-md-4">
+                                                        <div class="input-group">
+                                                            <input required value="{{ old('startDate') }}" name="startDate" class="form-control" placeholder="{{ trans('main_trans.StartDate') }}" autocomplete="off"  id="datepicker-action"  data-date-format="yyyy-mm-dd">
+                                                            <span class="input-group-text border-0" style="background-color: #F6F7F8;"><i class="fa fa-calendar"></i></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="input-group">
+                                                            <input value="{{ old('endDate') }}" required name="endDate" class="form-control" placeholder="{{ trans('main_trans.EndDate') }}" autocomplete="off"  id="datepicker-action2"  data-date-format="yyyy-mm-dd">
+                                                            <span class="input-group-text border-0" style="background-color: #F6F7F8;"><i class="fa fa-calendar"></i> </span>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <button style="width: 44%;" type="submit" class="btn btn-primary">{{ trans('main_trans.Filter') }}</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+
+                                    </div>
+                                    <div class="col-xl-12 mb-30">
+                                        <div class="card ">
+                                            <div class="card-body">
+
+
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>{{ trans('forms.Name') }}</th>
+                                                            <th>{{ trans('main_trans.WordHour') }}</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        @foreach($workedMinutesByUser as $index => $result)
+                                                            <tr>
+                                                                <td>{{ $index + 1 }}</td>
+                                                                <td>{{ $result->userName }}</td>
+                                                                <td>{{ $result->totalWorkedMinutes }}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            @endrole
 {{--                <div class="col-xl-4 mb-30">--}}
 {{--                    <div class="card card-statistics h-100">--}}
 {{--                        <!-- action group -->--}}
@@ -325,7 +387,7 @@
 {{--                            </div>--}}
 {{--                        </div>--}}
 {{--                    </div>--}}
-{{--                </div>--}}
+                </div>
 {{--                <div class="col-xl-8 mb-30">--}}
 {{--                    <div class="card card-statistics h-100">--}}
 {{--                        <div class="card-body">--}}
@@ -758,26 +820,6 @@
 {{--                    </div>--}}
 {{--                </div>--}}
 {{--            </div>--}}
-
-
-<div wire:id="Be1avhGwCrjXjgKZ4U5g" class="col-md-8 grid-margin ">
-    <div class="card">
-        <div class="card-body">
-            <div class="d-sm-flex justify-content-between align-items-center mb-4">
-                <h2 class="card-title mb-0">Working Hour Analysis</h2>
-                <div class="wrapper d-flex">
-                    <div class="d-flex align-items-center mr-3">
-                        <span class="dot-indicator bg-success"></span>
-                        <p class="mb-0 ml-2 text-muted">Hour Worked</p>
-                    </div>
-                </div>
-            </div>
-            <div class="chart-container"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                <canvas id="dashboard-hour-worked-chart" height="146" width="552" style="display: block; height: 117px; width: 442px;" class="chartjs-render-monitor"></canvas>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 

@@ -1,5 +1,6 @@
 <!-- jquery -->
-<script src="{{ URL::asset('assets/js/jquery-3.3.1.min.js') }}"></script>
+{{--<script src="{{ URL::asset('assets/js/jquery-3.3.1.min.js') }}"></script>--}}
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <!-- plugins-jquery -->
 <script src="{{ URL::asset('assets/js/plugins-jquery.js') }}"></script>
 <!-- plugin_path -->

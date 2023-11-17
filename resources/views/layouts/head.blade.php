@@ -5,15 +5,27 @@
 <link rel="shortcut icon" href="{{ URL::asset('assets/images/favicon.ico') }}" type="image/x-icon" />
 
 <!-- Font -->
-<link rel="stylesheet"
-    href="https://fonts.googleapis.com/css?family=Poppins:200,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900">
+
 @yield('css')
 <!--- Style css -->
 <link href="{{ URL::asset('assets/css/style.css') }}" rel="stylesheet">
+
 <script src="{{ URL::asset('js/attendance.js') }}"></script>
 <!--- Style css -->
 @if (App::getLocale() == 'en')
     <link href="{{ URL::asset('assets/css/ltr.css') }}" rel="stylesheet">
 @else
     <link href="{{ URL::asset('assets/css/rtl.css') }}" rel="stylesheet">
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Cairo+Play:wght@500&family=Cairo:wght@500&family=Markazi+Text&display=swap');
+        body{
+            font-family: 'Cairo', sans-serif;
+            font-family: 'Cairo Play', sans-serif;
+            font-family: 'Markazi Text', serif;
+            font-size: 16px;
+        }
+
+    </style>
 @endif
+

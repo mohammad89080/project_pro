@@ -20,18 +20,21 @@
 {{--                            <a href="#" class="btn">Punch In</a>--}}
                             @php
                                 $att=\App\Models\Attendance::where('user_id', Auth::user()->id)->latest()->first();
-                                
+
                                 $end=null;
                                 if($att){
                                     $end=$att->departure_time;
-            
+
                                 }
-    
+
                             @endphp
 
                             @if (!$att || ($att && $end))
                                 <form action="{{ route('start.work') }}" method="post">
                                     @csrf
+<<<<<<< HEAD
+                                    <button style="font-size: 20px" class="btn btn-primary w-100" type="submit">{{trans('main_trans.StartWork')}}</button>
+=======
                                     
                                     <button class="btn btn-primary w-100" type="submit">{{trans('main_trans.StartWork')}}</button>
                                     <script>
@@ -41,10 +44,14 @@
 
                                     }, 500);
                                     </script>
+>>>>>>> af8d16e0eea1499c6f802d01a55e72e262a92921
                                 </form>
                             @else
                                 <form action="{{ route('finish.work') }}" method="post">
                                     @csrf
+<<<<<<< HEAD
+                                    <button style="font-size: 20px" class="btn btn-danger mt-2 w-100" type="submit">{{trans('main_trans.EndWork')}}</button>
+=======
 
                                     <button class="btn btn-danger mt-2 w-100" type="submit" onclick="">{{trans('main_trans.EndWork')}}</button>
                                     <script>
@@ -58,11 +65,12 @@
                                         }, 1000);
                                     
                                     </script>
+>>>>>>> af8d16e0eea1499c6f802d01a55e72e262a92921
                                 </form>
                             @endif
-                            
 
-                            
+
+
 {{--                            <form action="{{ route('toggle-work') }}" method="post">--}}
 {{--                                @csrf--}}
 {{--                                <button type="submit">Toggle Work</button>--}}

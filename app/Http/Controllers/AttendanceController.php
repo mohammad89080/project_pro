@@ -99,7 +99,7 @@ class AttendanceController extends Controller
     {
 
         $attendances = Attendance::where('user_id', Auth::user()->id)->with(['user'])->get();
-      
+
         return view("page.attendances.index", compact('attendances'));
     }
 
@@ -133,7 +133,17 @@ class AttendanceController extends Controller
     {
         //
     }
-
+//    public function ajax_search(Request $request){
+//
+//dd($request);
+//        if($request->ajax()){
+//
+////            $search_by_text=$request->search_by_text;
+//            dd($request->startDate);
+////            $data=Treasuries::where('name','LIKE',"%{$search_by_text}%")->orderBy('id','DESC')->paginate(PAGINATION_COUNT);
+////            return view('admin.treasuries.ajax_search',['data'=>$data]);
+//        }
+//    }
     /**
      * Store a newly created resource in storage.
      */
@@ -228,4 +238,48 @@ class AttendanceController extends Controller
     {
         //
     }
+
+
+    public function getAttendanceSummary($selectedDate)
+    {
+
+        $totalUsers = User::count();
+
+        // Get the number of users who have started work on the selected date but haven't finished it
+        $activeUsersCount = User::whereHas('attendances', function ($query) use ($selectedDate) {
+            $query->where('attendance_date', $selectedDate)
+                ->whereNotNull('start_time')
+                ->whereNull('departure_time');
+        })->count();
+
+        // Get the number of users who were absent on the selected date
+        $absentUsersCount = $totalUsers - $activeUsersCount;
+
+        return [
+            'totalUsers' => $totalUsers,
+            'absentUsersCount' => $absentUsersCount,
+            'activeUsersCount' => $activeUsersCount,
+        ];
+
+    }
+//
+//    public function getAttendanceSummary($selectedDate)
+//    {
+//        // Get the total number of users
+//        $totalUsers = User::count();
+//
+//        // Get the number of users who were absent on the selected date
+//        $absentUsersCount = User::whereDoesntHave('attendances', function ($query) use ($selectedDate) {
+//            $query->where('attendance_date', $selectedDate);
+//        })->count();
+//
+//        // Get the number of users who were present (active) on the selected date
+//        $activeUsersCount = $totalUsers - $absentUsersCount;
+//
+//        return [
+//            'totalUsers' => $totalUsers,
+//            'absentUsersCount' => $absentUsersCount,
+//            'activeUsersCount' => $activeUsersCount,
+//        ];
+//    }
 }
