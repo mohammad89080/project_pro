@@ -85,12 +85,72 @@ class HomeController extends Controller
 //dd($workedMinutesByUser);
 //die;
 
+$startDate = Carbon::now()->subMonth(); // One month ago
+    $endDate = Carbon::now(); // Today
 
+    $dateNames = [];
+
+    while ($startDate->lte($endDate)) {
+        $dateNames[] = $startDate->format('d M');
+        $startDate->addDay();
+    }
+
+
+// $chartjs = app()->chartjs
+//         ->name('lineChartTest')
+//         ->type('line')
+//         ->size(['width' => 400, 'height' => 200])
+//         ->labels($dateNames)
+//         ->datasets([
+//             [
+//                 "label" => "My First dataset",
+//                 'backgroundColor' => "rgba(38, 185, 154, 0.31)",
+//                 'borderColor' => "rgba(38, 185, 154, 0.7)",
+//                 "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
+//                 "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
+//                 "pointHoverBackgroundColor" => "#fff",
+//                 "pointHoverBorderColor" => "rgba(220,220,220,1)",
+//                 'data' => [65, 59, 80, 81, 56, 55, 40],
+//             ],
+//             [
+//                 "label" => "My Second dataset",
+//                 'backgroundColor' => "rgba(38, 185, 154, 0.31)",
+//                 'borderColor' => "rgba(38, 185, 154, 0.7)",
+//                 "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
+//                 "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
+//                 "pointHoverBackgroundColor" => "#fff",
+//                 "pointHoverBorderColor" => "rgba(220,220,220,1)",
+//                 'data' => [12, 33, 44, 44, 55, 23, 40],
+//             ]
+//         ])
+//         ->options([]);
+
+$activeUsersCount = User::where('status', 'active')->count();
+$inactiveUsersCount = User::where('status', 'inactive')->count();
+
+$chartjs = app()->chartjs
+    ->name('barChartTest')
+    ->type('bar')
+    ->size(['width' => 400, 'height' => 200])
+    ->labels(['Active Users', 'Inactive Users'])
+    ->datasets([
+        [
+            'label' => 'Active Users',
+            'backgroundColor' => ['rgba(0, 255, 0, 0.2)'],
+            'data' => [$activeUsersCount],
+        ],
+        [
+            'label' => 'Inactive Users',
+            'backgroundColor' => ['rgba(255, 0, 0, 0.2)'],
+            'data' => [$inactiveUsersCount],
+        ],
+    ])
+    ->options([]);
         return view('dashboard',compact('activeUserCount',
             'UserCount','numberOfHolidaysThisYear',
             'numberOfHolidaysThisMonth','numberOfLeavesThisYear',
 
-            'numberOfLeavesGranted','user','workedMinutesByUser','attendanceSummary'));
+            'numberOfLeavesGranted','user','workedMinutesByUser','attendanceSummary','chartjs'));
 
 
 

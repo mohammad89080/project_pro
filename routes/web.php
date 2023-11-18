@@ -81,6 +81,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
     Route::get('/attendance/report', [AttendanceController::class, 'report'])->name('attendance.report');
 
     Route::get('/attendance/export/{user_id}', [AttendanceController::class, 'export'])->name('attendance.export');
+    Route::get('/attendance/export-pdf/{user_id}', [AttendanceController::class, 'exportToPdf'])->name('attendance.exportPdf');
 
 
     Route::resource('/attendance', AttendanceController::class);

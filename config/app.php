@@ -169,6 +169,9 @@ return [
          */
         Spatie\Permission\PermissionServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
+        Fx3costa\LaravelChartJs\Providers\ChartjsServiceProvider::class,
+
 
         /*
          * Application Service Providers...
@@ -196,6 +199,8 @@ return [
         // 'Example' => App\Facades\Example::class,
         'Carbon' => 'Carbon\Carbon',
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
+
     ])->toArray(),
 
 ];

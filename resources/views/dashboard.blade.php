@@ -104,7 +104,7 @@
                                     @role('admin')
                                     <h4>{{$numberOfLeavesThisYear}}</h4>
                                     @else
-                                    <h4>{{$numberOfLeavesThisYearUser}}</h4>
+                                    <h4>{{isset($numberOfLeavesThisYearUser) ? $numberOfLeavesThisYearUser :''}}</h4>
                                     @endrole
                                 </div>
                             </div>
@@ -284,6 +284,8 @@
                                     </div>
                                 </div>
                                 </div>
+                                {!! $chartjs->render() !!}
+
                             </div>
                             @endrole
 {{--                <div class="col-xl-4 mb-30">--}}

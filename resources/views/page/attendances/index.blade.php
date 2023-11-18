@@ -22,6 +22,10 @@
 
                     <div class="form-row align-items-center content-center">
                         @role('admin')
+                        
+                            
+                        
+
                         <div class="col-sm-3 my-1 form-group">
                             
                             <select name="userSelect" id="userSelect"  style="padding-bottom: 11px;"  class="form-control" required="">
@@ -43,6 +47,10 @@
 
                         <div class="col-sm-3 my-1 flex">
                             <a id="export" class="btn btn-info" href="#">Export to Excel</a>
+                        </div>
+
+                        <div class="col-sm-3 my-1 flex">
+                            <a id="exportPdf" class="btn btn-info" href="#">Export to PDF</a>
                         </div>
                         @endrole
                     </div>
@@ -151,10 +159,13 @@
             user_id=select_users[select_index].value;
 
             var exportUrl = "{{ route('attendance.export', ['user_id' => ':user_id']) }}";
+            var exportUrlPdf = "{{ route('attendance.exportPdf', ['user_id' => ':user_id']) }}";
             exportUrl = exportUrl.replace(':user_id', user_id);
+            exportUrlPdf = exportUrlPdf.replace(':user_id', user_id);
 
             // Set the href attribute of the export link
             aa=document.getElementById("export").href = exportUrl;
+            ab=document.getElementById("exportPdf").href = exportUrlPdf;
 
             filter = user.trim();
 

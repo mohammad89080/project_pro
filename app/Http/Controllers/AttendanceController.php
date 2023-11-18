@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Exports\AttendancesExport;
 use Maatwebsite\Excel\Facades\Excel;
+use PDF;
+
+
 class AttendanceController extends Controller
 {
     public function __construct()
@@ -270,7 +273,31 @@ class AttendanceController extends Controller
         return Excel::download(new AttendancesExport($user_id), 'user_' . $user_id . '_attendances.xlsx');
     }
 
+    public function exportToPDF($user_id)
+    {
+        // Fetch your data
+        $attendances = Attendance::where('user_id', $user_id)->get();
+        // $attendances = Attendance::All();
+    
 
+        // // Load the view and pass the data
+        // $pdf = PDF::loadView('page.attendances.index', ['attendances' => $attendances]);
+        // // return view("page.attendances.index", compact('attendances'));
+        // // Download the PDF file
+        // return $pdf->download('export.pdf');
+        // view()->share('attendances',$attendances);
+        // foreach($attendances as $attendance)
+        // {
+        //     print_r($attendance->start_time);
+        //     echo'<br>';
+        // }
+        // die;
+        $pdf = PDF::loadView('pdf_view', ['attendances'=>$attendances]);
+        // download PDF file with download method
+        return $pdf->download('pdf_file.pdf');
+    }
+
+    
 //
 //    public function getAttendanceSummary($selectedDate)
 //    {
