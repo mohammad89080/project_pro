@@ -15,4 +15,5 @@ return [
     'Logo' => 'Logo',
     'StartDate' => 'Start Date',
     'EndDate' => 'End Date',
+    'Delete' => 'Delete',
 ];

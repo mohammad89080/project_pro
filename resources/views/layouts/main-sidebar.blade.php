@@ -27,13 +27,20 @@
 
                                 }
 
-                            @endphp
+//                            @endphp
 
                             @if (!$att || ($att && $end))
                                 <form action="{{ route('start.work') }}" method="post">
                                     @csrf
-                                    <button style="font-size: 20px" class="btn btn-primary w-100" type="submit">{{trans('main_trans.StartWork')}}</button>
-                                    
+
+                                    <button id="btn-work" style="font-size: 20px" class="btn btn-primary w-100" type="submit">{{trans('main_trans.StartWork')}}</button>
+
+
+{{--                                    <button class="btn btn-primary w-100" type="submit">{{trans('main_trans.StartWork')}}</button>--}}
+
+{{--                                    <button style="font-size: 20px" class="btn btn-primary w-100" type="submit">{{trans('main_trans.StartWork')}}</button>--}}
+
+
                                     <script>
                                     setTimeout(function() {
                                         var timerButton = document.getElementById('work-timer');
@@ -45,7 +52,11 @@
                             @else
                                 <form action="{{ route('finish.work') }}" method="post">
                                     @csrf
-                                    <button style="font-size: 20px" class="btn btn-danger mt-2 w-100" type="submit">{{trans('main_trans.EndWork')}}</button>
+                                    <button id="btn-work" style="font-size: 20px" class="btn btn-danger mt-2 w-100" type="submit">{{trans('main_trans.EndWork')}}</button>
+
+
+{{--                                    <button class="btn btn-danger mt-2 w-100" type="submit" onclick="">{{trans('main_trans.EndWork')}}</button>--}}
+
 
                                     <script>
                                         setTimeout(function() {
@@ -56,8 +67,9 @@
                                             startTimer('{{$att->start_time}}')
 
                                         }, 1000);
-                                    
+
                                     </script>
+
                                 </form>
                             @endif
 
@@ -79,7 +91,7 @@
 
                     </li>
                     <!-- menu title -->
-                    <li class="mt-10 mb-10 text-muted pl-4 font-medium menu-title">Components </li>
+                    <li class="mt-10 mb-10 text-muted pl-4 font-medium menu-title"> </li>
                     <!-- menu item Elements-->
                     <li>
                         <a style="font-size: 15px;" href="{{route('dashboard')}}"><i class="ti-menu-alt"></i>
@@ -99,14 +111,14 @@
                     <li>
                         <a style="font-size: 16px;" href="javascript:void(0);" data-toggle="collapse" data-target="#leave-menu">
                             <div class="pull-left"><i class="fa fa-sign-out" aria-hidden="true"></i>
-                                <span class="right-nav-text">leave</span></div>
+                                <span class="right-nav-text">المغادرات</span></div>
                             <div class="pull-right"><i class="ti-plus"></i></div>
                             <div class="clearfix"></div>
                         </a>
                         <ul id="leave-menu" class="collapse" data-parent="#sidebarnav">
                             @role('admin')
-                            <li> <a href="{{route('leave.index')}}">All</a> </li>
-                            <li> <a href="{{route('leave-types.index')}}">Types</a></li>
+                            <li> <a  style="font-size: 14px;" href="{{route('leave.index')}}">{{trans('main_trans.All')}}</a> </li>
+                            <li> <a  style="font-size: 14px;" href="{{route('leave-types.index')}}">{{trans('main_trans.LeaveType')}}</a></li>
                             @else
                             <li> <a href="{{route('leave.create')}}">{{trans('main_trans.Leave_application')}}</a> </li>
                             <li> <a href="{{route('leave.myApply')}}">All</a></li>

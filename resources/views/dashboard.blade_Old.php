@@ -23,7 +23,6 @@
     <meta name="author" content="potenzaglobalsolutions.com" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     @include('layouts.head')
-
 </head>
 
 <body>
@@ -143,7 +142,13 @@
                                     <p class="card-text text-dark">{{ trans('main_trans.Leaves_This_Year') }}</p>
 
                                     <h4>{{$numberOfLeavesThisYear}}</h4>
+<<<<<<< HEAD
+                                    @else
+                                    <h4>{{isset($numberOfLeavesThisYearUser) ? $numberOfLeavesThisYearUser :''}}</h4>
+                                    @endrole
+=======
 
+>>>>>>> 8fe994b62a67b7fd28733bb3628de18ec73b2e32
                                 </div>
                             </div>
                             <p class="text-muted pt-3 mb-0 mt-2 border-top">
@@ -312,27 +317,11 @@
                                     </div>
                                 </div>
                                 </div>
+                                {!! $chartjs->render() !!}
+
                             </div>
-            @endrole
-
-            <div class="row">
-            <div class="col-xl-6 mb-30">
-                    <div style="width:75%;">
-                        {!! $chartjs->render() !!}
-                    </div>
-            </div>
-            <div class="col-xl-6 mb-30">
-            <div style="width:75%;">
-                {!! $chartjs2->render() !!}
-            </div>
-            </div>
-                <div class="col-xl-6 mb-30">
-                    <div style="width:75%;">
-                        {!! $chartjs3->render() !!}
-                    </div>
-                </div>
-            </div>
-
+                            @endrole
+{{--                <div class="col-xl-4 mb-30">--}}
 {{--                    <div class="card card-statistics h-100">--}}
 {{--                        <!-- action group -->--}}
 {{--                        <div class="btn-group info-drop">--}}

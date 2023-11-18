@@ -14,6 +14,9 @@ return [
     'Logo' => 'الأيقونة',
     'StartDate' => 'من تاريخ',
     'EndDate' => 'إلى تاريخ',
+    'Create' => 'إنشاء',
+      'Delete' => 'حذف',
+
 
 
 ];

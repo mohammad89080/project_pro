@@ -21,21 +21,91 @@ class AttendanceController extends Controller
         // $this->middleware('role:admin')->except(['index_my']); // Apply to other methods except method1 and method2
     }
 
+//    public function startWork(Request $request)
+//    {
+//
+//        $user = $request->user();
+//
+//
+//        $attendance = new Attendance([
+//            'attendance_date' => now()->toDateString(),
+//            'start_time' => now(),
+//            'user_id' => $user->id,
+//        ]);
+//        $workStartTime = config('app.work_start_time');
+//        $workStartTime ="19:30:00";
+//
+//        $lateTime = $this->calculateLateTime($attendance->attendance_date, $attendance->start_time, $workStartTime);
+//        $attendance->late_time = $lateTime;
+//
+//        $attendance->save();
+//
+//        return redirect()->back()->with('success', 'Work started successfully.');
+//    }
+//
+//    private function calculateLateTime($actualStartTime, $expectedStartTime)
+//    {
+//        $actualStart = Carbon::createFromTimestamp($actualStartTime);
+//        $expectedStart = Carbon::createFromTimestamp($expectedStartTime);
+//
+//        $lateTime = $actualStart->diffInMinutes($expectedStart);
+//
+//        return max(0, $lateTime);
+//    }
+    private function calculateLateTime($actualStartTime, $workStartTime)
+    {
+        $actualStart = Carbon::createFromTimestamp($actualStartTime);
+        $expectedStart = Carbon::parse($actualStart->toDateString() . ' ' . $workStartTime);
+
+        $lateTime = $actualStart->diffInMinutes($expectedStart);
+
+        return max(0, $lateTime);
+    }
+//
+//    public function finishWork(Request $request)
+//    {
+//
+//        $user = $request->user();
+//
+//
+//        $attendance = Attendance::where('user_id', $user->id)
+//            ->whereNull('departure_time')
+//            ->latest()
+//            ->first();
+//
+//        if ($attendance) {
+//
+//            $attendance->departure_time = now();
+//
+//            $start = Carbon::parse($attendance->start_time);
+//            $end = Carbon::parse($attendance->departure_time);
+//            $workingHours = $end->diffInHours($start) + $end->diffInMinutes($start) / 60;
+//
+//            $attendance->working_time = $workingHours;
+//
+//            $attendance->save();
+//
+//            return redirect()->back()->with('success', 'Work ended successfully.');
+//        }
+//
+//        return redirect()->back()->with('error', 'No active work session found.');
+//    }
     public function startWork(Request $request)
     {
-
         $user = $request->user();
-
 
         $attendance = new Attendance([
             'attendance_date' => now()->toDateString(),
             'start_time' => now(),
             'user_id' => $user->id,
         ]);
-        $workStartTime = config('app.work_start_time');
-        $workStartTime ="19:30:00";
 
-        $lateTime = $this->calculateLateTime($attendance->attendance_date, $attendance->start_time, $workStartTime);
+        $workStartTime = config('app.work_start_time');
+        $workStartTime = "19:30:00";
+
+//        $lateTime = $this->calculateLateTime($attendance->attendance_date, $attendance->start_time, $workStartTime);
+        $lateTime = $this->calculateLateTime($attendance->start_time, $workStartTime);
+
         $attendance->late_time = $lateTime;
 
         $attendance->save();
@@ -43,25 +113,9 @@ class AttendanceController extends Controller
         return redirect()->back()->with('success', 'Work started successfully.');
     }
 
-    private function calculateLateTime($attendanceDate, $actualStartTime, $expectedStartTime)
-    {
-
-        $actualStartTime = Carbon::parse($actualStartTime)->format('H:i:s');
-
-        $actualStart = Carbon::parse("$attendanceDate $actualStartTime");
-        $expectedStart = Carbon::parse("$attendanceDate $expectedStartTime");
-
-
-        $lateTime = $actualStart->diffInMinutes($expectedStart);
-
-        return max(0, $lateTime);
-    }
-
     public function finishWork(Request $request)
     {
-
         $user = $request->user();
-
 
         $attendance = Attendance::where('user_id', $user->id)
             ->whereNull('departure_time')
@@ -69,14 +123,13 @@ class AttendanceController extends Controller
             ->first();
 
         if ($attendance) {
-
             $attendance->departure_time = now();
 
             $start = Carbon::parse($attendance->start_time);
             $end = Carbon::parse($attendance->departure_time);
-            $workingHours = $end->diffInHours($start) + $end->diffInMinutes($start) / 60;
+            $workingTimeInSeconds = $end->diffInSeconds($start);
 
-            $attendance->working_time = $workingHours;
+            $attendance->working_time = $workingTimeInSeconds;
 
             $attendance->save();
 
@@ -130,6 +183,7 @@ class AttendanceController extends Controller
 
         return view('page.attendances.summary_report', compact('workedMinutesByUser', 'startDate', 'endDate'));
     }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -137,17 +191,7 @@ class AttendanceController extends Controller
     {
         //
     }
-//    public function ajax_search(Request $request){
-//
-//dd($request);
-//        if($request->ajax()){
-//
-////            $search_by_text=$request->search_by_text;
-//            dd($request->startDate);
-////            $data=Treasuries::where('name','LIKE',"%{$search_by_text}%")->orderBy('id','DESC')->paginate(PAGINATION_COUNT);
-////            return view('admin.treasuries.ajax_search',['data'=>$data]);
-//        }
-//    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -186,8 +230,37 @@ class AttendanceController extends Controller
         $user_id = Auth::user()->id;
         $workedMinutesByUser = $this->getWorkedMinutesByUser($user_id, $startDate, $endDate);
 
+
+//        $workedMinutesByUser1 = $workedMinutesByUser;
+
+
         return view('page.attendances.summary_report', compact('workedMinutesByUser', 'startDate', 'endDate'));
     }
+
+    public function getWorkedMinutesByUserForLast30Days()
+    {
+        $startDate = Carbon::now()->startOfMonth()->toDateString();
+        $endDate = Carbon::now()->endOfMonth()->toDateString();
+
+
+        $user_id = Auth::user()->id;
+        $workedMinutesByUser = $this->getWorkedTimeByUser($user_id, $startDate, $endDate);
+
+        return $workedMinutesByUser;
+    }
+    public function getWorkedMinutesByUserForWorkingTodays()
+    {
+
+        $currentDate = Carbon::now()->toDateString();
+        $user_id = Auth::user()->id;
+
+        $workedMinutesForToday = $this->getWorkedTimeByUser($user_id, $currentDate, $currentDate);
+
+        return $workedMinutesForToday;
+
+    }
+
+
 
     private function getWorkedMinutesByUser($user_id, $startDate, $endDate)
     {
@@ -197,6 +270,22 @@ class AttendanceController extends Controller
             ->where('user_id', $user_id)
             ->whereBetween('attendance_date', [$startDate, $endDate])
             ->get();
+    }
+    private function getWorkedTimeByUser($user_id, $startDate, $endDate)
+    {
+        $workedTime = DB::table('attendances')
+            ->select(DB::raw('SUM(working_time) as totalWorkedSeconds'))
+            ->where('user_id', $user_id)
+            ->whereBetween('attendance_date', [$startDate, $endDate])
+            ->first();
+
+        $totalWorkedSeconds = $workedTime->totalWorkedSeconds ?? 0;
+
+        $hours = floor($totalWorkedSeconds / 3600);
+        $minutes = floor(($totalWorkedSeconds % 3600) / 60);
+        $seconds = $totalWorkedSeconds % 60;
+
+        return sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);
     }
 
     public function report2($startDate,$endDate)
@@ -268,7 +357,7 @@ class AttendanceController extends Controller
     }
 
 
-    public function export($user_id) 
+    public function export($user_id)
     {
         return Excel::download(new AttendancesExport($user_id), 'user_' . $user_id . '_attendances.xlsx');
     }

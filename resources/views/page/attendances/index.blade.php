@@ -13,7 +13,20 @@
     <!-- breadcrumb -->
 @endsection
 @section('content')
+    @php
+   function time1($time)
+   {
+            $totalWorkedSeconds = $time ?? 0;
 
+    $hours = floor($totalWorkedSeconds / 3600);
+    $minutes = floor(($totalWorkedSeconds % 3600) / 60);
+    $seconds = $totalWorkedSeconds % 60;
+
+
+            return sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);
+   }
+
+    @endphp
     <div class="row">
         <div class="col-xl-12 mb-30">
             <div class="card">
@@ -27,26 +40,26 @@
                         
 
                         <div class="col-sm-3 my-1 form-group">
-                            
-                            <select name="userSelect" id="userSelect"  style="padding-bottom: 11px;"  class="form-control" required="">
-                                <option value="">--- Please Select User ---</option>
+
+                            <select style="font-size: 14px;font-weight: 900;padding-bottom: 7px;" name="userSelect" id="userSelect"  style=""  class="form-control" required="">
+                                <option value="">{{ trans('main_trans.PleaseSelectUser') }}</option>
                                 @foreach($users as $user )
                                     <option value="{{$user->id}}">{{$user->name}}</option>
                                 @endforeach
                             </select>
 
                         </div>
-                        
-                        <div class="col-sm-3 my-1 flex">
-                            <button id="reportButton"  class="btn btn-success ml-2 btn-fw" onclick="filter_users()">
 
-                                Report
+                        <div class="col-sm-3 my-1 flex">
+                            <button style="font-size: 17px" id="reportButton"  class="btn btn-success ml-2 btn-fw" onclick="filter_users()">
+                                {{ trans('main_trans.ReportPerson') }}
+
                             </button>
-                            
+
                         </div>
 
                         <div class="col-sm-3 my-1 flex">
-                            <a id="export" class="btn btn-info" href="#">Export to Excel</a>
+                            <a id="export" style="font-size: 17px" class="btn btn-info" href="#">{{ trans('main_trans.ExporttoExcel') }}</a>
                         </div>
 
                         <div class="col-sm-3 my-1 flex">
@@ -70,13 +83,13 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Name</th>
+                                <th>   {{ trans('forms.Name') }}</th>
 
-                                <th>Date</th>
-                                <th>In Time	</th>
-                                <th>Out Time</th>
-                                <th>Worked</th>
-                                <th>Time Late</th>
+                                <th> {{ trans('main_trans.Date') }}</th>
+                                <th> {{ trans('main_trans.InTime') }}</th>
+                                <th>{{ trans('main_trans.OutTime') }}</th>
+                                <th> {{ trans('main_trans.Worked') }}</th>
+                                <th> {{ trans('main_trans.TimeLate') }}</th>
 
 
                             </tr>
@@ -106,16 +119,15 @@
 
                                     <td>{{$attendance->start_time}}</td>
                                     <td>{{$attendance->departure_time}}</td>
-                                    <td>{{$attendance->working_time}}</td>
-                                    <td>{{$attendance->late_time}}</td>
 
+                                <td>{{time1($attendance->working_time)}}</td>
+
+
+                                <td>{{time1($attendance->late_time)}}</td>
                                     @php
                                         $lastDate = $attendance->attendance_date;
                                     @endphp
-                                    {{--                                    <td style="color: {{ $user->status ? 'green' : 'red' }}">--}}
-                                    {{--                                        {{ $user->status ? 'Active' : 'Inactive' }}--}}
-                                    {{--                                    </td>--}}
-                                </tr>
+
                             @endforeach
 
 
@@ -123,13 +135,13 @@
                             <tfoot>
                             <tr>
                                 <th>#</th>
-                                <th>Name</th>
+                                <th>   {{ trans('forms.Name') }}</th>
 
-                                <th>Date</th>
-                                <th>In Time	</th>
-                                <th>Out Time</th>
-                                <th>Worked</th>
-                                <th>Time Late</th>
+                                <th> {{ trans('main_trans.Date') }}</th>
+                                <th> {{ trans('main_trans.InTime') }}</th>
+                                <th>{{ trans('main_trans.OutTime') }}</th>
+                                <th> {{ trans('main_trans.Worked') }}</th>
+                                <th> {{ trans('main_trans.TimeLate') }}</th>
 
                             </tr>
                             </tfoot>
