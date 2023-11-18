@@ -252,8 +252,8 @@
 {{--            <!-- Orders Status widgets-->--}}
                             @role('admin')
 
-            <div class="row">
-                            <div class="col-xl-8 mb-30">
+                        <div class="row">
+                            <div class="col-xl-12 mb-30">
                                 <div class="card h-100">
 
                                         <div class="card-body" style="padding: 1rem 1.81rem;">
@@ -262,19 +262,19 @@
                                                 <div class="form-row align-items-center mb-3">
                                                     <div class="col-md-4">
                                                         <div class="input-group">
-                                                            <input required value="{{ old('startDate') }}" name="startDate" class="form-control" placeholder="{{ trans('main_trans.StartDate') }}" autocomplete="off"  id="datepicker-action"  data-date-format="yyyy-mm-dd">
+                                                            <input  style="font-size: 16px;" required value="{{ old('startDate') }}" name="startDate" class="form-control" placeholder="{{ trans('main_trans.StartDate') }}" autocomplete="off"  id="datepicker-action"  data-date-format="yyyy-mm-dd">
                                                             <span class="input-group-text border-0" style="background-color: #F6F7F8;"><i class="fa fa-calendar"></i></span>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <div class="input-group">
-                                                            <input value="{{ old('endDate') }}" required name="endDate" class="form-control" placeholder="{{ trans('main_trans.EndDate') }}" autocomplete="off"  id="datepicker-action2"  data-date-format="yyyy-mm-dd">
+                                                            <input   style="font-size: 16px;"  value="{{ old('endDate') }}" required name="endDate" class="form-control" placeholder="{{ trans('main_trans.EndDate') }}" autocomplete="off"  id="datepicker-action2"  data-date-format="yyyy-mm-dd">
                                                             <span class="input-group-text border-0" style="background-color: #F6F7F8;"><i class="fa fa-calendar"></i> </span>
                                                         </div>
 
                                                     </div>
                                                     <div class="col-md-4">
-                                                        <button style="width: 44%;" type="submit" class="btn btn-primary">{{ trans('main_trans.Filter') }}</button>
+                                                        <button style="width: 44%;font-size: 17px" style=" " type="submit" class="btn btn-primary">{{ trans('main_trans.Filter') }}</button>
                                                     </div>
                                                 </div>
                                             </form>

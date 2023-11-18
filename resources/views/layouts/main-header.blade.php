@@ -11,7 +11,7 @@
                 @endphp
 
                 @if (empty($settings->logo))
-                    <img class="rounded-circle" width="60" src="{{ URL::asset('assets/images/unnamed.png') }}" alt="logo">
+                    <img class="rounded-circle" width="65" src="{{ URL::asset('assets/images/OSUS.jpg') }}" alt="logo">
                 @else
                 <img class="" width="60" src="{{ asset('assets/images/' . $settings->logo) }}" alt="logo">
                 @endif
@@ -153,12 +153,13 @@
 {{--                                class="badge badge-info">6</span> </a>--}}
                         <div class="dropdown-divider"></div>
                         @role('admin')
-                        <a class="dropdown-item" href="{{route('settings.index')}}"><i class="text-info ti-settings"></i>Settings</a>
+                        <a class="dropdown-item" href="{{route('settings.index')}}"><i class="text-info ti-settings"></i>{{ trans('main_trans.Settings') }}</a>
+
                         @endrole
                         <a class="dropdown-item" href="#">
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <button type="submit" class="bg-transparent border-0" href="#"><i class="text-danger ti-unlock"></i>Logout</button>
+                                <button type="submit" class="bg-transparent border-0" href="#"><i class="text-danger ti-unlock"></i>{{ trans('main_trans.Logout') }}</button>
                             </form>
                         </a>
                     </div>

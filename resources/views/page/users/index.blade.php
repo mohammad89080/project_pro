@@ -24,12 +24,12 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Name</th>
+                                <th> {{ trans('forms.Name') }}</th>
 
-                                <th>Email</th>
-                                <th>Department</th>
-                                <th>Status</th>
-                                <th>Options</th>
+                                <th> {{ trans('forms.Email') }}</th>
+                                <th>{{ trans('forms.Department') }}</th>
+                                <th>{{ trans('forms.Status') }}</th>
+                                <th>{{ trans('main_trans.Options') }}</th>
 
                             </tr>
                             </thead>
@@ -71,7 +71,8 @@
 {{--                                                                </a>--}}
 
                                                                 <a class="dropdown-item" href="{{route('user.edit',$user->id)}}">
-                                                                   Update user
+
+                                                                    {{ trans('main_trans.UpdateUser') }}
                                                                 </a>
 
 {{--                                                                <a class="dropdown-item"  href="#">--}}
@@ -90,24 +91,28 @@
                                                                 </a>
 
                                                                 <a class="dropdown-item"  href="#">
-                                                                   Last In Time
+
+                                                                    {{ trans('main_trans.LastInTime') }}
                                                                 </a>
 
                                                                 <a class="dropdown-item" href="#">
-                                                                   Auto Punch Out Time
+
+                                                                    {{ trans('main_trans.AutoPunchOutTime') }}
                                                                 </a>
 
                                                                 <a class="dropdown-item"  href="#">
-                                                                    Force Punch In / Out
+
+                                                                    {{ trans('main_trans.ForcePunchIn/Out') }}
                                                                 </a>
 
                                                                 <a class="dropdown-item" href="{{ route('force-login', ['user' => $user->id]) }}">
-                                                                  Force Login
+
+                                                                    {{ trans('main_trans.ForceLogin') }}
                                                                 </a>
 
 
                                                                 <a class="dropdown-item text-danger btn"  href="#" onclick="event.preventDefault(); document.getElementById('delete-form-{{$user->id}}').submit();" >
-                                                                    <i class="ti-trash"></i> Delete
+                                                                    <i class="ti-trash"></i> {{ trans('forms.Delete') }}
                                                                 </a>
                                                                 <form id="delete-form-{{$user->id}}" action="{{ route('user.destroy', ['user' => $user->id]) }}" method="POST" style="display: inline;">
                                                                     @csrf
@@ -128,11 +133,12 @@
                             <tfoot>
                             <tr>
                                 <th>#</th>
-                                <th>Name</th>
-                                <th>Department</th>
-                                <th>Email</th>
-                                <th>Status</th>
-                                <th>Options</th>
+                                <th> {{ trans('forms.Name') }}</th>
+
+                                <th> {{ trans('forms.Email') }}</th>
+                                <th>{{ trans('forms.Department') }}</th>
+                                <th>{{ trans('forms.Status') }}</th>
+                                <th>{{ trans('main_trans.Options') }}</th>
                             </tr>
                             </tfoot>
 

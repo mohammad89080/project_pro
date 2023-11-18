@@ -227,10 +227,10 @@ class AttendanceController extends Controller
         $user_id = Auth::user()->id;
         $workedMinutesByUser = $this->getWorkedMinutesByUser($user_id, $startDate, $endDate);
 
-<<<<<<< HEAD
+
 //        $workedMinutesByUser1 = $workedMinutesByUser;
-=======
->>>>>>> d0b921c59820f19ad5f2a9a272af62af0094572c
+
+
         return view('page.attendances.summary_report', compact('workedMinutesByUser', 'startDate', 'endDate'));
     }
 
@@ -354,7 +354,7 @@ class AttendanceController extends Controller
     }
 
 
-    public function export($user_id) 
+    public function export($user_id)
     {
         return Excel::download(new AttendancesExport($user_id), 'user_' . $user_id . '_attendances.xlsx');
     }

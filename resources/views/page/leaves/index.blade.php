@@ -4,14 +4,16 @@
 @section('css')
 
 @section('title')
-    Leaves
+    {{ trans('main_trans.Leaves') }}
 @stop
 
 @endsection
 @section('page-header')
-<!-- breadcrumb -->
-
-<!-- breadcrumb -->
+    <!-- breadcrumb -->
+    @section('PageTitle')
+        {{trans('main_trans.Leaves')}}
+    @stop
+    <!-- breadcrumb -->
 @endsection
 @section('content')
 
@@ -24,8 +26,8 @@
                 <div class="form-row align-items-center content-center ">
                     <div class="col-sm-2 my-1 form-group">
 
-                        <select  id="catSelect" class="form-control pb-2" onchange="filter_table('catSelect','2')">
-                            <option value="" class="text-center">---Category---</option>
+                        <select style="font-size: 14px;font-weight: 900;padding-bottom: 7px;" id="catSelect" class="form-control pb-2" onchange="filter_table('catSelect','2')">
+                            <option value="" class="text-center">{{trans('main_trans.Category')}}</option>
                             @foreach($leave_types as $type )
                                 <option value="{{$type->name}}"> {{$type->name}} </option>
                             @endforeach
@@ -34,11 +36,11 @@
                     </div>
                     <div class="col-sm-2 my-1 form-group">
 
-                        <select id="statSelect" class="form-control pb-2" onchange="filter_table('statSelect','3')">
-                            <option value="" class="text-center">---Status---</option>
-                                <option value="Granted">Granted</option>
-                                <option value="Pending">Pending</option>
-                                <option value="Rejected">Rejected</option>
+                        <select style="font-size: 14px;font-weight: 900;padding-bottom: 7px;" id="statSelect" class="form-control pb-2" onchange="filter_table('statSelect','3')">
+                            <option value="" class="text-center">----{{trans('main_trans.Status')}}---</option>
+                                <option value="Granted">ممنوح</option>
+                                <option value="Pending">قيد الانتظار</option>
+                                <option value="Rejected">رفض</option>
                         </select>
 
                     </div>
@@ -64,13 +66,13 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>User</th>
-                            <th>Type</th>
-                            <th>Status</th>
-                            <th>Date</th>
-                            <th>Description</th>
+                            <th>{{trans('main_trans.User')}}</th>
+                            <th>{{trans('main_trans.Type')}}</th>
+                            <th>{{trans('main_trans.Status')}}</th>
+                            <th>{{trans('main_trans.Date')}}</th>
+                            <th>{{trans('main_trans.Description')}}</th>
                             @role('admin')
-                            <th>Options</th>
+                            <th>{{trans('main_trans.Options')}}</th>
                             @endrole
                         </tr>
                         </thead>
@@ -157,10 +159,10 @@
             cat_filter=document.getElementById('catSelect');
             stat_filter=document.getElementById('statSelect');
 
-<<<<<<< HEAD
+
             filter = data.trim();
 
-=======
+
             select_index_cat=cat_filter.selectedIndex;
             data_cat=cat_filter[select_index_cat].value;
 
@@ -169,28 +171,28 @@
 
             filter_cat = data_cat.trim();
             filter_stat = data_stat.trim();
-            
->>>>>>> d0b921c59820f19ad5f2a9a272af62af0094572c
+
+
             // var tr = document.querySelectorAll('.filter-data:not(.nshow)');
             tr=document.getElementsByClassName("filter-data");
 
             // Loop through all table rows, and hide those who don't match the search query
             count=0;
             for (i = 0; i < tr.length; i++) {
-<<<<<<< HEAD
+
                 td = tr[i].getElementsByTagName("td")[idx];
                 if (td) {
 
                     txtValue = td.textContent || td.innerText;
                     txtValue=txtValue.trim();
-=======
+
                 td_cat = tr[i].getElementsByTagName("td")[2];
                 td_stat = tr[i].getElementsByTagName("td")[3];
                 if (td_cat || td_stat) {
-                    
+
                     txtValue_cat = td_cat.textContent || td_cat.innerText;
                     txtValue_cat=txtValue_cat.trim();
->>>>>>> d0b921c59820f19ad5f2a9a272af62af0094572c
+
 
                     txtValue_stat = td_stat.textContent || td_stat.innerText;
                     txtValue_stat=txtValue_stat.trim();

@@ -22,12 +22,12 @@
                     <div class="col-3"></div>
                     <div class="col-3">
                         <div class="input-group">
-                            <input required class="form-control" placeholder="Date" autocomplete="off"  id="datepicker-action" name="holiday_date" data-date-format="yyyy-mm-dd">
-                            <span class="input-group-text border-0" style="background-color: #F6F7F8;"><i class="fa fa-calendar"></i> </button></span>
+                            <input style="font-size: 16px;" required class="form-control" placeholder="{{ trans('main_trans.Date')}}" autocomplete="off"  id="datepicker-action" name="holiday_date" data-date-format="yyyy-mm-dd">
+                            <span class="input-group-text border-0" style="background-color: #F6F7F8;"><i class="fa fa-calendar"></i></span>
                         </div>
                     </div>
                     <div class="col-3">
-                        <input type="submit" value="submit" class="btn btn-success btn-lg">
+                        <input  style="width: 44%;" type="submit" value="{{ trans('main_trans.submit')}}" class="btn btn-success btn-lg">
                     </div>
                 </div>
             </form>

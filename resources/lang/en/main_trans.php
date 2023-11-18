@@ -18,10 +18,25 @@ return [
     'Delete_Department' => 'Delete',
     'Holiday_This_Month' => 'Holiday This Month',
     'Holiday_This_Year' => 'Holiday This Year',
+    'LeaveType' => 'Leave Type',
+    'All' => 'All',
+    'ExporttoExcel' => 'Export to Excel',
+        'User' => 'User',
+        'Type' => 'Type',
+        'Status' => 'Status',
 
-    'Report' => 'Report',
+        'Description' => 'Description',
+        'Options' => 'Options',
+    'Category' => '---Category---',
+    'submit' => 'submit',
+    'CreateLeaveType' => 'Create LeaveType',
+    'LeaveTypes' => 'Leave Types',
+    'Create' => 'Create',
+    'UpdateUser' => 'Update User',
+    'Leaves' => 'Leaves',
+
     'ReportAll' => 'User report',
-
+    'ReportPerson' => 'Report Dispaly',
     "Date" => 'Date',
     'InTime' => 'In Time',
     'OutTime' => 'Out Time',
@@ -29,7 +44,7 @@ return [
     'TimeLate' => 'Late Time',
     'StartWork' => 'Start Work',
     'EndWork' => 'End Work',
-
+    'PleaseSelectUser' => '--- Please Select User ---',
   'WordHour' => 'Worked Hours',
     'periodFilter' => 'Displaying data for the period:',
     'SummaryReport' => 'Summary Report',
@@ -72,6 +87,8 @@ return [
     'library'=>'Library',
     'Onlineclasses'=>'Online classes',
     'Settings'=>'Settings',
+
+    'Logout'=>'Logout',
 
     'Copyright' => 'Copyright',
     'Name_Programer' => 'SamirGamal MoraSoft All Rights Reserved'

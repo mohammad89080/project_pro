@@ -16,15 +16,17 @@ return [
     'Delete_Department' => ' حذف القسم',
     'Holiday_This_Month' => 'العطل هذا الشهر',
     'Holiday_This_Year' => 'العطل هذه السنة',
-
+    'ExporttoExcel' => 'التصدير إكسل ',
     'Report' => 'التقارير',
+    'ReportPerson' => 'عرض التقرير',
     'ReportAll' => 'تقرير عن مستخدم',
     'SummaryReport' => 'تقرير مختصر',
     'Leaves_This_Month' => 'الإجازات هذا الشهر',
     'Leaves_This_Year' => 'الإجازات هذه السنة',
     'Leaves_Granted' => 'الإجازات المقبولة',
     'UpdateSettings' => 'تعديل معلومات النظام',
-
+    'LeaveType' => 'أنواع المغادرات',
+    'All' => 'كل المغادرات',
     'ActiveUser' => 'المستخدمين المفعلين',
     "Date" => 'التاريخ',
     'InTime' => 'بدء العمل',
@@ -39,10 +41,29 @@ return [
     'EndDate' => 'إلى تاريخ',
     'UserAbsent' => 'المستخدمين الغائبين',
     'UserActive' => 'المستخدمين النشيطين',
-
+    'Settings' => 'الضبط العام',
+    'Logout'=>'تسجيل خروج',
     'Filter' => 'فلترة',
+    'PleaseSelectUser' => '--- الرجاء اختيار مستخدم ---',
 
     'Last30Days' => 'ساعات عمل الشهر الحالي',
     'WorkingToday' => 'ساعات عمل اليوم',
+
+    'User' => 'المستخدم',
+    'Type' => 'النوع',
+    'Status' => 'الحالة',
+
+    'Description' => 'الوصف',
+    'Options' => 'الخيارات',
+    'Category' => '---نوع الحالة---',
+    'submit' => 'حفظ',
+    'CreateLeaveType' => 'إنشاء نوع الإجازة',
+    'LeaveTypes' => 'أنواع الإجازات',
+    'LastInTime' => 'قيد التجهيز',
+    'AutoPunchOutTime' => 'قيد التجهيز',
+    'ForcePunchIn/Out' => 'قيد التجهيز',
+    'ForceLogin' => 'دخول إلى حساب المستخدم',
+    'UpdateUser' => 'تعديل بيانات المستخدم',
+    'Leaves' => 'المغادرات',
 
 ];
