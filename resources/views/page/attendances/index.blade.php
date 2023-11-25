@@ -107,7 +107,7 @@
                                 @endphp
                                 <tr class="filter-data" !@role('admin') style="display:none" @endrole>
                                     <td>{{$i}}</td>
-                                    <td>{{$attendance->user->name}}</td>
+                                    <td>{{$attendance->user->name}}<span class="d-none">{{$attendance->user->id}}</span></td>
                                     @if ($attendance->attendance_date != $lastDate)
 
                                         <td>{{ $attendance->attendance_date }}</td>
@@ -167,8 +167,8 @@
             }
             select_users=document.getElementById('userSelect');
             select_index=select_users.selectedIndex;
-            user=select_users[select_index].innerText;
             user_id=select_users[select_index].value;
+            user=select_users[select_index].innerText+user_id;
 
             var exportUrl = "{{ route('attendance.export', ['user_id' => ':user_id']) }}";
             var exportUrlPdf = "{{ route('attendance.exportPdf', ['user_id' => ':user_id']) }}";
@@ -190,26 +190,8 @@
             setTimeout(function() {
                 // Your code to be executed after the delay
                 searchInput.value='';
+            }, 10);
 
-            }, 50);
-            // tr = document.getElementsByClassName("filter-data");
-
-
-            // // Loop through all table rows, and hide those who don't match the search query
-            // for (i = 0; i < tr.length; i++) {
-            //     td = tr[i].getElementsByTagName("td")[1];
-            //     if (td) {
-            //         txtValue = td.textContent || td.innerText;
-
-            //         if (txtValue==filter) {
-
-            //                 tr[i].style.display = "";
-            //         } else {
-            //                 tr[i].style.display = "none";
-            //         }
-
-            //     }
-            // }
         }
     </script>
 

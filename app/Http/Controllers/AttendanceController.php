@@ -367,23 +367,13 @@ class AttendanceController extends Controller
         // Fetch your data
         $attendances = Attendance::where('user_id', $user_id)->get();
         // $attendances = Attendance::All();
-    
+        // $attendances = Attendance::where('user_id', Auth::user()->id)->with(['user'])->get();
 
-        // // Load the view and pass the data
-        // $pdf = PDF::loadView('page.attendances.index', ['attendances' => $attendances]);
-        // // return view("page.attendances.index", compact('attendances'));
-        // // Download the PDF file
-        // return $pdf->download('export.pdf');
-        // view()->share('attendances',$attendances);
-        // foreach($attendances as $attendance)
-        // {
-        //     print_r($attendance->start_time);
-        //     echo'<br>';
-        // }
-        // die;
-        $pdf = PDF::loadView('pdf_view', ['attendances'=>$attendances]);
+        view()->share('attendances',$attendances);
+
+        $pdf = PDF::loadView('pdf_view', ['attendances'=>$attendances])->setOptions(['defaultFont' => 'sans-serif']);;
         // download PDF file with download method
-        return $pdf->download('pdf_file.pdf');
+        return $pdf->download($attendances[0]->user->name.'_file_report.pdf');
     }
 
     

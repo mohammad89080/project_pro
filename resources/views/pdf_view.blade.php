@@ -1,37 +1,29 @@
-@extends('layouts.master')
-@section('css')
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+</style>
+</head>
+<body>
 
-    @section('title')
-        {{ trans('main_trans.ReportAll') }}
-    @stop
-@endsection
-@section('page-header')
-    <!-- breadcrumb -->
-    @section('PageTitle')
-        {{ trans('main_trans.ReportAll') }}
-    @stop
-    <!-- breadcrumb -->
-@endsection
-@section('content')
+<h2>{{$attendances[0]->user->name}}</h2>
 
 
-<div class="table-responsive">
-    {{--                                                table-striped--}}
-    <table id="datatable" class="table  table-bordered p-0">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>Name</th>
+<table style="width:100%">
+    <tr>
+        <th>#</th>
 
-            <th>Date</th>
-            <th>In Time	</th>
-            <th>Out Time</th>
-            <th>Worked</th>
-            <th>Time Late</th>
+        <th>Date</th>
+        <th>In Time	</th>
+        <th>Out Time</th>
+        <th>Worked</th>
+        <th>Time Late</th>
+    </tr>
 
-
-        </tr>
-        </thead>
         <tbody>
         @php
             $i = 0;
@@ -43,17 +35,14 @@
                 $i++;
 
             @endphp
-            <tr class="filter-data">
+            <tr>
                 <td>{{$i}}</td>
-                {{-- <td>{{$attendance->user->name}}</td> --}}
                 @if ($attendance->attendance_date != $lastDate)
-
                     <td>{{ $attendance->attendance_date }}</td>
                 @else
 
                     <td></td>
                 @endif
-                {{--                                    <td>{{$attendance->attendance_date}}</td>--}}
 
                 <td>{{$attendance->start_time}}</td>
                 <td>{{$attendance->departure_time}}</td>
@@ -63,29 +52,14 @@
                 @php
                     $lastDate = $attendance->attendance_date;
                 @endphp
-                {{--                                    <td style="color: {{ $user->status ? 'green' : 'red' }}">--}}
-                {{--                                        {{ $user->status ? 'Active' : 'Inactive' }}--}}
-                {{--                                    </td>--}}
+
             </tr>
         @endforeach
 
 
         </tbody>
-        <tfoot>
-        <tr>
-            <th>#</th>
-            <th>Name</th>
-
-            <th>Date</th>
-            <th>In Time	</th>
-            <th>Out Time</th>
-            <th>Worked</th>
-            <th>Time Late</th>
-
-        </tr>
-        </tfoot>
 
     </table>
-</div>
 
-@endsection
+</body>
+</html>

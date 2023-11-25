@@ -111,7 +111,7 @@
                     <li>
                         <a style="font-size: 16px;" href="javascript:void(0);" data-toggle="collapse" data-target="#leave-menu">
                             <div class="pull-left"><i class="fa fa-sign-out" aria-hidden="true"></i>
-                                <span class="right-nav-text">المغادرات</span></div>
+                                <span class="right-nav-text">{{trans('main_trans.Leaves')}}</span></div>
                             <div class="pull-right"><i class="ti-plus"></i></div>
                             <div class="clearfix"></div>
                         </a>
