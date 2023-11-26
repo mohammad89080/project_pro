@@ -7,6 +7,7 @@ use App\Http\Controllers\AttendanceController;
 use App\Models\Holiday;
 use App\Models\Leave;
 use App\Models\User;
+use App\Models\Attendance;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
@@ -142,12 +143,13 @@ class HomeController extends Controller
             ]);
         $user_id = Auth::user()->id;
         $monthlyWorkedMinutes = $this->getMonthlyWorkedMinutesByUser($user_id);
-
+        
+        $dateData = $this->getDateNamesOneMonthAgoUntilToday();
         $chartjs3 = app()->chartjs
             ->name('lineChartTest')
             ->type('line')
             ->size(['width' => 400, 'height' => 200])
-            ->labels(['January', 'February', 'March', 'April', 'May', 'June', 'July'])
+            ->labels($dateData[0])
             ->datasets([
                 [
                     "label" => "دقائق العمل الشهرية",
@@ -157,7 +159,7 @@ class HomeController extends Controller
                     "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
                     "pointHoverBackgroundColor" => "#fff",
                     "pointHoverBorderColor" => "rgba(220,220,220,1)",
-                    'data' => $monthlyWorkedMinutes->all(),
+                    'data' => $dateData[1],
                 ],
             ])
             ->optionsRaw([
@@ -204,4 +206,25 @@ class HomeController extends Controller
             ->get()
             ->pluck('totalWorkedMinutes', 'month');
     }
+
+function getDateNamesOneMonthAgoUntilToday()
+{
+    $startDate = Carbon::now()->subMonth(); // One month ago
+    $endDate = Carbon::now(); // Today
+
+    $dateNames = [];
+    $data = [];
+    while ($startDate->lte($endDate)) {
+
+        // echo $startDate->format('Y-m-d');
+        $data[]=Attendance::where('attendance_date', $startDate->format('Y-m-d'))
+        ->where('user_id', Auth::user()->id)
+        ->sum('working_time');
+        $dateNames[] = $startDate->format('d M');
+        $startDate->addDay();
+    }
+    return [$dateNames, $data];
+}
+
+
 }

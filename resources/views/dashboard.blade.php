@@ -251,7 +251,7 @@
             </div>
 
 {{--            <!-- Orders Status widgets-->--}}
-                            @role('admin')
+        @role('admin')
 
                         <div class="row">
                             <div class="col-xl-12 mb-30">
@@ -322,12 +322,14 @@
                     </div>
             </div>
             <div class="col-xl-6 mb-30">
-            <div style="width:75%;">
-                {!! $chartjs2->render() !!}
+                <div style="width:75%;">
+                    {!! $chartjs2->render() !!}
+                </div>
             </div>
-            </div>
-                <div class="col-xl-6 mb-30">
+
+            <div class="col-xl-12 mb-30">
                     <div style="width:75%;">
+
                         {!! $chartjs3->render() !!}
                     </div>
                 </div>

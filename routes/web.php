@@ -9,7 +9,7 @@ use App\Http\Controllers\HolidayController;
 use App\Http\Controllers\LeaveTypeController;
 use App\Http\Controllers\LeaveController;
 use App\Http\Controllers\SettingsController;
-
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -91,6 +91,13 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
     Route::resource('/Holiday', HolidayController::class);
 
     Route::resource('/settings', SettingsController::class)->middleware(['role:admin']);
+
+    Route::get('/ccc', function () {
+       
+            $admin_users = User::role('admin')->get();
+           die(json_encode($admin_users));
+        
+});
 
 
 

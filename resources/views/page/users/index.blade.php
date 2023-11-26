@@ -51,6 +51,29 @@
                                     </td>
 
                                     <td>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="AutoPunchModalCenter{{$i}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Auto Punch Out Time</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                </div>
+                                                    <div class="modal-body">
+                                                        <input id="ttime" class="form-control" type="time" name="punch_out">
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="button" onclick="sch()" class="btn btn-primary">Save changes</button>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <div class="collapse" id="collapseAutoPunsh{{$i}}" style="z-index:5;">
+                                            ff
+                                        </div>
                                         <div class="dropdown" >
 {{--                                            --}}
                                             <button id="btn-optios" style=" padding-left:12px;
@@ -95,11 +118,12 @@
                                                                     {{ trans('main_trans.LastInTime') }}
                                                                 </a>
 
-                                                                <a class="dropdown-item" href="#">
+                                                                <a class="dropdown-item" data-toggle="modal" href="#AutoPunchModalCenter{{$i}}"
+                                                                  aria-expanded="false" aria-controls="collapseAutoPunsh{{$i}}">
 
                                                                     {{ trans('main_trans.AutoPunchOutTime') }}
                                                                 </a>
-
+                                                                
                                                                 <a class="dropdown-item"  href="#">
 
                                                                     {{ trans('main_trans.ForcePunchIn/Out') }}
