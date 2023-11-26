@@ -23,6 +23,7 @@
     <meta name="author" content="potenzaglobalsolutions.com" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     @include('layouts.head')
+
 </head>
 
 <body>
@@ -312,8 +313,26 @@
                                 </div>
                                 </div>
                             </div>
-                            @endrole
-{{--                <div class="col-xl-4 mb-30">--}}
+            @endrole
+
+            <div class="row">
+            <div class="col-xl-6 mb-30">
+                    <div style="width:75%;">
+                        {!! $chartjs->render() !!}
+                    </div>
+            </div>
+            <div class="col-xl-6 mb-30">
+            <div style="width:75%;">
+                {!! $chartjs2->render() !!}
+            </div>
+            </div>
+                <div class="col-xl-6 mb-30">
+                    <div style="width:75%;">
+                        {!! $chartjs3->render() !!}
+                    </div>
+                </div>
+            </div>
+
 {{--                    <div class="card card-statistics h-100">--}}
 {{--                        <!-- action group -->--}}
 {{--                        <div class="btn-group info-drop">--}}

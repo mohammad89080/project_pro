@@ -53,13 +53,21 @@ class User extends Authenticatable
     {
         return $this->hasMany(Attendance::class);
     }
-    public function isWorking()
+//    public function isWorking()
+//    {
+//
+//        $attendance = $this->attendances()
+//            ->where('attendance_date', now()->toDateString())
+//            ->first();
+//
+//        return $attendance && $attendance->start_time && !$attendance->departure_time;
+//    }
+    public function salary()
     {
-
-        $attendance = $this->attendances()
-            ->where('attendance_date', now()->toDateString())
-            ->first();
-
-        return $attendance && $attendance->start_time && !$attendance->departure_time;
+        return $this->hasOne(Salary::class);
+    }
+    public function advances()
+    {
+        return $this->hasMany(Advance::class);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\LeaveType;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +25,7 @@ class LeaveController extends Controller
     public function index()
     {
         $leave_types = LeaveType::all();
-        $leaves = Leave::all(); 
+        $leaves = Leave::all();
         return view("page.leaves.index", compact('leaves','leave_types'));
     }
     public function index_my()
@@ -35,13 +36,13 @@ class LeaveController extends Controller
     }
     public function indexGranted()
     {
-        $leaves = Leave::where('status','Granted')->get(); 
+        $leaves = Leave::where('status','Granted')->get();
         return view("page.leaves.index", compact('leaves'));
     }
 
     public function indexGranted_my()
     {
-        $leaves = Leave::where('user_id',Auth::user()->id)->where('status','Granted')->get(); 
+        $leaves = Leave::where('user_id',Auth::user()->id)->where('status','Granted')->get();
         return view("page.leaves.index", compact('leaves'));
     }
 
@@ -58,7 +59,7 @@ class LeaveController extends Controller
             if ($lu) {
                 $count=$lu->count;
             }
-            
+
             $count_leave[$type->id] = $type->maximum - $count;
         }
         return view("page.leaves.create", compact('leave_types','count_leave'));
@@ -102,13 +103,28 @@ class LeaveController extends Controller
             Leave::create($data);
             LeaveUser::updateOrCreate(
                 ['user_id' => $data['user_id'], 'leave_id' => $data['leave_id']],
-                [ 'count' => \DB::raw('count + 1')]
-            );
+                [ 'count' => \DB::raw('count + 1')]);
+
+            $user = User::role('admin')->get();
+            Notification::send($user, new \App\Notifications\Leavenotifications($user_id));
+
             toastr()->success(trans('messages.success'));
             return redirect()->route('leave');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
+    }
+    public function MarkAsRead_all (Request $request)
+    {
+
+        $userUnreadNotification= auth()->user()->unreadNotifications;
+
+        if($userUnreadNotification) {
+            $userUnreadNotification->markAsRead();
+            return back();
+        }
+
+
     }
 
     /**
@@ -140,7 +156,7 @@ class LeaveController extends Controller
 
             $data['status'] = $status;
             $leave->update($data);
-            
+
             toastr()->success('status updated successfully');
             return redirect()->route('leave');
         } catch (\Exception $e) {

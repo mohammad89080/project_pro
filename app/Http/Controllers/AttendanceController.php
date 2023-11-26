@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendance;
+use App\Models\Settings;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -10,6 +11,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Exports\AttendancesExport;
 use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\Mailer\Messenger\SendEmailMessage;
+
+
 class AttendanceController extends Controller
 {
     public function __construct()
@@ -49,15 +53,44 @@ class AttendanceController extends Controller
 //
 //        return max(0, $lateTime);
 //    }
+//    private function calculateLateTime($actualStartTime, $workStartTime)
+//    {
+//        // Convert actual start time and work start time to Carbon instances
+//        $actualStart = Carbon::createFromTimestamp($actualStartTime);
+//
+//        $expectedStart = Carbon::parse($actualStart->toDateString() . ' ' . $workStartTime);
+//
+//        // Calculate the delay in seconds
+//        $delayInSeconds = $actualStart->diffInSeconds($expectedStart);
+//
+//        // Return the delay in seconds, ensuring it's not negative
+//        return max(0, $delayInSeconds);
+//    }
     private function calculateLateTime($actualStartTime, $workStartTime)
     {
-        $actualStart = Carbon::createFromTimestamp($actualStartTime);
-        $expectedStart = Carbon::parse($actualStart->toDateString() . ' ' . $workStartTime);
+        // Convert actual start time and work start time to Carbon instances
+        $actualStart = Carbon::parse($actualStartTime);
 
-        $lateTime = $actualStart->diffInMinutes($expectedStart);
+        // Parse the work start time and set it to the same date as actual start time
+        $expectedStart = Carbon::parse($workStartTime)->setDate(
+            $actualStart->year,
+            $actualStart->month,
+            $actualStart->day
+        );
 
-        return max(0, $lateTime);
+        // Check if the actual start time is later than the expected start time
+        // If it's earlier, there is no delay
+        if ($actualStart->lte($expectedStart)) {
+            return 0;
+        }
+
+        // Calculate the delay in seconds
+        $delayInSeconds = $actualStart->diffInSeconds($expectedStart);
+
+        // Return the delay in seconds
+        return $delayInSeconds;
     }
+
 //
 //    public function finishWork(Request $request)
 //    {
@@ -96,9 +129,11 @@ class AttendanceController extends Controller
             'start_time' => now(),
             'user_id' => $user->id,
         ]);
+        $settings  = Settings::first();
 
-        $workStartTime = config('app.work_start_time');
-        $workStartTime = "19:30:00";
+//        $workStartTime = config('app.work_start_time');
+        $workStartTime = $settings->start_work;
+
 
 //        $lateTime = $this->calculateLateTime($attendance->attendance_date, $attendance->start_time, $workStartTime);
         $lateTime = $this->calculateLateTime($attendance->start_time, $workStartTime);
@@ -184,6 +219,7 @@ class AttendanceController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+
     public function create()
     {
         //
@@ -360,24 +396,5 @@ class AttendanceController extends Controller
     }
 
 
-//
-//    public function getAttendanceSummary($selectedDate)
-//    {
-//        // Get the total number of users
-//        $totalUsers = User::count();
-//
-//        // Get the number of users who were absent on the selected date
-//        $absentUsersCount = User::whereDoesntHave('attendances', function ($query) use ($selectedDate) {
-//            $query->where('attendance_date', $selectedDate);
-//        })->count();
-//
-//        // Get the number of users who were present (active) on the selected date
-//        $activeUsersCount = $totalUsers - $absentUsersCount;
-//
-//        return [
-//            'totalUsers' => $totalUsers,
-//            'absentUsersCount' => $absentUsersCount,
-//            'activeUsersCount' => $activeUsersCount,
-//        ];
-//    }
+
 }

@@ -12,6 +12,7 @@ use Illuminate\Support\Carbon;
 
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 
 class HomeController extends Controller
@@ -81,10 +82,105 @@ class HomeController extends Controller
 //die;
 //
 
+        $activeUsersCount = User::where('status', '1')->count();
+        $inactiveUsersCount = User::where('status', '0')->count();
+//        die(print_r($activeUsersCount));
+        $chartjs = app()->chartjs
+            ->name('barChartTest')
+            ->type('bar')
+            ->size(['width' => 400, 'height' => 200])
+            ->labels(['المستخدمين النشطين', 'المستخدمين غير النشطين'])
+            ->datasets([
+                [
+                    'label' => 'المستخدمين النشطين',
+
+                    'backgroundColor' => ['rgba(0, 255, 0, 0.5)'], // Green
+                    'data' => [$activeUsersCount,$inactiveUsersCount],
+                ],
+//                [
+//                    'label' => 'المستخدمين غير النشطين',
+//                    'backgroundColor' => ['rgba(255, 0, 0, 0.5)'], // Red
+//                    'data' => [$inactiveUsersCount],
+//                ],
+            ])
+            ->optionsRaw([
+                'legend' => [
+                    'display' => true,
+                    'labels' => [
+                        'fontColor' => 'black',
+                        'fontStyle' =>'bold',
+                        'fontFamily' =>'Markazi Text',
+                        'fontSize' =>20,
+                    ]
+
+                ]
+
+            ]);
+        $chartjs2 = app()->chartjs
+            ->name('pieChartTest')
+            ->type('pie')
+            ->size(['width' => 400, 'height' => 200])
+            ->labels(['Label x', 'Label y'])
+            ->datasets([
+                [
+                    'backgroundColor' => ['#FF6384', '#36A2EB'],
+                    'hoverBackgroundColor' => ['#FF6384', '#36A2EB'],
+                    'data' => [$activeUsersCount,$inactiveUsersCount]
+                ]
+            ])
+            ->optionsRaw([
+                'legend' => [
+                    'display' => true,
+                    'labels' => [
+                        'fontColor' => 'black',
+                        'fontStyle' =>'bold',
+                        'fontSize' =>16,
+                    ]
+
+                ]
+
+            ]);
+        $user_id = Auth::user()->id;
+        $monthlyWorkedMinutes = $this->getMonthlyWorkedMinutesByUser($user_id);
+
+        $chartjs3 = app()->chartjs
+            ->name('lineChartTest')
+            ->type('line')
+            ->size(['width' => 400, 'height' => 200])
+            ->labels(['January', 'February', 'March', 'April', 'May', 'June', 'July'])
+            ->datasets([
+                [
+                    "label" => "دقائق العمل الشهرية",
+                    'backgroundColor' => "rgba(38, 185, 154, 0.31)",
+                    'borderColor' => "rgba(38, 185, 154, 0.7)",
+                    "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
+                    "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
+                    "pointHoverBackgroundColor" => "#fff",
+                    "pointHoverBorderColor" => "rgba(220,220,220,1)",
+                    'data' => $monthlyWorkedMinutes->all(),
+                ],
+            ])
+            ->optionsRaw([
+                'legend' => [
+                    'display' => true,
+                    'labels' => [
+                        'fontColor' => 'black',
+                        'fontStyle' =>'bold',
+                        'fontSize' =>16,
+                    ]
+
+                ]
+
+            ]);
+
+
+
+
+//dd($monthlyWorkedMinutes);
 
         return view('dashboard',compact('activeUserCount',
             'UserCount','numberOfHolidaysThisYear',
-            'numberOfHolidaysThisMonth','numberOfLeavesThisYear',
+            'numberOfHolidaysThisMonth','numberOfLeavesThisYear','chartjs','chartjs2','chartjs3',
 
             'numberOfLeavesGranted','user','workedMinutesByUser','attendanceSummary'
             ,'numberOfLeavesThisYearUser','numberOfLeavesGrantedUser'
@@ -93,5 +189,27 @@ class HomeController extends Controller
 
 
 
+    }
+    private function getMonthlyWorkedMinutesByUser($user_id)
+    {
+        // Fetch monthly worked minutes by user for the current year
+        return DB::table('attendances')
+            ->select(
+                DB::raw('MONTH(attendance_date) as month'),
+                DB::raw('SUM(working_time) as totalWorkedMinutes')
+            )
+            ->where('user_id', $user_id)
+            ->whereYear('attendance_date', Carbon::now()->year)
+            ->groupBy(DB::raw('MONTH(attendance_date)'))
+            ->get()
+            ->pluck('totalWorkedMinutes', 'month');
+    }
+    public function ajax_search(Request $request){
+        if (!$request->session()->token() === $request->input('_token')) {
+            return response()->json(['error' => 'CSRF token mismatch'], 419);
+        }
+
+        // Your existing code here
+        dd($request);
     }
 }

@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\AdvanceController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\Department;
 use App\Http\Controllers\ForceLoginController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HolidayController;
 use App\Http\Controllers\LeaveTypeController;
@@ -37,8 +39,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
 
 
    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-   Route::post('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+    Route::post('/ajax_search', [App\Http\Controllers\HomeController::class, 'ajax_search'])->name('ajax_search');
 //    Route::get('test',function(){
 //        return View::make('test');
 //    });
@@ -59,6 +60,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
     Route::get('/leave/my', [LeaveController::class, 'index_my'])->name('leave.myApply');
     Route::get('/leave/leave-granted', [LeaveController::class, 'indexGranted'])->name('leave.leavesGranted');
     Route::get('/leave/leave-granted-my', [LeaveController::class, 'indexGranted_my'])->name('leave.leavesGrantedMy');
+    Route::get('/leave/MarkAsRead_all',[LeaveController::class, 'MarkAsRead_all'])->name('MarkAsRead_all');
     Route::resource('/leave', LeaveController::class);
 
 
@@ -79,9 +81,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
     Route::get('/attendance/mysumary', [AttendanceController::class, 'report_my'])->name('attendance.mysumary');
 
     Route::get('/attendance/report', [AttendanceController::class, 'report'])->name('attendance.report');
-
     Route::get('/attendance/export/{user_id}', [AttendanceController::class, 'export'])->name('attendance.export');
 
+    Route::post('/attendance/ajax_search', [AttendanceController::class, 'ajax_search'])->name('attendance.ajax_search');
 
     Route::resource('/attendance', AttendanceController::class);
 
@@ -90,7 +92,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
     Route::resource('/Holiday', HolidayController::class);
 
     Route::resource('/settings', SettingsController::class)->middleware(['role:admin']);
-
+    Route::resource('/salary', SalaryController::class);
+    Route::resource('advance', AdvanceController::class);
 
 
 });

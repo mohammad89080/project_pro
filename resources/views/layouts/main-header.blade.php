@@ -78,23 +78,34 @@
             </div>
 
             <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item fullscreen">
-                    <a id="btnFullscreen" href="#" class="nav-link"><i class="ti-fullscreen"></i></a>
-                </li>
-{{--                <li class="nav-item dropdown ">--}}
-{{--                    <a class="nav-link top-nav" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"--}}
-{{--                        aria-expanded="false">--}}
-{{--                        <i class="ti-bell"></i>--}}
-{{--                        <span class="badge badge-danger notification-status"> </span>--}}
-{{--                    </a>--}}
-{{--                    <div class="dropdown-menu dropdown-menu-right dropdown-big dropdown-notifications">--}}
-{{--                        <div class="dropdown-header notifications">--}}
-{{--                            <strong>Notifications</strong>--}}
-{{--                            <span class="badge badge-pill badge-warning">05</span>--}}
-{{--                        </div>--}}
-{{--                        <div class="dropdown-divider"></div>--}}
-{{--                        <a href="#" class="dropdown-item">New registered user <small--}}
-{{--                                class="float-right text-muted time">Just now</small> </a>--}}
+{{--                <li class="nav-item fullscreen">--}}
+{{--                    <a id="btnFullscreen" href="#" class="nav-link"><i class="ti-fullscreen"></i></a>--}}
+{{--                </li>--}}
+                <li class="nav-item dropdown ">
+                    <a class="nav-link top-nav" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                        aria-expanded="false">
+                        <i class="ti-bell"></i>
+                        @if(auth()->user()->unreadNotifications->count() > 0)
+                            <span class="badge badge-danger notification-status"> </span>
+                        @endif
+
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-big dropdown-notifications">
+                        <div class="dropdown-header notifications">
+                            <strong style="font-size: 15px">الإشعارات</strong>
+                            <a href="{{route('MarkAsRead_all')}}" style="margin-right: 67px;background-color: #ffc300;
+                                    font-size: 15px ;
+                                    border-radius: 5px;
+                                    padding: 2px ;">تعيين قراءة الكل</a>
+
+                            <span class="badge badge-pill badge-warning" style="font-size: 15px"> {{ auth()->user()->unreadNotifications->count() }}</span>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        @foreach (auth()->user()->unreadNotifications as $notification)
+                        <a href="{{route('leave.index')}}" class="dropdown-item">{{ $notification->data['title'] }}
+                            {{ $notification->data['user'] }} <small
+                                class="float-right text-muted time cnotification-subtext" style="font-size: 15px" >{{ $notification->created_at }}</small> </a>
+
 {{--                        <a href="#" class="dropdown-item">New invoice received <small--}}
 {{--                                class="float-right text-muted time">22 mins</small> </a>--}}
 {{--                        <a href="#" class="dropdown-item">Server error report<small--}}
@@ -103,34 +114,35 @@
 {{--                                days</small> </a>--}}
 {{--                        <a href="#" class="dropdown-item">Order confirmation<small class="float-right text-muted time">2--}}
 {{--                                days</small> </a>--}}
-{{--                    </div>--}}
-{{--                </li>--}}
-{{--                <li class="nav-item dropdown ">--}}
-{{--                    <a class="nav-link top-nav" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"--}}
-{{--                        aria-expanded="true"> <i class=" ti-view-grid"></i> </a>--}}
-{{--                    <div class="dropdown-menu dropdown-menu-right dropdown-big">--}}
-{{--                        <div class="dropdown-header">--}}
-{{--                            <strong>Quick Links</strong>--}}
-{{--                        </div>--}}
-{{--                        <div class="dropdown-divider"></div>--}}
-{{--                        <div class="nav-grid">--}}
-{{--                            <a href="#" class="nav-grid-item"><i class="ti-files text-primary"></i>--}}
-{{--                                <h5>New Task</h5>--}}
-{{--                            </a>--}}
-{{--                            <a href="#" class="nav-grid-item"><i class="ti-check-box text-success"></i>--}}
-{{--                                <h5>Assign Task</h5>--}}
-{{--                            </a>--}}
-{{--                        </div>--}}
-{{--                        <div class="nav-grid">--}}
-{{--                            <a href="#" class="nav-grid-item"><i class="ti-pencil-alt text-warning"></i>--}}
-{{--                                <h5>Add Orders</h5>--}}
-{{--                            </a>--}}
-{{--                            <a href="#" class="nav-grid-item"><i class="ti-truck text-danger "></i>--}}
-{{--                                <h5>New Orders</h5>--}}
-{{--                            </a>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </li>--}}
+                        @endforeach
+                    </div>
+                </li>
+                <li class="nav-item dropdown ">
+                    <a class="nav-link top-nav" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                        aria-expanded="true"> <i class=" ti-view-grid"></i> </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-big">
+                        <div class="dropdown-header">
+                            <strong>Quick Links</strong>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <div class="nav-grid">
+                            <a href="#" class="nav-grid-item"><i class="ti-files text-primary"></i>
+                                <h5>New Task</h5>
+                            </a>
+                            <a href="#" class="nav-grid-item"><i class="ti-check-box text-success"></i>
+                                <h5>Assign Task</h5>
+                            </a>
+                        </div>
+                        <div class="nav-grid">
+                            <a href="#" class="nav-grid-item"><i class="ti-pencil-alt text-warning"></i>
+                                <h5>Add Orders</h5>
+                            </a>
+                            <a href="#" class="nav-grid-item"><i class="ti-truck text-danger "></i>
+                                <h5>New Orders</h5>
+                            </a>
+                        </div>
+                    </div>
+                </li>
                 <li class="nav-item dropdown mr-30">
                     <a class="nav-link nav-pill user-avatar" data-toggle="dropdown" href="#" role="button"
                         aria-haspopup="true" aria-expanded="false">

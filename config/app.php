@@ -77,7 +77,8 @@ return [
     */
 
 //    'timezone' => 'UTC',
-    'timezone' => 'Asia/Damascus',
+    'timezone' => 'Europe/Istanbul',
+
 
 
     /*
@@ -168,7 +169,7 @@ return [
          * Package Service Providers...
          */
         Spatie\Permission\PermissionServiceProvider::class,
-
+        Fx3costa\LaravelChartJs\Providers\ChartjsServiceProvider::class,
 
         /*
          * Application Service Providers...
