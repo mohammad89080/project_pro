@@ -142,7 +142,7 @@ class HomeController extends Controller
 
             ]);
         $user_id = Auth::user()->id;
-        $monthlyWorkedMinutes = $this->getMonthlyWorkedMinutesByUser($user_id);
+        // $monthlyWorkedMinutes = $this->getMonthlyWorkedMinutesByUser($user_id);
         
         $dateData = $this->getDateNamesOneMonthAgoUntilToday();
         $chartjs3 = app()->chartjs
@@ -223,6 +223,7 @@ function getDateNamesOneMonthAgoUntilToday()
         $dateNames[] = $startDate->format('d M');
         $startDate->addDay();
     }
+
     return [$dateNames, $data];
 }
 

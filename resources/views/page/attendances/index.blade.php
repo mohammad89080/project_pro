@@ -14,7 +14,7 @@
 @endsection
 @section('content')
     @php
-   function time1($time)
+   function time2($time)
    {
             $totalWorkedSeconds = $time ?? 0;
 
@@ -120,10 +120,10 @@
                                     <td>{{$attendance->start_time}}</td>
                                     <td>{{$attendance->departure_time}}</td>
 
-                                <td>{{time1($attendance->working_time)}}</td>
+                                <td>{{time2($attendance->working_time)}}</td>
 
 
-                                <td>{{time1($attendance->late_time)}}</td>
+                                <td>{{time2($attendance->late_time)}}</td>
                                     @php
                                         $lastDate = $attendance->attendance_date;
                                     @endphp

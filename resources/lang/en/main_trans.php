@@ -34,7 +34,9 @@ return [
     'Create' => 'Create',
     'UpdateUser' => 'Update User',
     'Leaves' => 'Leaves',
-
+    'LastInTime' => 'Last In Time',
+    'AutoPunchOutTime' => 'Auto Punch Out Time',
+    'ForcePunchIn/Out' => 'Force PunchIn / Out',
     'ReportAll' => 'User report',
     'ReportPerson' => 'Report Dispaly',
     "Date" => 'Date',

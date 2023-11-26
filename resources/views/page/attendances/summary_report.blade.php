@@ -37,14 +37,16 @@
 
             <div class="form-row align-items-center mb-3">
                 <div class="col-md-4">
+                    <input  id="token_search" type="hidden" value="{{csrf_token()}}">
+                    <input  id="ajax_search_url" type="hidden" value="{{route('ajax_search')}}">
                     <div class="input-group">
-                        <input required name="startDate" class="form-control" placeholder="{{ trans('main_trans.StartDate') }}" autocomplete="off"  id="datepicker-action"  data-date-format="yyyy-mm-dd">
+                        <input  required name="startDate" class="form-control t " placeholder="{{ trans('main_trans.StartDate') }}" autocomplete="off"  id="datepicker-action"  data-date-format="yyyy-mm-dd">
                         <span class="input-group-text border-0" style="background-color: #F6F7F8;"><i class="fa fa-calendar"></i> </span>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="input-group">
-                        <input required name="endDate" class="form-control" placeholder="{{ trans('main_trans.EndDate') }}" autocomplete="off"  id="datepicker-action2"  data-date-format="yyyy-mm-dd">
+                        <input  required name="endDate" class="form-control f" placeholder="{{ trans('main_trans.EndDate') }}" autocomplete="off"  id="datepicker-action2"  data-date-format="yyyy-mm-dd">
                         <span class="input-group-text border-0" style="background-color: #F6F7F8;"><i class="fa fa-calendar"></i></span>
                     </div>
 
@@ -109,4 +111,62 @@
         </div>
     </div>
     </div>
+
 @endsection
+@section('js')
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+            // jQuery.ajaxSetup({
+            //     headers: {
+            //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            //     }
+            // });
+            // Attach an event handler to the change event of the date inputs
+
+            $('#datepicker-action, #datepicker-action2').on('change', function() {
+                var startDate = $('#datepicker-action').val();
+                var endDate = $('#datepicker-action2').val();
+                var token_search = $("#token_search").val();
+                var ajax_search_url = $("#ajax_search_url").val();
+                // You can use startDate and endDate as needed
+                console.log('Start Date:', startDate);
+                console.log('End Date:', endDate);
+                console.log('token_search:', token_search);
+                console.log('ajax_search_url:', ajax_search_url);
+                // jQuery.ajaxSetup({
+                //     headers: {
+                //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                //     }
+                // });
+                $.ajax({
+
+                    url: ajax_search_url,
+                    type: 'post',
+
+                    dataType: 'html',
+                    contentType:'application/html',
+                    cache: false,
+
+                    data: {
+                        startDate: startDate,
+                        _token: "{{csrf_token()}}"
+                    },
+
+                    success: function(data) {
+                        // $("#ajax_responce_serarchDiv").html(data);
+                        console.log( data);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown){
+                        alert("AJAX: " + textStatus + " : " + jqXHR.status + " : " + errorThrown);
+                    }
+                });
+
+                // If you want to submit the form using jQuery, uncomment the following line
+                // $('#attendanceForm').submit();
+            });
+        });
+    </script>
+
+@endsection
+

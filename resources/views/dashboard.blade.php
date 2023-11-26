@@ -1,17 +1,4 @@
-@php
-    function time1($time)
-    {
-             $totalWorkedSeconds = $time ?? 0;
 
-     $hours = floor($totalWorkedSeconds / 3600);
-     $minutes = floor(($totalWorkedSeconds % 3600) / 60);
-     $seconds = $totalWorkedSeconds % 60;
-
-
-             return sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);
-    }
-
-@endphp
 <!DOCTYPE html>
 <html lang="en">
 

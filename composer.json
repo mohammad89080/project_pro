@@ -6,7 +6,10 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+<<<<<<< HEAD
+=======
         "barryvdh/laravel-dompdf": "^2.0",
+>>>>>>> 1be0acb202d233c94d7d59cdc31fb4e34e981c32
         "fx3costa/laravelchartjs": "^3.0",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",
@@ -14,7 +17,6 @@
         "laravel/tinker": "^2.8",
         "laravel/ui": "^4.2",
         "livewire/livewire": "^3.1",
-
         "mcamara/laravel-localization": "^1.8",
         "spatie/laravel-permission": "^6.1",
         "yoeunes/toastr": "^2.3"

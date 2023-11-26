@@ -8,8 +8,8 @@
     <meta name="description" content="Webmin - Bootstrap 4 & Angular 5 Admin Dashboard Template" />
     <meta name="author" content="potenzaglobalsolutions.com" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-
     @include('layouts.head')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
 </head>
 
@@ -68,6 +68,9 @@
  footer -->
 
     @include('layouts.footer-scripts')
+<script>
+
+</script>
 </body>
 
 </html>

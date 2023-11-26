@@ -77,7 +77,9 @@ return [
     */
 
 //    'timezone' => 'UTC',
-    'timezone' => 'Turkey',
+
+    'timezone' => 'Europe/Istanbul',
+
 
 
     /*
