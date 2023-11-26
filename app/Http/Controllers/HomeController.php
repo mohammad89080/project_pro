@@ -192,20 +192,20 @@ class HomeController extends Controller
 
 
     }
-    private function getMonthlyWorkedMinutesByUser($user_id)
-    {
-        // Fetch monthly worked minutes by user for the current year
-        return DB::table('attendances')
-            ->select(
-                DB::raw('MONTH(attendance_date) as month'),
-                DB::raw('SUM(working_time) as totalWorkedMinutes')
-            )
-            ->where('user_id', $user_id)
-            ->whereYear('attendance_date', Carbon::now()->year)
-            ->groupBy(DB::raw('MONTH(attendance_date)'))
-            ->get()
-            ->pluck('totalWorkedMinutes', 'month');
-    }
+    // private function getMonthlyWorkedMinutesByUser($user_id)
+    // {
+    //     // Fetch monthly worked minutes by user for the current year
+    //     return DB::table('attendances')
+    //         ->select(
+    //             DB::raw('MONTH(attendance_date) as month'),
+    //             DB::raw('SUM(working_time) as totalWorkedMinutes')
+    //         )
+    //         ->where('user_id', $user_id)
+    //         ->whereYear('attendance_date', Carbon::now()->year)
+    //         ->groupBy(DB::raw('MONTH(attendance_date)'))
+    //         ->get()
+    //         ->pluck('totalWorkedMinutes', 'month');
+    // }
 
 function getDateNamesOneMonthAgoUntilToday()
 {
