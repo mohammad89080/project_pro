@@ -11,7 +11,11 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Exports\AttendancesExport;
 use Maatwebsite\Excel\Facades\Excel;
+<<<<<<< HEAD
 use Symfony\Component\Mailer\Messenger\SendEmailMessage;
+=======
+use PDF;
+>>>>>>> 1be0acb202d233c94d7d59cdc31fb4e34e981c32
 
 
 class AttendanceController extends Controller
@@ -395,6 +399,43 @@ class AttendanceController extends Controller
         return Excel::download(new AttendancesExport($user_id), 'user_' . $user_id . '_attendances.xlsx');
     }
 
+    public function exportToPDF($user_id)
+    {
+        // Fetch your data
+        $attendances = Attendance::where('user_id', $user_id)->get();
+        // $attendances = Attendance::All();
+        // $attendances = Attendance::where('user_id', Auth::user()->id)->with(['user'])->get();
 
+<<<<<<< HEAD
 
+=======
+        view()->share('attendances',$attendances);
+
+        $pdf = PDF::loadView('pdf_view', ['attendances'=>$attendances])->setOptions(['defaultFont' => 'sans-serif']);;
+        // download PDF file with download method
+        return $pdf->download($attendances[0]->user->name.'_file_report.pdf');
+    }
+
+    
+//
+//    public function getAttendanceSummary($selectedDate)
+//    {
+//        // Get the total number of users
+//        $totalUsers = User::count();
+//
+//        // Get the number of users who were absent on the selected date
+//        $absentUsersCount = User::whereDoesntHave('attendances', function ($query) use ($selectedDate) {
+//            $query->where('attendance_date', $selectedDate);
+//        })->count();
+//
+//        // Get the number of users who were present (active) on the selected date
+//        $activeUsersCount = $totalUsers - $absentUsersCount;
+//
+//        return [
+//            'totalUsers' => $totalUsers,
+//            'absentUsersCount' => $absentUsersCount,
+//            'activeUsersCount' => $activeUsersCount,
+//        ];
+//    }
+>>>>>>> 1be0acb202d233c94d7d59cdc31fb4e34e981c32
 }

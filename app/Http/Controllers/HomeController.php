@@ -204,6 +204,7 @@ class HomeController extends Controller
             ->get()
             ->pluck('totalWorkedMinutes', 'month');
     }
+<<<<<<< HEAD
     public function ajax_search(Request $request){
         if (!$request->session()->token() === $request->input('_token')) {
             return response()->json(['error' => 'CSRF token mismatch'], 419);
@@ -212,4 +213,6 @@ class HomeController extends Controller
         // Your existing code here
         dd($request);
     }
+=======
+>>>>>>> 1be0acb202d233c94d7d59cdc31fb4e34e981c32
 }

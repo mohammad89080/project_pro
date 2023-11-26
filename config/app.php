@@ -169,7 +169,14 @@ return [
          * Package Service Providers...
          */
         Spatie\Permission\PermissionServiceProvider::class,
+<<<<<<< HEAD
         Fx3costa\LaravelChartJs\Providers\ChartjsServiceProvider::class,
+=======
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
+        Fx3costa\LaravelChartJs\Providers\ChartjsServiceProvider::class,
+
+>>>>>>> 1be0acb202d233c94d7d59cdc31fb4e34e981c32
 
         /*
          * Application Service Providers...
@@ -198,9 +205,8 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
         'Carbon' => 'Carbon\Carbon',
-
-
-
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ])->toArray(),
 

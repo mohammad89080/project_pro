@@ -18,11 +18,15 @@
         <div class="col-xl-12 mb-30">
             <div class="card">
                 <div class="card-body" style="padding: 1rem 1.81rem;">
+<<<<<<< HEAD
+        @role('admin')
+=======
 
 
 
         @role('admin')
 
+>>>>>>> 8fe994b62a67b7fd28733bb3628de18ec73b2e32
         <form action="{{ route('get-attendance') }}" method="post">
 
         @else
@@ -46,7 +50,10 @@
                         <span class="input-group-text border-0" style="background-color: #F6F7F8;"><i class="fa fa-calendar"></i></span>
                     </div>
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 8fe994b62a67b7fd28733bb3628de18ec73b2e32
                 </div>
                 <div class="col-md-4">
                     <button style="width: 44%;" type="submit" class="btn btn-primary btn-lg ">Filter</button>
