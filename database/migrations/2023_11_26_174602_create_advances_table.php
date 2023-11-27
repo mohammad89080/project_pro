@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('advances', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained();
+            $table->decimal('amount');
+            $table->string('status')->default('Pending');
+            $table->text('notes')->nullable();
             $table->timestamps();
         });
     }

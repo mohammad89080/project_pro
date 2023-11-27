@@ -94,7 +94,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
 
     Route::resource('/settings', SettingsController::class)->middleware(['role:admin']);
     Route::resource('/salary', SalaryController::class);
-    Route::resource('advance', AdvanceController::class);
+    Route::resource('/advance', AdvanceController::class);
 
 
 });
