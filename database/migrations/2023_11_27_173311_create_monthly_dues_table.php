@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('advances', function (Blueprint $table) {
+        Schema::create('monthly_dues', function (Blueprint $table) {
             $table->id();
-            $table->decimal('amount', 10, 2);
+            $table->foreignId('user_id')->constrained();
+            $table->date('month_year');
+            $table->decimal('dues_amount', 10, 2);
+            $table->decimal('advance_amount', 10, 2)->default(0);
             $table->timestamps();
         });
     }
@@ -23,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('advances');
+        Schema::dropIfExists('monthly_dues');
     }
 };

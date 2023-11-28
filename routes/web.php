@@ -93,7 +93,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
     Route::resource('/Holiday', HolidayController::class);
 
     Route::resource('/settings', SettingsController::class)->middleware(['role:admin']);
+    Route::get('/salary/get', [SalaryController::class,'calculateMonthlyDues'])->name('calculateMonthlyDues');
     Route::resource('/salary', SalaryController::class);
+
     Route::resource('advance', AdvanceController::class);
 
 

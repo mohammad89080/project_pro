@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Salary;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -19,7 +20,25 @@ class SalaryController extends Controller
         $data = Salary::with(['user'])->orderBy('id', 'desc')->get();
         return view('page.salaries.index',compact('data','users'));
     }
+    public function calculateMonthlyDues($user_id,$monthlySalary,$requiredWorkingHours)
+    {
 
+        $workedTime = DB::table('attendances')
+            ->select(DB::raw('SUM(working_time) as totalWorkedSeconds'))
+            ->where('user_id', $user_id)
+            ->whereYear('attendance_date', now()->year)
+            ->whereMonth('attendance_date', now()->month)
+            ->first();
+//        $monthlySalary = 1000;
+//        $requiredWorkingHours = 160;
+        $totalWorkedHours = $workedTime->totalWorkedSeconds / 3600;
+
+        $hourlyRate = $monthlySalary / $requiredWorkingHours;
+
+        $totalDues = $hourlyRate * $totalWorkedHours;
+
+        return $totalDues;
+    }
     /**
      * Show the form for creating a new resource.
      */

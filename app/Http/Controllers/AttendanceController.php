@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\MonthlySummary;
 use Illuminate\Console\Scheduling\Schedule;
 
 use App\Models\Attendance;
@@ -93,6 +94,39 @@ class AttendanceController extends Controller
         return $delayInSeconds;
     }
 
+//    public function calculateMonthlyDues($user_id, $monthlySalary, $requiredWorkingHours)
+//    {
+//
+//        // Get the total worked time and late time for the user in the current month
+//        $workedTime = DB::table('attendances')
+//            ->select(DB::raw('SUM(working_time) as totalWorkedSeconds, SUM(late_time) as totalLateTimeMinutes'))
+//            ->where('user_id', 21)
+//            ->whereYear('attendance_date', now()->year)
+//            ->whereMonth('attendance_date', now()->month)
+//            ->first();
+//        dd($workedTime);
+//        // Calculate total worked hours in the month
+//        $totalWorkedHours = floor($workedTime->totalWorkedSeconds / 3600);
+//
+//        // Calculate total late time in minutes
+//        $totalLateTimeMinutes = $workedTime->totalLateTimeMinutes;
+//
+//        // Calculate the monthly dues
+//        $hourlyRate = 1000 / 160;
+//        $overtimeRate = $hourlyRate * 1.5; // Assuming 1.5x overtime rate
+//
+//        $overtimeHours = max(0, $totalWorkedHours - $requiredWorkingHours);
+//
+//        $regularHoursPayment = $requiredWorkingHours * $hourlyRate;
+//        $overtimePayment = $overtimeHours * $overtimeRate;
+//
+//        // Calculate total dues considering late time penalties
+//        $totalDues = $regularHoursPayment + $overtimePayment - ($totalLateTimeMinutes * $hourlyRate / 60);
+//
+//        return $totalDues;
+//    }
+
+
 //
 //    public function finishWork(Request $request)
 //    {
@@ -166,6 +200,9 @@ class AttendanceController extends Controller
             $attendance->working_time = $workingTimeInSeconds;
 
             $attendance->save();
+            $result = $this->calculateMonthlyDues($user->id, 1000, 160);
+
+            $this->updateMonthlySummary($user->id,$result['totalWorkedHours'],$result['totalDues']);
 
             return redirect()->back()->with('success', 'Work ended successfully.');
         }
@@ -173,6 +210,52 @@ class AttendanceController extends Controller
         return redirect()->back()->with('error', 'No active work session found.');
     }
 
+    public function updateMonthlySummary($user_id, $totalWorkedHours, $totalSalaryDue)
+    {
+
+        $currentYear = now()->year;
+        $currentMonth = now()->month;
+
+        $monthlySummary = MonthlySummary::where('user_id', $user_id)
+            ->where('year', $currentYear)
+            ->where('month', $currentMonth)
+            ->first();
+
+        if ($monthlySummary) {
+
+            $monthlySummary->total_worked_hours = $totalWorkedHours;
+            $monthlySummary->total_salary_due = $totalSalaryDue;
+            $monthlySummary->save();
+        } else {
+            // Create a new record
+            MonthlySummary::create([
+                'user_id' => $user_id,
+                'year' => $currentYear,
+                'month' => $currentMonth,
+                'total_worked_hours' => $totalWorkedHours,
+                'total_salary_due' => $totalSalaryDue,
+            ]);
+        }
+    }
+    public function calculateMonthlyDues($user_id,$monthlySalary,$requiredWorkingHours)
+    {
+
+        $workedTime = DB::table('attendances')
+            ->select(DB::raw('SUM(working_time) as totalWorkedSeconds'))
+            ->where('user_id', $user_id)
+            ->whereYear('attendance_date', now()->year)
+            ->whereMonth('attendance_date', now()->month)
+            ->first();
+
+        $totalWorkedHours = $workedTime->totalWorkedSeconds / 3600;
+        $hourlyRate = $monthlySalary / $requiredWorkingHours;
+        $totalDues = $hourlyRate * $totalWorkedHours;
+        $result = [
+            'totalDues' => $totalDues,
+            'totalWorkedHours' => $totalWorkedHours,
+        ];
+        return $result;
+    }
   /**
      * Display a listing of the resource.
      */
@@ -413,7 +496,7 @@ class AttendanceController extends Controller
         return $pdf->download($attendances[0]->user->name.'_file_report.pdf');
     }
 
-    
+
 //
 //    public function getAttendanceSummary($selectedDate)
 //    {

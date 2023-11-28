@@ -18,15 +18,13 @@
         <div class="col-xl-12 mb-30">
             <div class="card">
                 <div class="card-body" style="padding: 1rem 1.81rem;">
-<<<<<<< HEAD
-        @role('admin')
-=======
+
 
 
 
         @role('admin')
 
->>>>>>> 8fe994b62a67b7fd28733bb3628de18ec73b2e32
+
         <form action="{{ route('get-attendance') }}" method="post">
 
         @else
@@ -50,10 +48,6 @@
                         <span class="input-group-text border-0" style="background-color: #F6F7F8;"><i class="fa fa-calendar"></i></span>
                     </div>
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 8fe994b62a67b7fd28733bb3628de18ec73b2e32
                 </div>
                 <div class="col-md-4">
                     <button style="width: 44%;" type="submit" class="btn btn-primary btn-lg ">Filter</button>
@@ -113,60 +107,5 @@
     </div>
 
 @endsection
-@section('js')
-    <script type="text/javascript">
 
-        $(document).ready(function() {
-            // jQuery.ajaxSetup({
-            //     headers: {
-            //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            //     }
-            // });
-            // Attach an event handler to the change event of the date inputs
-
-            $('#datepicker-action, #datepicker-action2').on('change', function() {
-                var startDate = $('#datepicker-action').val();
-                var endDate = $('#datepicker-action2').val();
-                var token_search = $("#token_search").val();
-                var ajax_search_url = $("#ajax_search_url").val();
-                // You can use startDate and endDate as needed
-                console.log('Start Date:', startDate);
-                console.log('End Date:', endDate);
-                console.log('token_search:', token_search);
-                console.log('ajax_search_url:', ajax_search_url);
-                // jQuery.ajaxSetup({
-                //     headers: {
-                //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                //     }
-                // });
-                $.ajax({
-
-                    url: ajax_search_url,
-                    type: 'post',
-
-                    dataType: 'html',
-                    contentType:'application/html',
-                    cache: false,
-
-                    data: {
-                        startDate: startDate,
-                        _token: "{{csrf_token()}}"
-                    },
-
-                    success: function(data) {
-                        // $("#ajax_responce_serarchDiv").html(data);
-                        console.log( data);
-                    },
-                    error: function(jqXHR, textStatus, errorThrown){
-                        alert("AJAX: " + textStatus + " : " + jqXHR.status + " : " + errorThrown);
-                    }
-                });
-
-                // If you want to submit the form using jQuery, uncomment the following line
-                // $('#attendanceForm').submit();
-            });
-        });
-    </script>
-
-@endsection
 
