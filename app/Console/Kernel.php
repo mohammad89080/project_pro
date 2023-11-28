@@ -18,7 +18,7 @@ class Kernel extends ConsoleKernel
         //     // For example, you might use Eloquent to delete the user by ID
         //     // User::destroy($userId);
         //     \Log::info("User with ID $userId deleted at the scheduled time.");
-        // })->at('16:49');
+        // })->at('21:50');
         
     }
 

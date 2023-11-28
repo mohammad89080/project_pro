@@ -93,7 +93,10 @@ return [
     'Logout'=>'Logout',
 
     'Copyright' => 'Copyright',
-    'Name_Programer' => 'SamirGamal MoraSoft All Rights Reserved'
+    'Name_Programer' => 'SamirGamal MoraSoft All Rights Reserved',
+
+    'Advances' => 'Advances',
+    'Advance' => 'Advance',
 
 
 

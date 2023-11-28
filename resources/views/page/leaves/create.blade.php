@@ -56,7 +56,7 @@
                                 Leave Description
                             </label>
                             <div class="col-sm-5">
-                                <textarea name="description" id="" cols="40" rows="7"></textarea>
+                                <textarea name="description" id="" cols="40" rows="7" class="form-control"></textarea>
                                 @error('description')<span class="text-danger">{{ $message }}</span>@enderror
                             </div>
                         </div>

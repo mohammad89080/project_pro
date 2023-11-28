@@ -27,7 +27,7 @@
 
                                 }
 
-//                            @endphp
+                           @endphp
 
                             @if (!$att || ($att && $end))
                                 <form action="{{ route('start.work') }}" method="post">
@@ -127,9 +127,11 @@
                     </li>
 
                     <li>
-                        <a style="font-size: 16px;" href="{{route('department.index')}}"><i class="fa fa-plane" aria-hidden="true"></i>
-                            <span class="right-nav-text"></span>{{trans('main_trans.Department')}} </a>
+                        <a style="font-size: 16px;" href="{{route('advance.index')}}"><i class="fa fa-credit-card" aria-hidden="true"></i>
+                            <span class="right-nav-text"></span>{{trans('main_trans.Advances')}} </a>
                     </li>
+
+                    
                     <li>
                         <a  style="font-size: 16px;" href="javascript:void(0);" data-toggle="collapse" data-target="#elements">
                             <div class="pull-left"><i class="ti-palette"></i><span

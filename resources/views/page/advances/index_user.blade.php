@@ -3,19 +3,19 @@
 @section('css')
 
     @section('title')
-        إدارة سلف الموظفين
+        إدارة السلف
     @stop
 @endsection
 @section('page-header')
     <!-- breadcrumb -->
     @section('PageTitle')
-     إدارة سلف الموظفين
+     إدارة السلف 
     @stop
     <!-- breadcrumb -->
 @endsection
 @section('content')
     <div class="card-body">
-        <a class="button x-small" href="#" data-toggle="modal" data-target="#exampleModal">إضافة سلفة لموظف </a>
+        <a class="button x-small" href="#" data-toggle="modal" data-target="#exampleModal">طلب سلفة </a>
     </div>
 
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
@@ -35,19 +35,7 @@
 
                     <form action="{{route('advance.store')}}" method="POST">
                         {{ csrf_field() }}
-                        <div class="form-group row">
-                            <div class="col">
-                                <label for="inputName"
-                                       class="control-label">اضافة سلفة لموظف </label>
-                                <select name="user_id" class="form-control" required>
-                                    <option value="">اختيار الموظف</option>
-                                    @foreach($users as $user)
-                                        <option value="{{ $user->id }}" {{ old('user_id') == $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
-                                    @endforeach
-                                </select>
-                                @error('user_id')<span class="text-danger">{{ $message }}</span>@enderror
-                            </div>
-                        </div>
+                        
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label text-right" for="rrr">
                                 قيمة السلفة
@@ -95,7 +83,6 @@
                                 <th>الحالة</th>
                                 <th>ملاحظات</th>
                                 <th>التاريخ</th>
-                                <th>العمليات</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -124,21 +111,7 @@
                                     <td>{{$record->notes}}</td>
                                     <td>{{$record->created_at}}</td>
 
-                                    <td>
-
-                                        <a href="#"
-                                        class="btn btn-outline-info btn-sm"
-                                        data-toggle="modal"
-                                        data-target="#edit{{ $record->id }}">تعديل البيانات</a>
-
-                                        <form id="delete-form-{{$record->id}}" action="{{ route('advance.destroy', ['advance' => $record->id]) }}" method="POST" style="display: inline;">
-                                            @csrf
-                                            @method('DELETE')
-
-                                            <button type="submit" title="delete" class="btn btn-outline-danger btn-sm" >حذف</button>
-                                        </form>
-
-                                    </td>
+                                    
                                 </tr>
                                 <!--تعديل قسم جديد -->
                                 <div class="modal fade"
@@ -162,49 +135,23 @@
                                             </div>
                                             <div class="modal-body">
 
-                                                <form action="{{ route('advance.update',$record) }}" method="POST">
+                                                <form action="{{ route('advance.update',$record->id) }}" method="POST">
                                                     @csrf
                                                     @method('PUT')
+                                                    
                                                     <div class="row">
                                                         <div class="col">
-                                                            <label for="inputName"
-                                                                   class="control-label">تعديل السلفة</label>
-                                                            <select name="user_id" class="custom-select">
-                                                                <option value="">اختيار موظف</option>
-                                                                @foreach($users as $user)
-                                                                    <option value="{{ $user->id }}" {{ old('user_id', $record->user_id) == $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
-                                                                @endforeach
-                                                            </select>
-                                                            @error('user_id')<span class="text-danger">{{ $message }}</span>@enderror
-                                                        </div>
-                                                    </div>
-                                                    <br>
-                                                    <div class="row">
-                                                        <div class="col">
-                                                            <label for="inputName" class="control-label">السلفة</label>
+                                                            <label for="inputName" class="control-label">الراتب</label>
                                                             <input id="id"
-                                                                   type="number"
-                                                                   name="amount"
+                                                                   type="text"
+                                                                   name="salary"
                                                                    class="form-control"
-                                                                   value="{{$record->amount}}">
-                                                            @error('amount')<span class="text-danger">{{ $message }}</span>@enderror
+                                                                   value="{{$record->salary_amount}}">
+                                                            @error('salary')<span class="text-danger">{{ $message }}</span>@enderror
                                                         </div>
-                                                    </div>
-                                                    <br>
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <label for="status" class="control-label">الحالة</label>
-                                                                <select name="status" class="custom-select">
-                                                                    <option value="">الحالة</option>
 
-                                                                    <option value="Granted" {{$record->status=="Granted"?"selected":""}} >Granted</option>
-                                                                    <option value="Pending" {{$record->status=="Pending"?"selected":""}}>Pending</option>
-                                                                    <option value="Rejected" {{$record->status=="Rejected"?"selected":""}}>Rejected</option>
-                                                                
-                                                                </select>
-                                                            </div>
-                                                        </div>
                                                     </div>
+                                            </div>
 
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
@@ -228,7 +175,6 @@
                                 <th>الحالة</th>
                                 <th>ملاحظات</th>
                                 <th>التاريخ</th>
-                                <th>العمليات</th>
                             </tr>
                             </tfoot>
 
