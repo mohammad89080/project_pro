@@ -70,4 +70,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Advance::class);
     }
+    public function monthly_summary()
+    {
+        return $this->hasMany(MonthlySummary::class);
+    }
 }

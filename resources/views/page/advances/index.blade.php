@@ -88,14 +88,16 @@
                         {{--                                                table-striped--}}
                         <table id="datatable" class="table  table-bordered p-0">
                             <thead>
+
+
                             <tr>
                                 <th>#</th>
-                                <th>الأسم</th>
+                                <th> {{ trans('forms.Name') }}</th>
                                 <th>قيمة السلفة</th>
-                                <th>الحالة</th>
+                                <th>{{ trans('forms.Status') }}</th>
                                 <th>ملاحظات</th>
-                                <th>التاريخ</th>
-                                <th>العمليات</th>
+                                <th>{{ trans('forms.Date') }}</th>
+                                <th>{{ trans('main_trans.Options') }}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -221,15 +223,15 @@
 
                             </tbody>
                             <tfoot>
-                            <tr>
-                                <th>#</th>
-                                <th>الأسم</th>
-                                <th>الراتب</th>
-                                <th>الحالة</th>
-                                <th>ملاحظات</th>
-                                <th>التاريخ</th>
-                                <th>العمليات</th>
-                            </tr>
+                                <tr>
+                                    <th>#</th>
+                                    <th> {{ trans('forms.Name') }}</th>
+                                    <th>قيمة السلفة</th>
+                                    <th>{{ trans('forms.Status') }}</th>
+                                    <th>ملاحظات</th>
+                                    <th>{{ trans('forms.Date') }}</th>
+                                    <th>{{ trans('main_trans.Options') }}</th>
+                                </tr>
                             </tfoot>
 
                         </table>

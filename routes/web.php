@@ -11,6 +11,7 @@ use App\Http\Controllers\HolidayController;
 use App\Http\Controllers\LeaveTypeController;
 use App\Http\Controllers\LeaveController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\MonthlySummaryController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -95,12 +96,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'lo
     Route::resource('/settings', SettingsController::class)->middleware(['role:admin']);
     Route::get('/salary/get', [SalaryController::class,'calculateMonthlyDues'])->name('calculateMonthlyDues');
     Route::resource('/salary', SalaryController::class);
-<<<<<<< HEAD
-
-    Route::resource('advance', AdvanceController::class);
-=======
     Route::resource('/advance', AdvanceController::class);
->>>>>>> 3a33d1ce67e3b4b0b3a0513ff1a0b9d9de3261c4
+    Route::resource('/monthlysummary', MonthlySummaryController::class);
 
 
 });

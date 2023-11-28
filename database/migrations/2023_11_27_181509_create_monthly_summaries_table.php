@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained(); // Assuming 'users' table already exists
             $table->unsignedInteger('year');
             $table->unsignedInteger('month');
-            $table->float('total_worked_hours');
-            $table->float('total_salary_due');
+            $table->float('total_worked_hours')->default(0);
+            $table->float('total_salary_due')->default(0);
             $table->timestamps();
         });
     }

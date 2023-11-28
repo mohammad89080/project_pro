@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\MonthlySummary;
+use App\Models\Advance;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Query\JoinClause;
 class MonthlySummaryController extends Controller
 {
     /**
@@ -12,7 +14,18 @@ class MonthlySummaryController extends Controller
      */
     public function index()
     {
-        //
+        
+        $monthly_summary = MonthlySummary::all()->sortBy('year')->sortBy('month');
+        $advance=[];
+        foreach ($monthly_summary as $summary) {
+            $advance[$summary->user_id.$summary->month] = DB::table('advances')
+            ->where('user_id', $summary->user_id)
+            ->where('status', 'Granted')
+            ->where(DB::raw('MONTH(created_at)'), $summary->month)
+            ->sum('amount');
+        }
+
+        return view("page.monthly_summary.index", compact('monthly_summary','advance'));
     }
 
     /**

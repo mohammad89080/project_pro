@@ -13,14 +13,10 @@ return new class extends Migration
     {
         Schema::create('advances', function (Blueprint $table) {
             $table->id();
-<<<<<<< HEAD
-            $table->decimal('amount', 10, 2);
-=======
             $table->foreignId('user_id')->constrained();
             $table->decimal('amount');
             $table->string('status')->default('Pending');
             $table->text('notes')->nullable();
->>>>>>> 3a33d1ce67e3b4b0b3a0513ff1a0b9d9de3261c4
             $table->timestamps();
         });
     }
